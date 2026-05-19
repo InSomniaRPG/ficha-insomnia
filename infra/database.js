@@ -1,18 +1,10 @@
 import { Client } from "pg";
 
 async function query(query_obj) {
-  const credentials = {
-      host: process.env.POSTGRES_HOST,
-      port: process.env.POSTGRES_PORT,
-      user: process.env.POSTGRES_USER,
-      database: process.env.POSTGRES_DB,
-      password: process.env.POSTGRES_PASSWORD,
-      ssl:process.env.NODE_ENV === 'development' ? false : true,
-    }
-    const client = new Client(credentials);
-    console.log("Credenciais do Postgres", credentials)
+
+  let client;
   try {
-    await client.connect();
+    client = await getNewClient();
     const result = await client.query(query_obj);
     return result
   } catch (err) {
@@ -21,7 +13,37 @@ async function query(query_obj) {
   } finally {
     await client.end();
   }
+
 }
+
+function getSSLValues() {
+  if (process.env.POSTGRES_CA) {
+    return {
+      ca: process.env.POSTGRES_CA,
+    };
+  }
+
+  return process.env.NODE_ENV === "production" ? true : false;
+}
+
+async function getNewClient() {
+
+  const credentials = {
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
+      user: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DB,
+      password: process.env.POSTGRES_PASSWORD,
+      ssl: getSSLValues(),
+    }
+
+    const client = new Client(credentials);
+    // console.log("Credenciais do Postgres", credentials)
+    await client.connect();
+    return client;
+}
+
 export default {
-  query: query,
+  query,
+  getNewClient,
 };
