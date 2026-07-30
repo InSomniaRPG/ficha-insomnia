@@ -1,10 +1,12 @@
+import orchestrator from "tests/orchestrator.js";
 import database from "infra/database";
 
-async function cleanDatabase() {
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
   await database.query("drop schema public cascade; create schema public;");
-}
+});
 
-beforeAll(cleanDatabase);
+
 
 test("GET to /api/v1/status should return status 200 OK", async () => {
   const response = await fetch("http://localhost:3000/api/v1/migrations");
