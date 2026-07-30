@@ -1,5 +1,12 @@
-function index(request, response) {
-  return "Insomnia-RPG";
+export async function getServerSideProps() {
+  return {
+    redirect: {
+      destination: "/index.html",
+      permanent: false,
+    },
+  };
 }
 
-export default index;
+export default function Home() {
+  return null;
+}
