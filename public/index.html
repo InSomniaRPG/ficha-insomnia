@@ -94,9 +94,13 @@ main{max-width:1680px;margin:0 auto;padding:14px 16px 60px;display:grid;gap:14px
 .grp>label,.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2)}
 .grp select,.grp input{width:100%}
 .hr{height:1px;background:var(--line);margin:14px -12px}
-.sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);
-  margin:0 0 9px;display:flex;align-items:center;gap:8px}
-.sub:before{content:"";width:3px;height:11px;background:var(--runa);border-radius:2px;flex:none}
+.sub{font-family:var(--ui);font-size:14.5px;font-weight:700;letter-spacing:.01em;color:var(--txt);
+  margin:0 0 11px;display:flex;align-items:center;gap:9px;padding-bottom:6px;
+  border-bottom:1px solid var(--line)}
+.sub:before{content:"";width:4px;height:17px;background:linear-gradient(180deg,var(--runa),#6d4fd8);
+  border-radius:2px;flex:none}
+.card>h3{font-size:11.5px !important;letter-spacing:.13em;color:var(--txt) !important}
+.blkh h4{font-size:15px;font-weight:700}
 .note{font-size:11.5px;color:var(--dim2);margin:5px 0 0}
 .check{display:flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid var(--line);border-radius:6px;
   background:var(--panel2);cursor:pointer;font-size:12.5px;user-select:none}
@@ -249,6 +253,22 @@ pre.out{margin:0;padding:12px;font-family:var(--mono);font-size:11px;white-space
 .mbox b small{font-size:11px;color:var(--dim2);font-weight:400}
 .mbox b.pv{color:var(--pv)} .mbox b.fx{color:var(--fluxo)} .mbox b.pa{color:var(--pa)}
 .mbtns{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}
+.msub{font-size:11px;color:var(--dim2);margin-top:2px}
+.msub b{font-family:var(--mono);color:var(--fluxo);font-weight:600}
+.mbox.over{border-color:var(--err)}
+/* ---- card de artefato ---- */
+.blk.arte{padding:0;overflow:hidden}
+.artehead{display:grid;grid-template-columns:1fr auto;gap:4px 10px;width:100%;text-align:left;
+  background:var(--panel3);border:none;padding:10px 12px;cursor:pointer;color:inherit;align-items:center}
+.artehead:hover{background:#2b2540}
+.blk.arte.open .artehead{border-bottom:1px solid var(--line)}
+.ah1{display:flex;gap:7px;align-items:baseline;flex-wrap:wrap}
+.ah1 b{font-size:14.5px;font-weight:700}
+.ah2{grid-column:1;font-size:11.5px;color:var(--dim2)}
+.ahx{grid-row:1/3;grid-column:2;font-family:var(--mono);color:var(--runa);font-size:13px}
+.arebody{padding:11px 12px}
+.aruna{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;padding:4px 0}
+.aruna b{font-size:12.5px}
 .mhab{border:1px solid var(--line);border-radius:7px;background:var(--panel2);padding:9px 10px}
 .mhab.on{border-color:var(--runa);background:#241d3d}
 .mh1{display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;margin-bottom:7px}
@@ -400,28 +420,28 @@ const OP_VAL=(sig,rot)=>[{l:sig+'1 '+rot,c:0},{l:sig+'2 '+rot,c:5},{l:sig+'3 '+r
 const CAT = {
 
 ofensivo:{n:'Ofensivo',c:'#ff8080',bg:'#3d1f24',fns:[
- {id:'dano_dist',taFixo:true,n:'Dano à Distância',b:2,pa:2,t:'o',ta:['Corpo','Agilidade','Mente'],dano:true,
+ {id:'dano_dist',taFixo:true,esc:{dano:['2+P','4+P*3']},n:'Dano à Distância',b:2,pa:2,t:'o',ta:['Corpo','Agilidade','Mente'],dano:true,
   r:{ac:['curto','medio','longo']},op:[{id:'e',l:'Esforço extra',it:P_ESF()}],db:'2 + Psique · com 4 P.A: 4 + Psique × 3',
   d:'Causa dano à distância contra um alvo.',
   rg:['Não combina com dano de armas à distância.','O tipo de dano é o do Estigma.','Escolha ataque ou teste — a escolha é permanente.','É Ataque Psíquico: não usa bônus de Especialização.','Só vale em Duração Prolongada se usar Teste de Resistência.'],
   ta_nota:'Mente só se o dano for psíquico.'},
- {id:'dano_cac',n:'Dano Corpo a Corpo',b:5,pa:2,dano:true,ataque:true,
+ {id:'dano_cac',esc:{dano:['2+P','4+P*3']},n:'Dano Corpo a Corpo',b:5,pa:2,dano:true,ataque:true,
   r:{al:['unico'],ac:['corpo'],du:['inst']},op:[{id:'e',l:'Esforço extra',it:P_ESF()}],db:'2 + Psique · com 4 P.A: 4 + Psique × 3',
   d:'Causa dano corpo a corpo contra um alvo.',
   rg:['Não combina com dano de armas corpo a corpo nem golpes desarmados.','Exige Jogada de Ataque.','É Ataque Psíquico corpo a corpo, sem bônus de Especialização.']},
- {id:'postura',n:'Postura Ofensiva',b:15,pa:1,dano:true,ataque:true,
+ {id:'postura',esc:{dano:['P/2','1+P','2+P*2']},n:'Postura Ofensiva',b:15,pa:1,dano:true,ataque:true,
   r:{al:['unico','multiplos'],du:['prol']},db:'Fraco (1 P.A): metade da Psique · Médio (2 P.A): 1 + Psique · Forte (3 P.A): 2 + Psique × 2',
   d:'Postura que permite repetir Ataques Psíquicos sem gastar Fluxo por golpe enquanto estiver ativa. A força de cada ataque é escolhida na hora.',
   rg:['P.A: 1 para ativar, mais 1 a 3 por ataque conforme o esforço escolhido.','Não combina com dano de armas corpo a corpo ou golpes desarmados.','Exige Jogadas de Ataque (Ataque Psíquico), sem bônus de Especialização.','O P.A do Ataque Fraco não pode ser reduzido a 0 por Canalização Rápida.','O Ataque Fraco não recebe benefício de Aumento de Dano nem de Redução de Margem Crítica.']},
- {id:'dano_auto',taFixo:true,n:'Dano Automático',b:5,pa:1,t:'o',ta:['Corpo','Mente'],dano:true,
+ {id:'dano_auto',taFixo:true,esc:{dano:['P']},n:'Dano Automático',b:5,pa:1,t:'o',ta:['Corpo','Mente'],dano:true,
   r:{du:['prol']},db:'Psique (não aumentável)',
   d:'Marca um alvo: ele recebe dano automático no início do turno dele, 1×/rodada, ignorando escudos e reforços.',
   rg:['Depois de afetar, não precisa de novos ataques ou testes enquanto ativa.','Em área, só aplica enquanto o alvo está dentro.','Em alvo único/múltiplos, o alcance só define onde a marca é aplicada.']},
- {id:'explosao',n:'Explosão de Dano',b:5,pa:1,dano:true,
+ {id:'explosao',esc:{dano:['P']},n:'Explosão de Dano',b:5,pa:1,dano:true,
   r:{al:['unico','multiplos'],du:['prol']},db:'Psique (no 3º acerto)',
   d:'Seus ataques deixam acúmulos; ao acertar o 3º ataque, ele causa dano adicional igual à Psique.',
   rg:['Acúmulos só por jogadas de ataque, contados por alvo.','A contagem reinicia quando a explosão dispara.','Desativar a habilidade zera os acúmulos.']},
- {id:'aumento_dano',n:'Aumento de Dano',b:10,pa:1,ps:'s',
+ {id:'aumento_dano',efeito:{tipo:'dano'},n:'Aumento de Dano',b:10,pa:1,ps:'s',
   op:[{id:'v',l:'Dano adicional',it:OP_VAL('+',' de dano')}],
   d:'Aprimora o dano causado por um alvo ao acertar ataque ou habilidade de dano.',
   rg:['Aumentos do mesmo usuário não acumulam.','Se atribuída como passiva, não pode ser em área.']},
@@ -435,7 +455,7 @@ ofensivo:{n:'Ofensivo',c:'#ff8080',bg:'#3d1f24',fns:[
  {id:'quebra_res',param:{id:'dmg',l:'Tipo de dano ignorado',it:Object.keys(DANO_TIPO)},n:'Quebra de Resistência',b:5,pa:1,ps:'s',
   d:'O alvo passa a ignorar resistências a um tipo de dano à sua escolha.',
   rg:['Só um tipo de dano ignorado por ativação.','Em runa combinada com função de dano, a própria habilidade recebe o benefício.']},
- {id:'red_critico',n:'Redução de Margem Crítica',b:10,pa:1,ps:'s',r:{al:['unico'],ac:['pessoal']},
+ {id:'red_critico',efeito:{tipo:'nota',txt:'margem de crítico −1'},n:'Redução de Margem Crítica',b:10,pa:1,ps:'s',r:{al:['unico'],ac:['pessoal']},
   d:'Reduz em -1 a margem de crítico dos ataques do usuário.'},
  {id:'demolicao',n:'Demolição',b:5,pa:1,ps:'s',r:{al:['unico'],ac:['pessoal']},
   d:'Dobra todo o dano que o usuário causa a estruturas e coberturas.'},
@@ -448,13 +468,13 @@ ofensivo:{n:'Ofensivo',c:'#ff8080',bg:'#3d1f24',fns:[
   db:'Pequeno: metade da Psique · Médio: 3 + Psique · Grande: 4 + Psique × 2',
   d:'Espaços de Levitação iguais à Psique: levita objetos inanimados e os arremessa em alta velocidade.',
   rg:['O Fluxo é descontado para cada objeto erguido.','Sempre pode atacar com um objeto logo após erguê-lo, sem gastar de novo.','Em Duração Prolongada, atacar nos turnos seguintes só consome os P.A de cada objeto.','Regras de quantidade de alvos e área não se aplicam.','Não recebe benefício de Aumento de Dano nem Redução de Margem Crítica.','O objeto sofre dano igual ao que causa e pode quebrar (não vale para armas).']},
- {id:'dano_acum',n:'Dano Acumulativo',b:10,pa:1,r:{al:['unico'],ac:['pessoal']},
+ {id:'dano_acum',esc:{dano:['+1 até P']},n:'Dano Acumulativo',b:10,pa:1,r:{al:['unico'],ac:['pessoal']},
   d:'+1 de dano sempre que o usuário acerta um ataque, acumulando até um valor igual à Psique.',
   rg:['Falhar em dois ataques consecutivos ou passar um turno sem atacar zera os acúmulos.']}
 ]},
 
 defensivo:{n:'Defensivo',c:'#7fb8ff',bg:'#1c2c42',fns:[
- {id:'escudo',efeito:{tipo:'escudo'},n:'Escudo',b:5,pa:null,rc:'s',
+ {id:'escudo',efeito:{tipo:'escudo'},esc:{escudo:['P','P*2','P*3']},n:'Escudo',b:5,pa:null,rc:'s',
   op:[{id:'e',l:'Esforço extra (se não for Prolongada)',it:[{l:'1 P.A — escudo = Psique',c:0,pa:1},{l:'2 P.A — escudo = Psique × 2',c:5,pa:2},{l:'3 P.A — escudo = Psique × 3',c:10,pa:3}]}],
   d:'Concede escudo a um alvo: absorve dano como uma barra extra de PV.',
   rg:['Em Duração Prolongada o escudo se reestabelece no início do seu turno.','Não pode ser aplicada no mesmo alvo mais de uma vez por rodada.','Um novo escudo substitui o atual, sem acumular.']},
@@ -462,7 +482,7 @@ defensivo:{n:'Defensivo',c:'#7fb8ff',bg:'#1c2c42',fns:[
   op:[{id:'v',l:'Proteção adicional',it:[{l:'-1 de dano sofrido',c:0},{l:'-2 de dano sofrido',c:5},{l:'-3 de dano sofrido',c:10}]}],
   d:'Reduz de forma fixa o dano que o alvo protegido sofre.',
   rg:['Uma nova Redução substitui a atual, sem acumular.','Alvo usando colete/traje defensivo não se beneficia.']},
- {id:'imun_cond',paramN:{id:'cd',l:'Condições imunizadas',it:CONDS.map(c=>c[0]),qtd:'half'},n:'Imunidade à Condição',b:10,pa:1,rc:'s',ps:'s',unica:true,
+ {id:'imun_cond',efeito:{tipo:'imune'},paramN:{id:'cd',l:'Condições imunizadas',it:CONDS.map(c=>c[0]),qtd:'half'},n:'Imunidade à Condição',b:10,pa:1,rc:'s',ps:'s',unica:true,
   op:[{id:'niv',l:'Nível da condição (custo por condição)',it:[{l:'Nível I',c:0},{l:'Nível II',c:5},{l:'Nível III',c:10}]}],
   d:'Concede imunidade a condições. A quantidade de imunidades é igual à metade da Psique.',
   rg:['Não concede imunidade a condições amistosas nem ao Cansaço.','As condições escolhidas na construção não podem ser alteradas.','Não pode ser escolhida mais de uma vez no mesmo Estigma/Runas.','O custo base é cobrado uma vez; os extras são por condição.']},
@@ -472,13 +492,13 @@ defensivo:{n:'Defensivo',c:'#7fb8ff',bg:'#1c2c42',fns:[
  {id:'reflexao',n:'Reflexão de Dano',b:15,pa:2,rc:'x',nc:true,r:{du:['inst'],al:['unico']},
   d:'Reduz metade do dano sobre o alvo protegido e reflete esse dano ao oponente que o causou.',
   rg:['A redução não acumula com outros efeitos que cortem o dano pela metade.','Usada numa rodada, não pode ser reativada até o início da próxima.']},
- {id:'resist_dano',paramN:{id:'dmg',l:'Tipos de dano resistidos',it:Object.keys(DANO_TIPO),qtd:'half'},n:'Resistência a Dano',b:10,pa:1,rc:'s',ps:'s',unica:true,
+ {id:'resist_dano',efeito:{tipo:'resist'},paramN:{id:'dmg',l:'Tipos de dano resistidos',it:Object.keys(DANO_TIPO),qtd:'half'},n:'Resistência a Dano',b:10,pa:1,rc:'s',ps:'s',unica:true,
   d:'Concede resistência a tipos específicos de dano. A quantidade é igual à metade da Psique.',
   rg:['Os tipos escolhidos na construção não podem ser alterados.','Não pode ser escolhida mais de uma vez no mesmo Estigma/Runas.']},
  {id:'absorcao_fluxo',n:'Absorção de Fluxo',b:10,pa:2,rc:'x',nc:true,r:{du:['inst'],al:['unico']},
   d:'Absorve o Fluxo de outro Médium ao ativar uma habilidade, neutralizando-a e restaurando 10 + o custo total dela.',
   rg:['O excedente vira Fluxo Temporário, usado antes do seu Limite.','Para absorver habilidades aprimoradas por P.A extras, gaste P.A equivalentes.']},
- {id:'contra_ataque',n:'Contra Ataque',b:7,pa:1,rc:'s',dano:true,r:{ac:['pessoal']},db:'metade da Psique',
+ {id:'contra_ataque',esc:{dano:['P/2']},n:'Contra Ataque',b:7,pa:1,rc:'s',dano:true,r:{ac:['pessoal']},db:'metade da Psique',
   d:'Causa dano automaticamente em quem atinge o usuário com um ataque corpo a corpo.',
   rg:['Não funciona contra habilidades que não fazem jogada de ataque.','Só é efetiva contra ataques em alcance corpo a corpo.']},
  {id:'copias_ilusorias',n:'Cópias Ilusórias',b:7,pa:1,nc:true,
@@ -548,7 +568,7 @@ controle:{n:'Controle',c:'#c39bff',bg:'#2d2247',fns:[
 ]},
 
 enfraquecimento:{n:'Enfraquecimento',c:'#ff9a6a',bg:'#3b2517',fns:[
- {id:'desvantagem',n:'Desvantagem',b:5,pa:1,rc:'s',r:{al:['unico','multiplos'],du:['inst','inicio','fim']},
+ {id:'desvantagem',efeito:{tipo:'nota',txt:'desvantagem na próxima rolagem'},n:'Desvantagem',b:5,pa:1,rc:'s',r:{al:['unico','multiplos'],du:['inst','inicio','fim']},
   d:'Concede desvantagem a um alvo na próxima rolagem dele ou na rolagem atual.',
   rg:['Não pode ser atribuída a Duração Prolongada.']},
  {id:'red_atributo',efeito:{tipo:'atr',sinal:-1},param:{id:'atr',l:'Atributo reduzido',it:['Corpo','Agilidade','Força','Carisma','Instinto','Mente']},n:'Redução de Atributo',b:10,pa:2,t:'s',ta:ATRIBS,ap:[
@@ -556,10 +576,10 @@ enfraquecimento:{n:'Enfraquecimento',c:'#ff9a6a',bg:'#3b2517',fns:[
   op:[{id:'v',l:'Redução',it:[{l:'-1 no atributo',c:0},{l:'-2 no atributo',c:5},{l:'-3 no atributo',c:10}]}],
   d:'Reduz um atributo específico do alvo (escolhido na criação).',
   rg:['Qualquer atributo derivado do reduzido também é prejudicado.','Não acumula com penalidades que afetem a mesma jogada.','Reduzindo Corpo, os PV máximos caem; ao escapar, os PV atuais não voltam.','O atributo do teste é o mesmo atributo reduzido.']},
- {id:'red_desloc_fixa',n:'Redução Fixa de Deslocamento',b:5,pa:2,ataque:true,r:{al:['unico','multiplos']},
+ {id:'red_desloc_fixa',efeito:{tipo:'desloc_fixo',sinal:-1},esc:{desloc:['-P/2']},n:'Redução Fixa de Deslocamento',b:5,pa:2,ataque:true,r:{al:['unico','multiplos']},
   d:'Ao atingir o alvo, reduz o deslocamento dele em metade da Psique (metros). Acumula até 3 vezes.',
   rg:['Exige habilidade que faça jogadas de ataque.','Por padrão dura até o início do próximo turno do alvo.']},
- {id:'red_desloc_meio',taFixo:true,n:'Redução de Deslocamento pela Metade',b:7,pa:2,t:'s',ta:['Corpo','Agilidade','Força'],
+ {id:'red_desloc_meio',efeito:{tipo:'desloc_meio'},taFixo:true,n:'Redução de Deslocamento pela Metade',b:7,pa:2,t:'s',ta:['Corpo','Agilidade','Força'],
   d:'Reduz todo o deslocamento do alvo pela metade.',
   rg:['Em Duração Prolongada repete o teste a cada rodada, sem reconsumir o custo.']},
  {id:'aplic_penal',taFixo:true,n:'Aplicação de Penalidade',b:10,pa:2,t:'s',ta:['Mente','Corpo'],
@@ -572,10 +592,10 @@ enfraquecimento:{n:'Enfraquecimento',c:'#ff9a6a',bg:'#3b2517',fns:[
 ]},
 
 fortalecimento:{n:'Fortalecimento',c:'#7ee6a8',bg:'#183226',fns:[
- {id:'vantagem',n:'Vantagem',b:5,pa:1,rc:'s',r:{al:['unico','multiplos'],du:['inst','inicio','fim']},
+ {id:'vantagem',efeito:{tipo:'nota',txt:'vantagem na próxima rolagem'},n:'Vantagem',b:5,pa:1,rc:'s',r:{al:['unico','multiplos'],du:['inst','inicio','fim']},
   d:'Concede vantagem a um alvo na próxima rolagem dele ou na rolagem atual.',
   rg:['Não pode ser atribuída a Duração Prolongada.']},
- {id:'aplic_bonus',param:{id:'rol',l:'Tipo de rolagem beneficiada',it:['Jogada de Ataque','Jogada de Esquiva/Defesa','Teste de Habilidade','Teste de Resistência']},n:'Aplicação de Bônus',b:10,pa:1,
+ {id:'aplic_bonus',efeito:{tipo:'rolagem',sinal:1},param:{id:'rol',l:'Tipo de rolagem beneficiada',it:['Jogada de Ataque','Jogada de Esquiva/Defesa','Teste de Habilidade','Teste de Resistência']},n:'Aplicação de Bônus',b:10,pa:1,
   op:[{id:'v',l:'Bônus',it:[{l:'+1 no modificador',c:0},{l:'+2 no modificador',c:5},{l:'+3 no modificador',c:10}]}],
   d:'Aumenta o modificador do alvo em um tipo de rolagem escolhido na criação.',
   rg:['Escolha Jogada de Ataque, Esquiva/Defesa, Teste de Habilidade ou de Resistência.','Não acumula com Aumento de Atributo que fortaleça a mesma jogada.']},
@@ -583,7 +603,7 @@ fortalecimento:{n:'Fortalecimento',c:'#7ee6a8',bg:'#183226',fns:[
   op:[{id:'v',l:'Aumento',it:[{l:'+1 no atributo',c:0},{l:'+2 no atributo',c:5},{l:'+3 no atributo',c:10}]}],
   d:'Aumenta um atributo específico do alvo (escolhido na criação).',
   rg:['Derivados do atributo também são beneficiados.','Não acumula com bônus em jogadas de ataque, esquiva ou testes.','Aumentos de dano não acumulam com Aumento de Dano.','Aumentando Corpo, PV máximos e atuais sobem proporcionalmente.']},
- {id:'aum_desloc_fixo',efeito:{tipo:'desloc_psi'},n:'Aumento Fixo de Deslocamento',b:5,pa:1,r:{al:['unico','multiplos']},
+ {id:'aum_desloc_fixo',efeito:{tipo:'desloc_psi'},esc:{desloc:['P','P*2','P*3']},n:'Aumento Fixo de Deslocamento',b:5,pa:1,r:{al:['unico','multiplos']},
   op:[{id:'v',l:'Acúmulos imediatos',it:[{l:'1 acúmulo',c:0},{l:'até 2 acúmulos',c:5},{l:'até 3 acúmulos',c:10}]}],
   d:'Aumenta o deslocamento do alvo em um valor igual à Psique. Acumula até 3 vezes.',
   rg:['Esses bônus não podem ser dobrados por outras habilidades.','Em Duração Prolongada os acúmulos vêm automaticamente a cada rodada.']},
@@ -591,9 +611,9 @@ fortalecimento:{n:'Fortalecimento',c:'#7ee6a8',bg:'#183226',fns:[
   ap:['Dobra o deslocamento.','Bônus adicional igual à base original.','Mais um bônus adicional igual à base original.'],
   d:'Dobra o deslocamento do alvo; o movimento dele não provoca ataques de oportunidade.',
   rg:['Só o deslocamento base é dobrado.','Aprimoramentos exigem alcance pessoal.','Não pode ser aplicada em alvo já afetado por essa função.']},
- {id:'aum_iniciativa',efeito:{tipo:'inic_psi'},n:'Aumento de Iniciativa',b:7,pa:0,ps:'x',r:{al:['unico'],ac:['pessoal']},
+ {id:'aum_iniciativa',esc:{inic:['P']},efeito:{tipo:'inic_psi'},n:'Aumento de Iniciativa',b:7,pa:0,ps:'x',r:{al:['unico'],ac:['pessoal']},
   d:'Aumenta a iniciativa do usuário em um valor igual à Psique.'},
- {id:'furia_mortal',n:'Fúria Mortal',b:5,pa:1,ps:'s',nc:true,r:{al:['unico'],ac:['pessoal']},
+ {id:'furia_mortal',efeito:{tipo:'nota',txt:'+1 a +3 conforme os PV caem'},n:'Fúria Mortal',b:5,pa:1,ps:'s',nc:true,r:{al:['unico'],ac:['pessoal']},
   d:'Bônus crescente conforme o usuário se fere: 75% dos PV ou menos +1, 50% ou menos +2, 25% ou menos +3.',
   rg:['Vale em ataques, esquiva/defesa e testes de resistência/habilidade.','Os bônus só valem enquanto os PV estiverem no limiar.']},
  {id:'ampliar_musc',efeito:{tipo:'carga'},n:'Ampliar Musculatura',b:5,pa:1,ps:'s',r:{al:['unico'],ac:['pessoal']},
@@ -616,7 +636,7 @@ suporte:{n:'Suporte',c:'#ffd97a',bg:'#3a3016',fns:[
   op:[{id:'pv',num:true,l:'PV a restaurar nesta ativação',def:10,min:1,max:400}],
   d:'Cura um alvo, fechando e tratando feridas.',
   rg:['Em área/múltiplos, a soma da cura não pode passar do máximo da habilidade.','Ferimento crítico só é regenerado depois que o alvo recebe cura igual ao dano que o causou.','O valor máximo é o limite por uso — pode curar menos.']},
- {id:'aura_cura',n:'Aura de Cura',b:10,pa:2,r:{du:['prol'],al:['area'],ar:['esfera','cubo']},
+ {id:'aura_cura',esc:{cura:['P']},n:'Aura de Cura',b:10,pa:2,r:{du:['prol'],al:['area'],ar:['esfera','cubo']},
   d:'Aura que restaura um valor igual à Psique em cada alvo, ao ativar e no início de cada rodada.',
   rg:['Cura inclusive ferimentos críticos, conforme a regra de cura acumulada.']},
  {id:'compart_dano',n:'Compartilhamento de Dano',b:5,pa:2,rc:'s',r:{al:['unico']},
@@ -625,7 +645,7 @@ suporte:{n:'Suporte',c:'#ffd97a',bg:'#3a3016',fns:[
  {id:'purificacao',n:'Purificação',b:15,pa:2,r:{du:['inst'],al:['unico']},
   d:'Remove automaticamente um efeito de Controle ou Enfraquecimento imposto sobre um alvo.',
   rg:['Ao remover Cansaço, só remove um nível por ativação.']},
- {id:'ignorar_dor',n:'Ignorar Dor',b:7,pa:2,ps:'s',r:{al:['unico','multiplos']},
+ {id:'ignorar_dor',efeito:{tipo:'ignoraFerido'},n:'Ignorar Dor',b:7,pa:2,ps:'s',r:{al:['unico','multiplos']},
   d:'Ignora os efeitos negativos dos estados de Ferido e Gravemente Ferido.'},
  {id:'reanimacao',n:'Reanimação',b:20,pa:5,nc:true,r:{du:['inst'],al:['unico'],ac:['pessoal','corpo']},
   d:'Traz de volta uma criatura morta há no máximo 1 hora, com 1 PV e 1d6 de [In]Sanidade.',
@@ -756,7 +776,9 @@ transmutacao:{n:'Transmutação',c:'#ff9ede',bg:'#3d1c33',fns:[
   rg:['Só o material em maior quantidade conta na durabilidade.','Não transmuta Somnium nem itens criados por terceiros.','Não molda estrutura no espaço de uma criatura.','Criar cobertura num turno desfaz as coberturas de turnos anteriores.']},
  {id:'destruir_materia',n:'Destruir / Reconstruir Matéria',bv:'2 de Fluxo por quadrado (1 se menor que um quadrado)',
   pa:1,nc:true,calc:'quadrados',r:{du:['inst'],al:['area'],ar:['esfera','cubo']},
-  op:[{id:'qd',num:true,l:'Quadrados afetados',def:1,min:1,max:200,mult:2}],
+  op:[{id:'esc',l:'Escala do alvo',it:[{l:'Quadrados inteiros — 2 de Fluxo cada',c:0},
+                                       {l:'Objetos menores que um quadrado — 1 de Fluxo cada',c:0}]},
+      {id:'qd',num:true,l:'Quantidade afetada na ativação',def:1,min:1,max:200,mult:2}],
   d:'Reconstrói estruturas e objetos danificados, ou rompe a ligação entre as partículas, reduzindo tudo a pó.',
   rg:['Não afeta Somnium nem materiais criados por Fluxo de outros.','Ao ativar, escolhe quais materiais na área serão afetados.','Os efeitos são duradouros e permanecem após desativar.']},
  {id:'transmutar_materia',n:'Transmutar Matéria',bv:'variável pelo material criado',pa:1,nc:true,
@@ -770,7 +792,7 @@ transmutacao:{n:'Transmutação',c:'#ff9ede',bg:'#3d1c33',fns:[
 ]},
 
 exotico:{n:'Exótico',c:'#b6a4ff',bg:'#292347',fns:[
- {id:'clonagem',n:'Clonagem',b:15,pa:3,rc:'s',r:{du:['prol']},pl:'não consome por rodada',
+ {id:'clonagem',esc:{pv:['P*2']},n:'Clonagem',b:15,pa:3,rc:'s',r:{du:['prol']},pl:'não consome por rodada',
   ap:['Clones herdam especializações, ecos e habilidades de origem, mas não habilidades psíquicas; mente isolada.',
       'Clones herdam todas as habilidades psíquicas do Estigma/Runas e entram em mente coletiva.',
       'Você pode trocar de lugar com um clone no campo de visão gastando 1 P.A.'],
@@ -803,16 +825,16 @@ exotico:{n:'Exótico',c:'#b6a4ff',bg:'#292347',fns:[
  {id:'roubo_vida',n:'Roubo de Vida',b:10,pa:1,sc:true,exigeDano:true,r:{du:['inst']},
   d:'Cura o usuário em metade do dano causado ao atingir um inimigo.',
   rg:['Só pode ser escolhida em Runa Combinada com uma função que já cause dano.','Com jogada de ataque, aplica sempre que acerta; com teste, só quando o alvo falha.','Em área a efetividade cai pela metade, mas absorve de cada alvo que falhou.']},
- {id:'roubo_fluxo',n:'Roubo de Fluxo',b:5,pa:1,sc:true,
+ {id:'roubo_fluxo',esc:{fluxo:['P*2']},n:'Roubo de Fluxo',b:5,pa:1,sc:true,
   d:'Força o alvo a liberar Fluxo ao ser atingido, restaurando o seu Limite em Psique × 2.',
   rg:['Só em Runa Combinada com função que faça ataque ou peça teste de resistência.','Em área a efetividade cai pela metade, mas absorve de cada alvo que falhou.']},
- {id:'devorar_fluxo',n:'Devorar Fluxo',b:5,pa:1,r:{al:['unico'],ac:['pessoal']},
+ {id:'devorar_fluxo',esc:{fluxo:['P']},n:'Devorar Fluxo',b:5,pa:1,r:{al:['unico'],ac:['pessoal']},
   d:'Restaura Fluxo igual à Psique sempre que o usuário acerta uma Jogada de Ataque. O alvo perde o mesmo valor.',
   rg:['Não aplica em habilidade em área nem que peça teste de resistência.','Em ataques de 1 P.A com objetos pequenos, a restauração cai pela metade.']},
- {id:'sanguinario',n:'Sanguinário',b:5,pa:1,r:{al:['unico'],ac:['pessoal']},
+ {id:'sanguinario',esc:{cura:['P/2']},n:'Sanguinário',b:5,pa:1,r:{al:['unico'],ac:['pessoal']},
   d:'Cura o usuário em metade da Psique sempre que ele acerta uma Jogada de Ataque.',
   rg:['Não aplica em habilidade em área nem que peça teste de resistência.']},
- {id:'regeneracao',n:'Regeneração',b:10,pa:0,ps:'x',r:{al:['unico'],ac:['pessoal']},
+ {id:'regeneracao',esc:{cura:['P']},n:'Regeneração',b:10,pa:0,ps:'x',r:{al:['unico'],ac:['pessoal']},
   ap:['Recupera PV a cada 10 minutos.','A cada 5 minutos.','A cada 1 minuto.'],
   d:'Fator de cura aprimorado: recupera PV igual à Psique e regenera qualquer ferimento crítico.'},
  {id:'armazenar_hab',n:'Armazenar Habilidades',bv:'= custo total da habilidade guardada',pa:null,rc:'s',ps:'x',se:true,
@@ -887,9 +909,9 @@ const SUBS = {
 
 'Mercenário':[
  {id:'gratis',n:'Senhor da Guerra — habilidades gratuitas',nv:1,lim:'merc4',limTxt:'1 no nível 1, +1 nos níveis 6, 11 e 16',
-  fonte:'talentos',
+  fonte:'talentos',depois:'Senhor da Guerra',
   nota:'Habilidades de qualquer Especialização, mesmo sem nenhum nível nela. Não consomem Pontos de Aprimoramento.'},
- {id:'assin',n:'Arma de Assinatura',nv:6,lim:'merc3',limTxt:'1 no nível 6, +1 nos níveis 11 e 16',
+ {id:'assin',n:'Arma de Assinatura',nv:6,lim:'merc3',depois:'Arma de Assinatura',limTxt:'1 no nível 6, +1 nos níveis 11 e 16',
   nota:'Escolha o tipo e a categoria. O talento vale enquanto você empunhar uma arma daquele tipo e categoria.',
   lista:[
   {n:'Combate Desarmado',d:'1×/rodada, ao gastar 2 P.A para um ataque desarmado, gasta +1 P.A e faz um segundo ataque.'},
@@ -903,11 +925,11 @@ const SUBS = {
   {n:'Marciais à Distância — Pesada',d:'O projétil atravessa o alvo e atinge criaturas na mesma linha, dentro do alcance ideal. Elas esquivam normalmente.'},
   {n:'Marciais Arremessáveis — Leve',d:'1×/rodada arremessa uma quantidade de armas leves igual à Agilidade ao mesmo tempo. Uma jogada de ataque; cada alvo esquiva separado; cada arma atinge só um alvo.'},
   {n:'Marciais Arremessáveis — Média',d:'Soma a Agilidade ao alcance do arremesso, além da Força, e +1 de dano.'}]},
- {id:'supnd',n:'Pontos de Supressão — atributo do ND',nv:11,lim:1,limTxt:'escolha permanente',
+ {id:'supnd',n:'Pontos de Supressão — atributo do ND',nv:11,lim:1,depois:'Pontos de Supressão',limTxt:'escolha permanente',
   nota:'O ND pode ser o resultado da sua jogada de ataque ou uma rolagem separada com este atributo.',
   lista:[{n:'Força',d:'ND dos Pontos de Supressão rolado com Força.'},
          {n:'Agilidade',d:'ND dos Pontos de Supressão rolado com Agilidade.'}]},
- {id:'sup',n:'Pontos de Supressão',nv:11,ref:true,
+ {id:'sup',n:'Pontos de Supressão',nv:11,ref:true,depois:'Pontos de Supressão',
   nota:'Ao acertar um ataque desarmado, marcial ou de fogo, gaste +1 P.A depois de confirmar o acerto para atingir um Ponto, 1×/rodada. Só é eficaz contra Médiuns ou possuídos por Possessor. Todos pedem teste de resistência de Corpo.',
   lista:[
   {n:'Golpe Inibidor',d:'Em falha, todas as habilidades de duração prolongada do alvo são desativadas.'},
@@ -1115,6 +1137,26 @@ const ART_UTIL = [
  {n:'Runa de Reforço',p:'1.500 créditos',w:'0,01 kg',d:'Marcada na pele: reduz todo o dano recebido em 1.'},
  {n:'Núcleo de Isca',p:'200 créditos',w:'0,1 kg',d:'1 P.A para ativar: atrai Encostos num raio de 60 metros.'}
 ];
+/* Modificações do Artesão — Toque de Mestre (nível 6). Máximo 2 por artefato. */
+const ART_MODS = [
+ {n:'Liga Leve',req:'Qualquer arma média ou pesada',d:'Reduz o peso em uma categoria e remove os requisitos de Força, sem afetar o dano base nem a quantidade de mãos.'},
+ {n:'Peso Extra',req:'Arma corpo a corpo pesada',d:'Requisito de Força +1, mas o dano base sobe de 4 para 6. Não combina com Liga Leve.',dano:2},
+ {n:'Gume Afiado',req:'Arma corpo a corpo leve',d:'Reduz a margem de crítico em -1.'},
+ {n:'Proteção Reforçada',req:'Qualquer armadura ou colete',d:'Reduz o dano sofrido pelo usuário em -1.',red:1},
+ {n:'Lâmina Serrilhada',req:'Arma corpo a corpo cortante',d:'Acertos críticos causam Hemorragia Externa e ainda permitem rolar na tabela; se cair Hemorragia de novo, o efeito é duplicado.'},
+ {n:'Haste Segmentada',req:'Arma corpo a corpo média ou pesada',d:'+1 m de alcance, funcionando como chicote laminado.'},
+ {n:'Guarda Entrelaçada',req:'Arma corpo a corpo leve ou média',d:'+1 em jogadas de defesa e vantagem em testes para Desarmar.',def:1},
+ {n:'Contrapeso Perfeito',req:'Qualquer arma média',d:'+1 em jogadas de ataque com a arma.',atk:1},
+ {n:'Bico Perfurante',req:'Arma corpo a corpo de dano contundente',d:'Pode causar dano Perfurante em vez de Contundente e, ao fazê-lo, ignora metade da Armadura do alvo, incluindo Armadura de Fluxo.'},
+ {n:'Ponta Farpada Retrátil',req:'Arma corpo a corpo de dano perfurante',d:'Ao acertar, causa +1 de dano perfurante.',dano:1},
+ {n:'Câmara de Impacto',req:'Arma de fogo com propriedade de impacto',d:'Permite fabricar munições de impacto durante os disparos.'},
+ {n:'Câmara de Espalhamento',req:'Arma de fogo com propriedade de impacto',d:'Permite fabricar munições de espalhamento durante os disparos.'},
+ {n:'Câmara de Sobrecarga',req:'Armas de fogo',d:'Em acerto crítico, pode rolar 2d12 em vez de um.'},
+ {n:'Cano Estendido',req:'Armas de fogo',d:'Dobra o alcance geral e os projéteis causam +1 de dano perfurante.',dano:1},
+ {n:'Roldanas',req:'Arcos',d:'Dobra o alcance geral e os projéteis causam +1 de dano perfurante.',dano:1},
+ {n:'Mecanismo de Repetição',req:'Balestras',d:'Adiciona a propriedade de Rajada à arma.'},
+ {n:'Lâmina Acoplada',req:'Armas de fogo, arcos e balestras',d:'Permite usar a arma como arma branca corpo a corpo para dano cortante, com dano pela categoria, e se beneficiar de especializações corpo a corpo.'}
+];
 const ART_INICIAL = {
   Inceptor:'um Artefato de Rank C',
   Adeptus:'dois Artefatos de Rank C ou um de Rank B',
@@ -1132,6 +1174,9 @@ const half = n => Math.floor(n/2);
 const uid  = () => 'h'+Math.random().toString(36).slice(2,9);
 const ATR  = ['corpo','agilidade','forca','carisma','instinto','mente'];
 const ATRN = {corpo:'Corpo',agilidade:'Agilidade',forca:'Força',carisma:'Carisma',instinto:'Instinto',mente:'Mente'};
+const ROT_MOD={desloc:'Deslocamento',inic:'Iniciativa',reducao:'Redução de dano',
+ 'Jogada de Ataque':'Jogada de Ataque','Jogada de Esquiva/Defesa':'Esquiva e Defesa',
+ 'Teste de Habilidade':'Teste de Habilidade','Teste de Resistência':'Teste de Resistência'};
 const ATRS = {corpo:'COR',agilidade:'AGI',forca:'FOR',carisma:'CAR',instinto:'INS',mente:'MEN'};
 /* nome da Afinidade (como vem do banco) -> chave do atributo */
 const AF2ATR = {'Corpo':'corpo','Força':'forca','Agilidade':'agilidade','Carisma':'carisma','Instinto':'instinto','Mente':'mente'};
@@ -1164,10 +1209,28 @@ function novaFicha(){
     veratemEco:'',armas:[{n:'',v:false},{n:'',v:false},{n:'',v:false},{n:'',v:false},{n:'',v:false}],
     subs:{},usos:{},sigilo:{nome:'',v:'',op:{},ativo:false},
     estigma:est,historia:'',inventario:'',notas:'',tab:'personagem',
-    tiposDano:[],paGasto:0,rodada:1,dano:{atk:0,def:0,esc:0,red:0,base:0,bonus:0,tipo:''},
+ tiposDano:[],multiDano:false,mods:[],fnsCustom:[],usosHab:{},paGasto:0,rodada:1,dano:{atk:0,def:0,esc:0,red:0,base:0,bonus:0,tipo:''},
     artefatos:[],cfgArte:{}
   };
 }
+/* Funções criadas pelo próprio grupo, registradas no catálogo em tempo de execução */
+function registrarCustom(f){
+  if(!f || !f.id || !f.arq || !CAT[f.arq]) return;
+  const ja=CAT[f.arq].fns.findIndex(x=>x.id===f.id);
+  const obj=Object.assign({},f,{custom:true});
+  if(ja>=0) CAT[f.arq].fns[ja]=obj; else CAT[f.arq].fns.push(obj);
+  FN[f.id]=obj;
+}
+function limparCustom(){
+  Object.keys(CAT).forEach(a=>{ CAT[a].fns=CAT[a].fns.filter(f=>!f.custom); });
+  Object.keys(FN).forEach(k=>{ if(FN[k].custom) delete FN[k]; });
+}
+function sincCustom(){
+  limparCustom();
+  (ROOT.fnsCustom||[]).forEach(registrarCustom);
+  if(ROOT.sec) (ROOT.sec.fnsCustom||[]).forEach(registrarCustom);
+}
+
 let ROOT = novaFicha();
 let CH = ROOT;
 const emSec = () => !!(ROOT.sec && CH === ROOT.sec);
@@ -1175,7 +1238,7 @@ const emSec = () => !!(ROOT.sec && CH === ROOT.sec);
 /* Cria a ficha secundária conforme a variação de Sigilo escolhida */
 function novoArtefato(){
   return {k:uid(),nome:'',rank:'C',forma:'arma',arma:'',assimilado:false,
-    psiOn:0,atqOn:0,fluxoTotal:0,fluxoGasto:0,emocao:'',notas:'',runas:[],sel:null};
+    psiOn:0,atqOn:0,fluxoTotal:0,fluxoGasto:0,emocao:'',notas:'',runas:[],sel:null,mods:[]};
 }
 function cfgR(rank){
   const p=RANKS[rank], c=(CH.cfgArte||{})[rank]||{};
@@ -1319,7 +1382,8 @@ function listaSub(s){
 
 /* Bônus vindos de habilidades ativas ou passivas do Estigma (Modo Mesa) */
 function efeitosAtivos(psique){
-  const E={atr:{},desloc:0,deslocDobro:false,inic:0,carga:1,reducao:0,escudo:0,lista:[]};
+  const E={atr:{},desloc:0,deslocDobro:false,deslocMeio:false,inic:0,carga:1,reducao:0,escudo:0,
+           dano:0,rol:{},ignoraFerido:false,lista:[]};
   CH.estigma.habs.forEach(h=>{
     const ligada = h.passiva || h.ativa;
     if(!ligada) return;
@@ -1354,6 +1418,29 @@ function efeitosAtivos(psique){
             E.lista.push({l:rot,t:(m[0]>0?'+':'')+m[0]+' Força · '+(m[1]>0?'+':'')+m[1]+' Agilidade'});
           }
           break;}
+        case 'dano':{
+          const o=(f.op||[]).find(x=>x.id==='v'); const n=((sf.op&&sf.op.v)??0)+1;
+          E.dano+=n; E.lista.push({l:rot,t:'+'+n+' de dano'}); break;}
+        case 'rolagem':{
+          const k=(sf.par&&sf.par.rol)||''; const n=(((sf.op&&sf.op.v)??0)+1)*f.efeito.sinal;
+          if(!k){ E.lista.push({l:rot,t:f.n+': defina o tipo de rolagem'}); break; }
+          E.rol[k]=(E.rol[k]||0)+n;
+          E.lista.push({l:rot,t:(n>0?'+':'')+n+' em '+k}); break;}
+        case 'desloc_fixo':{
+          const v2=half(psique)*(f.efeito.sinal||1);
+          E.desloc+=v2; E.lista.push({l:rot,t:(v2>0?'+':'')+v2+' m de deslocamento'}); break;}
+        case 'desloc_meio':
+          E.deslocMeio=true; E.lista.push({l:rot,t:'deslocamento reduzido à metade'}); break;
+        case 'ignoraFerido':
+          E.ignoraFerido=true; E.lista.push({l:rot,t:'ignora Ferido e Gravemente Ferido'}); break;
+        case 'nota':
+          E.lista.push({l:rot,t:f.efeito.txt}); break;
+        case 'resist':{
+          const arr=((sf.par||{}).dmg)||[];
+          E.lista.push({l:rot,t:arr.length?'resistência a '+arr.join(', '):'defina os tipos de dano'}); break;}
+        case 'imune':{
+          const arr=((sf.par||{}).cd)||[];
+          E.lista.push({l:rot,t:arr.length?'imune a '+arr.join(', '):'defina as condições'}); break;}
         case 'reducao':{
           const o=(f.op||[]).find(x=>x.id==='v'); const n=((sf.op&&sf.op.v)??0)+1;
           E.reducao=Math.max(E.reducao,n); E.lista.push({l:rot,t:'−'+n+' de dano sofrido'}); break;}
@@ -1381,6 +1468,16 @@ function D(){
   const bonusSig = sigAtivo ? 2 : 0;
   const psique   = p.limAtr + bonusSig;
   const EF = efeitosAtivos(p.limAtr + bonusSig);
+  /* Penalidades e bônus marcados à mão no Modo Mesa */
+  (CH.mods||[]).forEach(m=>{
+    const v=+m.valor||0; if(!v) return;
+    if(ATR.includes(m.alvo)) { EF.atr[m.alvo]=(EF.atr[m.alvo]||0)+v; }
+    else if(m.alvo==='desloc') EF.desloc+=v;
+    else if(m.alvo==='inic') EF.inic+=v;
+    else if(m.alvo==='reducao') EF.reducao+=v;
+    else if(m.alvo) EF.rol[m.alvo]=(EF.rol[m.alvo]||0)+v;
+    EF.lista.push({l:(m.nota||'ajuste manual'),t:(v>0?'+':'')+v+' em '+(ATRN[m.alvo]||ROT_MOD[m.alvo]||m.alvo)});
+  });
   const aE = Object.assign({},a);
   if(bonusSig && AF2ATR[af]) aE[AF2ATR[af]] = (a[AF2ATR[af]]||0) + bonusSig;
   ATR.forEach(k=>{ if(EF.atr[k]) aE[k]=Math.max(0,(aE[k]||0)+EF.atr[k]); });
@@ -1431,22 +1528,24 @@ function D(){
             : pvAtual <= pvTotal*0.25 ? 'GRAVEMENTE FERIDO'
             : pvAtual <= pvTotal*0.5  ? 'FERIDO' : 'NORMAL';
   const penFerido = sit==='GRAVEMENTE FERIDO' ? -4 : sit==='FERIDO' ? -2 : 0;
-  const ignoraFerido = af==='Corpo';
+  const ignoraFerido = af==='Corpo' || EF.ignoraFerido;
 
   /* defesas */
   const guarda = temTalento('Em Guarda') ? p.guarda : 0;
   const inic   = Math.max(aE.agilidade+half(aE.instinto), aE.instinto+half(aE.agilidade));
-  const esquiva= inic + afd.esq + guarda + mEsq;
+  const rolAtk = (EF.rol['Jogada de Ataque']||0);
+  const rolEsq = (EF.rol['Jogada de Esquiva/Defesa']||0)+(EF.rol['Jogada de Esquiva']||0);
+  const esquiva= inic + afd.esq + guarda + mEsq + rolEsq;
   const inicTot= inic + EF.inic;
-  const defesa = aE.forca + half(Math.max(aE.agilidade,aE.instinto)) + guarda + mDef;
+  const defesa = aE.forca + half(Math.max(aE.agilidade,aE.instinto)) + guarda + mDef + rolEsq;
 
   /* ataque psíquico / ND */
-  const atqPsi = psique + half(aE[AF2ATR[af]]||0) + afd.atk;
+  const atqPsi = psique + half(aE[AF2ATR[af]]||0) + afd.atk + rolAtk;
 
   /* combate desarmado */
   const versatil = (CH.esp.desarmado.tal||[]).some(t=>t&&t.startsWith('Versátil'));
   const atrDes   = versatil ? Math.max(aE.forca,aE.agilidade) : aE.forca;
-  const atqDes   = atrDes + p.bonusEsp;
+  const atqDes   = atrDes + p.bonusEsp + rolAtk;
   const danoDes  = CH.esp.desarmado.nv + half(atrDes);
 
   /* ecos */
@@ -1482,13 +1581,14 @@ function D(){
     limExp,runaAd,temVinc,nvVinculo,veratemMestre,
     pvTotal,pvAtual,sit,penFerido,ignoraFerido,
     inic:inicTot,inicBase:inic,esquiva,defesa,guarda,atqPsi,
-    reducaoTotal:mRed+EF.reducao, escudoAtivo:EF.escudo,
+    reducaoTotal:mRed+EF.reducao, escudoAtivo:EF.escudo, rolAtk, rolEsq, bonusDanoAtivo:EF.dano,
     versatil,atrDes,atqDes,danoDes,
     revBonus,revTeste,manBonus,detAlc,detMult,
     limFluxo,fluxoDisp,descPass,sobrecarga,sec,tamPV,custoInvoc,baseFluxo,
     bonusVinculo:(veratemMestre&&CH.veratemEco==='manipulacao'&&CH.ecos.manipulacao.nv===3)?4:nvVinculo,
     runasDisp,runasUso,passLim,passUso,
-    desloc:Math.round(((10 + aE.agilidade*afd.desl + mDesl) * (EF.deslocDobro?2:1)) + EF.desloc),
+    desloc:Math.max(0,Math.round((((10 + aE.agilidade*afd.desl + mDesl) * (EF.deslocDobro?2:1))
+             / (EF.deslocMeio?2:1)) + EF.desloc)),
     levant:(120+50*aE.forca)*afd.carga*EF.carga,
     carga:(60+10*aE.forca)*afd.carga*EF.carga,
     detPassiva:3*aE.instinto, ndPassiva:6+aE.instinto, idiomas:1+half(aE.mente),
@@ -1541,6 +1641,33 @@ function atqArma(x,vinculada){
   if(!prof) return {mod:0,base:'sem proficiência',prof:false};
   return {mod:attr+bonus,base:base+(bonus?' + '+bonus:''),prof:true,attr,bonus};
 }
+function bonusOrigemArma(x,tipoLabel){
+  const out=[];
+  if(CH.origem==='Mercenário'){
+    const assin=subSel('assin');
+    const nome = x.tipo==='Desarmado' ? 'Combate Desarmado'
+      : (x.tipo==='Corpo a Corpo' ? 'Marciais Corpo a Corpo — '+x.cat
+      : x.tipo==='Armas de Fogo' ? 'Armas de Fogo — '+x.cat
+      : x.tipo==='Armas à Distância' ? 'Marciais à Distância — '+x.cat
+      : x.tipo==='Marciais Arremessáveis' ? 'Marciais Arremessáveis — '+x.cat : '');
+    if(assin.includes(nome) && CH.nivel>=6){
+      if(x.tipo==='Armas de Fogo'&&x.cat==='Pesada') out.push({l:'Arma de Assinatura',v:1});
+      if(x.tipo==='Marciais Arremessáveis'&&x.cat==='Média') out.push({l:'Arma de Assinatura',v:1});
+    }
+  }
+  return out;
+}
+function modsArma(x){
+  const out=[];
+  (CH.artefatos||[]).forEach(a=>{
+    if(!a.assimilado || a.forma!=='arma' || !a.arma || !x || a.arma!==x.n) return;
+    (a.mods||[]).forEach(nome=>{
+      const m=ART_MODS.find(z=>z.n===nome);
+      if(m&&m.dano) out.push({l:'Modificação: '+m.n,v:m.dano});
+    });
+  });
+  return out;
+}
 function danoArma(x,vinculada){
   const d=D();
   if(!x) return {txt:'—',comp:[]};
@@ -1558,7 +1685,10 @@ function danoArma(x,vinculada){
     const cc = x.tipo==='Corpo a Corpo' || x.tipo==='Marciais Arremessáveis';
     if(CH.afinidade==='Força' && cc) comp.push({l:'Afinidade Força',v:1});
     if(vinculada && d.nvVinculo) comp.push({l:'Eco de Vínculo (nível '+d.nvVinculo+')',v:d.bonusVinculo});
+    bonusOrigemArma(x).forEach(b=>comp.push(b));
+    modsArma(x).forEach(b=>comp.push(b));
   }
+  if(d.bonusDanoAtivo) comp.push({l:'Aumento de Dano ativo',v:d.bonusDanoAtivo});
   const tot = comp.reduce((s,c)=>s+c.v,0);
   return {txt:tot+' '+(x.dtipo||''),tot,comp};
 }
@@ -1577,6 +1707,19 @@ function fnPA(hab,i){
   if(pa==null) pa = 0;
   return pa;
 }
+const FIS=['Cortante','Perfurante','Contundente'];
+function baseFisico(){ return FIS.includes(CH.estigma.tipoDano); }
+function tiposPermitidos(){
+  if(baseFisico()) return FIS.slice();
+  const extra=(CH.multiDano?(CH.tiposDano||[]):[]);
+  return [CH.estigma.tipoDano,...extra].filter((v,i,a)=>v&&a.indexOf(v)===i);
+}
+function tipoDaRuna(hab){
+  const perm=tiposPermitidos();
+  if(hab.tipoDano && perm.includes(hab.tipoDano)) return hab.tipoDano;
+  return CH.estigma.tipoDano;
+}
+function temDano(hab){ return hab.fns.some(sf=>FN[sf.id]&&FN[sf.id].dano); }
 function ignoraAlcance(hab){ return hab.fns.some(sf=>FN[sf.id]&&FN[sf.id].ig); }
 const fazAtaque = r => r==='ataque'||r==='ambos';
 const fazTeste  = r => r==='teste' ||r==='ambos';
@@ -1610,6 +1753,12 @@ function runasGastas(hab){
   if(hab.tipo==='estigma') return extra;
   return (hab.comb?2:1) + extra;
 }
+/* Fluxo Eficiente: reduz o consumo prolongado em até 5, conforme a Psique */
+function redPassiva(hab){
+  if(!contaMaestria('manipulacao','Fluxo Eficiente')) return 0;
+  const psi = PROG[CH.nivel] ? PROG[CH.nivel].limAtr : 0;
+  return Math.min(5, psi);
+}
 function custo(hab){
   let base=0, pa=0, det=[];
   hab.fns.forEach((sf,i)=>{
@@ -1623,7 +1772,8 @@ function custo(hab){
         let m = o.mult || 1;
         if(f.calc==='cura')  m = (sf.ap>=3 ? 1 : 2);
         if(f.calc==='fluxo') m = 1;
-        sub += v*m; rot.push(v+' × '+m);
+        if(f.calc==='quadrados') m = ((sf.op.esc??0)===1 ? 1 : 2);
+        sub += v*m; rot.push(v+(f.calc==='quadrados'?(m===1?' objeto(s) × 1':' quadrado(s) × 2'):' × '+m));
       }else{
         const it = o.it[sf.op[o.id] ?? 0];
         if(it && it.c){ sub += it.c; rot.push((it.c>0?'+':'')+it.c+' '+o.l.toLowerCase()); }
@@ -1647,14 +1797,19 @@ function custo(hab){
   if(!hab.passiva) add('Duração — '+DUR[hab.dur].l, DUR[hab.dur].c);
   if(hab.testeFim && hab.dur==='prol' && fazTeste(resolucao(hab))) add('Teste no fim do turno',5);
   if(hab.comb && mostraCombOpt(hab) && hab.combOpt==='ataque_teste') add('Ataque + Teste separados',-3);
-  if(!hab.passiva){
+  if(!hab.passiva && !hab.arte){
     if(hab.verbal)  add('Requisito Verbal',-1);
     if(hab.gestual) add('Requisito Gestual',-3);
   }
   const modSum = mods.reduce((s,m)=>s+m.v,0);
-  let total = Math.max(0, base + modSum);
-  const prol = (hab.dur==='prol' && !hab.passiva) ? 10 : 0;
-  return {det,baseBruta,base,mods,modSum,total,pa:hab.passiva?0:pa,prol};
+  const bruto = base + modSum;
+  const temFn = hab.fns.some(sf=>FN[sf.id]);
+  let total = temFn ? Math.max(1, bruto) : Math.max(0, bruto);
+  const piso = temFn && bruto < 1;
+  let prol = (hab.dur==='prol' && !hab.passiva) ? 10 : 0;
+  if(prol && hab.concentracao) prol = 0;
+  else if(prol) prol = Math.max(0, prol - redPassiva(hab));
+  return {det,baseBruta,base,mods,modSum,total,piso,pa:hab.passiva?0:pa,prol};
 }
 
 /* ============================================================
@@ -1852,11 +2007,18 @@ function validaFicha(){
 
   (CH.artefatos||[]).forEach(a=>{
     const nome=a.nome||'artefato sem nome', limR=RANKS[a.rank].runas, uso=runasArte(a);
-    if(uso>limR) e(nome+': '+uso+' runas gravadas, o '+RANKS[a.rank].n+' comporta '+limR+
-      (a.rank==='EX'?' (o Artesão pode passar disso pagando +10 VF por runa extra)':'')+'.');
+    if(uso>limR && a.rank!=='EX')
+      e(nome+': '+uso+' runas gravadas, o '+RANKS[a.rank].n+' comporta '+limR+'.');
+    else if(uso>limR)
+      i(nome+': '+uso+' runas num Rank EX — acima das 4 padrão, o que depende do Artesão que o forjou (+10 VF por runa extra).');
     if(a.assimilado && !a.fluxoTotal) w(nome+': defina a reserva de Fluxo — metade do Limite do Onírico do Núcleo Principal.');
     if(a.assimilado && a.rank!=='C' && !a.emocao && a.rank==='B')
       i(nome+': defina a emoção primária — é ela que determina a Rejeição Emocional em caso de falha.');
+    if((a.mods||[]).length>2) e(nome+': no máximo duas modificações por artefato.');
+    if((a.mods||[]).includes('Liga Leve') && (a.mods||[]).includes('Peso Extra'))
+      e(nome+': Peso Extra não pode ser aplicada numa arma com Liga Leve.');
+    if((a.mods||[]).length && CH.origem!=='Artesão')
+      i(nome+': modificações marcadas — só valem se um Artesão as instalou ou se o artefato já veio modificado.');
     if(passArte(a)>=(a.fluxoTotal||0) && passArte(a)>0)
       e(nome+': as runas passivas consomem '+passArte(a)+' de uma reserva de '+(a.fluxoTotal||0)+' — não sobra Fluxo para ativar nada.');
   });
@@ -1867,6 +2029,18 @@ function validaFicha(){
     alto.forEach(a=>i((a.nome||'artefato')+' é '+RANKS[a.rank].n+
       ': você só forja esse Rank a partir do nível '+RANK_NV[a.rank]+' — mas pode tê-lo obtido de outra forma.'));
   }
+
+  const conc=CH.estigma.habs.filter(h=>h.concentracao);
+  if(conc.length && !contaMaestria('manipulacao','Concentração'))
+    e('Concentração está marcada em '+conc.length+' habilidade(s), mas a maestria não foi adquirida no Eco de Manipulação.');
+  else if(conc.length>1)
+    e('Concentração vale para uma única habilidade de duração prolongada — '+conc.length+' estão marcadas.');
+  else if(conc.length && conc[0].fns.some(sf=>sf.id==='aura_cura'))
+    e('Concentração não se aplica à função de Aura de Cura.');
+  else if(conc.length)
+    i('Concentração: "'+(conc[0].nome||'sem nome')+'" pode ficar ativa sem consumo por '+d.psique+' hora(s) no dia. Depois disso volta a consumir.');
+  if(contaMaestria('manipulacao','Fluxo Eficiente'))
+    i('Fluxo Eficiente: o consumo por rodada das habilidades prolongadas cai '+Math.min(5,d.psique)+' (Psique, no máximo 5).');
 
   if(d.sobrecarga>0)
     w('Sobrecarga de Fluxo: '+d.sobrecarga+' além do limite → '+d.insAcum+' acúmulo(s) de [In]Sanidade.');
@@ -1899,7 +2073,7 @@ const TABS=[
   {k:'personagem',n:'Personagem'},{k:'atributos',n:'Atributos'},{k:'origem',n:'Origem'},
   {k:'esp',n:'Especializações'},{k:'ecos',n:'Ecos Psíquicos'},{k:'estigma',n:'Estigma e Runas'},
   {k:'sigilo',n:'Sigilo'},{k:'combate',n:'Combate'},{k:'notas',n:'Notas e Inventário'},
-  {k:'artefatos',n:'Artefatos'},{k:'mesa',n:'Modo Mesa',mesa:true}
+  {k:'artefatos',n:'Artefatos'},{k:'mesa',n:'Modo Mesa',mesa:true},{k:'ficha2',n:'—',sec:true}
 ];
 let ARTE = null;                       // índice do artefato aberto na aba Artefatos
 function arteAtual(){ return (CH.tab==='artefatos' && ARTE!=null) ? (CH.artefatos||[])[ARTE] : null; }
@@ -1910,6 +2084,7 @@ function ctxHabs(){
 }
 const curHab = () => { const c=ctxHabs(); return c.arr.find(h=>h.k===c.sel) || c.arr[0]; };
 let PICKER=null, BUSCA='';
+let RASCUNHO={n:'',arq:'ofensivo',b:5,pa:1,d:'',dano:false,t:false,rc:false,ps:false,cond:false};
 const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 function listaBusca(){
   const q=norm(BUSCA);
@@ -1937,6 +2112,7 @@ function picker(titulo,itens,acao){
 }
 
 function render(){
+  sincCustom();
   if(ARTE!=null && !(CH.artefatos||[])[ARTE]) ARTE=null;
   sincSec(); sincFluxo(); barraSec(); vitals(); nav(); budget(); view(); side(); alerts(); persist();
 }
@@ -1956,16 +2132,27 @@ function barraSec(){
 }
 
 /* ---------- topo ---------- */
+function vitalsTexto(){
+  const d=D();
+  const set=(sel,txt)=>{const el=document.querySelector(sel); if(el) el.textContent=txt;};
+  set('#vPvMax','/ '+d.pvTotal);
+  set('#vFxMax','/ '+d.fluxoDisp);
+  const bPv=document.querySelector('#boxPv');
+  if(bPv){ bPv.classList.toggle('bad', d.sit!=='NORMAL');
+    const u2=bPv.querySelector('u'); if(u2) u2.textContent='PV — '+d.sit.toLowerCase(); bPv.title=d.sit; }
+  const bFx=document.querySelector('#boxFx');
+  if(bFx) bFx.classList.toggle('bad', d.sobrecarga>0);
+}
 function vitals(){
   const d=D();
   const v=(c,l,val,t)=>`<div class="vital ${c}" title="${t||''}"><u>${l}</u><b>${val}</b></div>`;
   $('#vitals').innerHTML =
     v('','Nível','<span class="mono">'+CH.nivel+'</span> <small>'+d.p.cl+'</small>','Classificação do nível')+
     v('','Psique',d.psique,'Igual ao Limite de Atributo do nível')+
-    `<div class="vital pv ${d.sit!=='NORMAL'?'bad':''}" title="${d.sit}"><u>PV — ${d.sit.toLowerCase()}</u>
-      <b><input type="number" id="pvAtual" value="${d.pvAtual}"><small>/ ${d.pvTotal}</small></b></div>`+
-    `<div class="vital fx ${d.sobrecarga>0?'bad':''}" title="Limite ${d.limFluxo}${d.descPass?' − '+d.descPass+' de passivas':''}">
-      <u>Fluxo gasto</u><b><input type="number" id="fluxoGasto" value="${CH.fluxoGasto}"><small>/ ${d.fluxoDisp}</small></b></div>`+
+    `<div class="vital pv ${d.sit!=='NORMAL'?'bad':''}" id="boxPv" title="${d.sit}"><u>PV — ${d.sit.toLowerCase()}</u>
+      <b><input type="number" id="pvAtual" value="${d.pvAtual}"><small id="vPvMax">/ ${d.pvTotal}</small></b></div>`+
+    `<div class="vital fx ${d.sobrecarga>0?'bad':''}" id="boxFx" title="Limite ${d.limFluxo}${d.descPass?' − '+d.descPass+' de passivas':''}">
+      <u>Fluxo gasto</u><b><input type="number" id="fluxoGasto" value="${CH.fluxoGasto}"><small id="vFxMax">/ ${d.fluxoDisp}</small></b></div>`+
     v('pa','P.A',d.paTotal+(d.aptPA?' <small>(+'+d.aptPA+')</small>':''),'Pontos de Ação por turno'+(d.aptPA?' — inclui +'+d.aptPA+' de Eficiência Máxima':''))+
     v('','Atq. Psíquico / ND','+'+d.atqPsi,'Psique + metade da Afinidade'+(d.afd.atk?' + '+d.afd.atk+' (Carisma)':''))+
     `<div class="vital ins"><u>[In]Sanidade</u><b><input type="number" id="insan" value="${CH.insanidade}"></b></div>`;
@@ -1974,7 +2161,8 @@ function vitals(){
 /* ---------- navegação ---------- */
 function nav(){
   const d=D();
-  const oculta = emSec() ? (CH.secTipo==='invocacao'?['origem','sigilo']:['sigilo']) : [];
+  const oculta = emSec() ? (CH.secTipo==='invocacao'?['origem','sigilo','ficha2']:['sigilo','ficha2']) : [];
+  if(!emSec() && !ROOT.sec) oculta.push('ficha2');
   const mark={
     atributos:[d.gastoAtr+'/'+d.ptsAtr, d.atrDisp<0?'bad':d.atrDisp===0?'ok':'warn'],
     esp:[d.gEsp+'p',''],
@@ -1992,6 +2180,11 @@ function nav(){
   };
   $('#nav').innerHTML = TABS.filter(t=>!oculta.includes(t.k)).map((t,ix)=>{
     const m=mark[t.k];
+    if(t.sec){
+      const tp=ROOT.sec.secTipo==='invocacao'?'Invocação':'Sobreposição';
+      return `<button class="nb sec" data-abrirsec="1"><i>↗</i><span>Ficha da ${tp}</span>
+        <b class="ok">${esc(ROOT.sec.nome)||'abrir'}</b></button>`;
+    }
     return `<button class="nb ${CH.tab===t.k?'on':''}" data-tab="${t.k}">
       <i>${ix+1}</i><span>${t.n}</span>${m?`<b class="${m[1]}">${m[0]}</b>`:''}</button>`;
   }).join('');
@@ -2032,6 +2225,7 @@ function side(){
     L('Defesa','+'+d.defesa,'Força + metade do maior entre Agilidade e Instinto'+(d.guarda?' + '+d.guarda+' (Em Guarda)':''))+
     L('Ataque Psíquico / ND','+'+d.atqPsi)+
     L('Ataque Desarmado','+'+d.atqDes+' · dano '+d.danoDes)+
+    ataquesArma(L)+
     L('Deslocamento',d.desloc+' m'+(d.afd.desl>1?' (dobrado)':''))+
     L('Levantamento de peso',d.levant+' kg'+(d.afd.carga>1?' (dobrado)':''))+
     L('Carga geral',d.carga+' kg'+(d.afd.carga>1?' (dobrada)':''))+
@@ -2040,6 +2234,28 @@ function side(){
     L('Idiomas',d.idiomas,'1 + metade da Mente')+
     L('Recuperação de Fluxo',(d.psique*2)+' / 10 min','dobro da Psique a cada 10 minutos')+
     (d.penFerido&&!d.ignoraFerido?`<div class="lrow" style="background:#2a1219"><span>Estado ${d.sit.toLowerCase()}</span><b style="color:var(--err)">${d.penFerido} em ataque/ND/esquiva/defesa</b></div>`:'');
+}
+/* Modificadores de ataque corpo a corpo e à distância, pela especialização e pelas armas */
+function ataquesArma(L){
+  const d=D(), out=[];
+  const bonus = (CH.esp.cac.nv>0||CH.origem==='Mercenário') ? d.p.bonusEsp : 0;
+  const bonusD= (CH.esp.dist.nv>0||CH.origem==='Mercenário') ? d.p.bonusEsp : 0;
+  const cc = [['leve','Leve','AGI',d.aE.agilidade],['media','Média','AGI ou FOR',Math.max(d.aE.agilidade,d.aE.forca)],
+              ['pesada','Pesada','FOR',d.aE.forca]];
+  out.push(L('<b style="color:var(--txt)">Corpo a corpo</b>', CH.esp.cac.nv?'nível '+CH.esp.cac.nv:'sem especialização'));
+  cc.forEach(([k,lab,src,at])=>{
+    const prof=(CH.esp.cac.prof||[]).includes(lab)||CH.origem==='Mercenário';
+    out.push(L('&nbsp;↳ '+lab+' <em>('+src+')</em>', prof?('+'+(at+bonus+d.rolAtk)):'sem proficiência'));
+  });
+  out.push(L('<b style="color:var(--txt)">À distância</b>', CH.esp.dist.nv?'nível '+CH.esp.dist.nv:'sem especialização'));
+  out.push(L('&nbsp;↳ Arremesso / arco <em>(AGI)</em>',
+    (CH.esp.dist.nv>0||CH.origem==='Mercenário')?'+'+(d.aE.agilidade+bonusD+d.rolAtk):'sem proficiência'));
+  ['Leve','Média','Pesada'].forEach((cat,ix)=>{
+    const ok = CH.origem==='Mercenário' || CH.esp.dist.nv>=ix+1;
+    out.push(L('&nbsp;↳ Fogo '+cat+' <em>(AGI)</em>', ok?'+'+(d.aE.agilidade+bonusD+d.rolAtk):'sem proficiência'));
+  });
+  if(d.bonusDanoAtivo) out.push(L('Bônus de dano ativo','+'+d.bonusDanoAtivo));
+  return out.join('');
 }
 function sideDano(){
   const rows=[['1–2','+1'],['3–4','+2'],['5–6','+3'],['7–8','+4'],['9–10','+5'],['11 ou mais','+6']];
@@ -2153,7 +2369,12 @@ function vAtributos(){
     <tr><td>Iniciativa</td><td class="n">+${d.inic}</td><td><small>1d12 + Agilidade + metade do Instinto, ou 1d12 + Instinto + metade da Agilidade</small></td></tr>
     <tr><td>Esquiva</td><td class="n">+${d.esquiva}</td><td><small>igual à iniciativa${d.afd.esq?' + '+d.afd.esq+' da Afinidade Agilidade':''}${d.guarda?' + '+d.guarda+' de Em Guarda':''}</small></td></tr>
     <tr><td>Defesa</td><td class="n">+${d.defesa}</td><td><small>Força + metade do maior entre Agilidade e Instinto${d.guarda?' + '+d.guarda+' de Em Guarda':''}</small></td></tr>
-    <tr><td>Ataque Psíquico / ND</td><td class="n">+${d.atqPsi}</td><td><small>Psique + metade da ${CH.afinidade||'Afinidade'}${d.afd.atk?' + '+d.afd.atk+' da Afinidade Carisma':''}</small></td></tr>
+    <tr><td>Ataque Psíquico / ND</td><td class="n">+${d.atqPsi}</td><td><small>Psique + metade da ${CH.afinidade||'Afinidade'}${d.afd.atk?' + '+d.afd.atk+' da Afinidade Carisma':''}${d.rolAtk?' + '+d.rolAtk+' de habilidade ativa':''}</small></td></tr>
+    <tr><td>Ataque Desarmado</td><td class="n">+${d.atqDes}</td><td><small>${d.versatil?'maior entre Força e Agilidade':'Força'} + ${d.p.bonusEsp} da especialização · dano ${d.danoDes}</small></td></tr>
+    <tr><td>Corpo a Corpo</td><td class="n">${CH.esp.cac.nv||CH.origem==='Mercenário'?'+'+(d.aE.forca+d.p.bonusEsp)+' a +'+(Math.max(d.aE.agilidade,d.aE.forca)+d.p.bonusEsp):'—'}</td>
+      <td><small>Leve usa Agilidade, Média o maior dos dois, Pesada usa Força${CH.esp.cac.nv?', + '+d.p.bonusEsp+' da especialização':' — sem especialização não há bônus de atributo'}</small></td></tr>
+    <tr><td>À Distância</td><td class="n">${CH.esp.dist.nv||CH.origem==='Mercenário'?'+'+(d.aE.agilidade+d.p.bonusEsp):'—'}</td>
+      <td><small>Agilidade${CH.esp.dist.nv?' + '+d.p.bonusEsp+' da especialização':' — sem especialização não há bônus de atributo'}. Proficiência de fogo por categoria vem do nível.</small></td></tr>
     <tr><td>Deslocamento</td><td class="n">${d.desloc} m</td><td><small>10 + Agilidade${d.afd.desl>1?', com o bônus de Agilidade dobrado pela Afinidade':''}</small></td></tr>
     <tr><td>Levantamento / Carga</td><td class="n">${d.levant} / ${d.carga}</td><td><small>120 + 50 × Força e 60 + 10 × Força${d.afd.carga>1?', dobrados pela Afinidade Força':''}</small></td></tr>
     <tr><td>Pontos de Ação</td><td class="n">${d.paTotal}</td><td><small>${d.p.pa} do nível${d.aptPA?' + '+d.aptPA+' de Eficiência Máxima':''}</small></td></tr>
@@ -2198,7 +2419,9 @@ function vOrigem(){
     h += lib?`<div class="longtext">${esc(x.t)}</div>`
             :`<p class="note">Liberada quando o personagem alcançar o nível ${x.nv}.</p>`;
     h += `</div>`;
-    (SUBS[CH.origem]||[]).filter(sb=>sb.nv===x.nv && !jaFeitos[sb.id]).forEach(sb=>{
+    (SUBS[CH.origem]||[]).filter(sb=>!jaFeitos[sb.id] &&
+        (sb.depois ? sb.depois===x.n : sb.nv===x.nv &&
+         !(SUBS[CH.origem]||[]).some(o=>o.id===sb.id&&o.depois))).forEach(sb=>{
       jaFeitos[sb.id]=1; h+=blocoSub(sb,d); });
   });
   (SUBS[CH.origem]||[]).filter(sb=>!jaFeitos[sb.id]).forEach(sb=>{ jaFeitos[sb.id]=1; h+=blocoSub(sb,d); });
@@ -2500,99 +2723,156 @@ function custoSigilo(){
 
 function vArtefatos(){
   const d=D(), lista=CH.artefatos||[], lim=half(d.psique);
-  let h=`<p class="note" style="margin-bottom:10px">Artefatos Oníricos são armas e equipamentos feitos de Somnium Forjado: ferem Oníricos sem precisar de Eco de Vínculo e podem carregar Runas do Anátema da criatura purificada. Assimilados ao mesmo tempo: no máximo metade da Psique.</p>
+  let h=`<p class="note" style="margin-bottom:10px">Artefatos Oníricos ferem Oníricos sem precisar de Eco de Vínculo e podem carregar Runas do Anátema da criatura purificada. Assimilados ao mesmo tempo: no máximo metade da Psique.</p>
   <div class="mrow">
     <div class="mbox"><u>Assimilados</u><b class="${assimilados()>lim?'pv':''}">${assimilados()} <small>/ ${lim}</small></b></div>
     <div class="mbox"><u>No inventário</u><b>${lista.length}</b></div>
     ${CH.origem==='Artesão'?`<div class="mbox"><u>Forja Viva</u><b style="font-size:15px">até ${
       ['C','B','A','EX'].filter(r=>CH.nivel>=RANK_NV[r]).pop()||'—'}</b>
-      <div class="mbtns"><span class="note" style="margin:0">C nv1 · B nv6 · A nv11 · EX nv16</span></div></div>`:''}
+      <div class="msub">C nv1 · B nv6 · A nv11 · EX nv16</div></div>`:''}
   </div>`;
-
-  if(CH.origem==='Artesão'){
-    const cl=d.p.cl;
-    h += `<div class="al i" style="margin-bottom:10px"><i>i</i><div>Como Artesão, você começa a campanha com ${
-      esc(ART_INICIAL[cl]||ART_INICIAL.Inceptor)} (classificação ${cl}). O Valor de Forja de um núcleo é igual ao Nível de Ameaça do Onírico purificado; a runa gravada sai sempre do Anátema do Núcleo Principal.</div></div>`;
-  }
-
+  if(CH.origem==='Artesão')
+    h += `<div class="al i" style="margin-bottom:10px"><i>i</i><div>Como Artesão você começa com ${
+      esc(ART_INICIAL[d.p.cl]||ART_INICIAL.Inceptor)} (classificação ${d.p.cl}). O Valor de Forja de um núcleo é igual ao Nível de Ameaça do Onírico purificado.${
+      CH.nivel>=6?' A partir do 6º nível, o Toque de Mestre permite instalar até duas Modificações por artefato.':''}</div></div>`;
   if(!lista.length) h += `<div class="empty"><b>Nenhum artefato ainda</b>Adicione um artefato que você forjou, comprou ou encontrou.</div>`;
 
   lista.forEach((a,ix)=>{
     const R2=RANKS[a.rank], cfg=cfgR(a.rank), aberto=ARTE===ix;
     const uso=runasArte(a), pass=passArte(a), disp=fluxoArte(a)-(a.fluxoGasto||0);
-    h += `<div class="blk" style="border-color:${a.assimilado?'var(--fluxo)':'var(--line)'}">
-      <div class="blkh">
-        <h4>${esc(a.nome)||'Artefato sem nome'}</h4>
-        <span class="bdg ${a.rank==='EX'?'r':a.rank==='A'?'y':'v'}">${R2.n}</span>
-        <span class="bdg ${uso>R2.runas?'r':''}">${uso} de ${R2.runas} runa${R2.runas>1?'s':''}</span>
-        ${a.assimilado?`<span class="bdg g">assimilado</span>`:''}
-        <label class="check sm ${a.assimilado?'on':''}"><input type="checkbox" data-arteass="${ix}" ${a.assimilado?'checked':''}> assimilar</label>
-        <button class="btn sm dz" data-artedel="${ix}">✕</button></div>
+    const erros=validaFicha().filter(z=>z.l==='e'&&z.t.startsWith((a.nome||'artefato sem nome'))).length;
+    h += `<div class="blk arte ${aberto?'open':''}" style="border-color:${
+      erros?'var(--err)':a.assimilado?'var(--fluxo)':'var(--line)'}">
+      <button class="artehead" data-artetoggle="${ix}">
+        <span class="ah1"><b>${esc(a.nome)||'Artefato sem nome'}</b>
+          <span class="bdg ${a.rank==='EX'?'r':a.rank==='A'?'y':'v'}">${R2.n}</span>
+          ${a.assimilado?'<span class="bdg g">assimilado</span>':''}
+          ${erros?'<span class="bdg r">verificar</span>':''}</span>
+        <span class="ah2">${esc(FORMAS[a.forma]||'')}${a.arma?' · '+esc(a.arma):''}
+          · ${uso}${a.rank==='EX'&&uso>4?'':'/'+R2.runas} runa${uso===1?'':'s'}
+          · reserva ${disp}/${a.fluxoTotal||0}</span>
+        <span class="ahx">${aberto?'▾':'▸'}</span></button>`;
+    if(!aberto){
+      const resumo=(a.runas||[]).filter(r=>r.fns.some(sf=>sf.id)).map(r=>{
+        const c=custo(r), fs=r.fns.map(sf=>FN[sf.id]).filter(Boolean);
+        return `<div class="aruna"><b>${esc(r.nome)||'Runa'}</b>
+          <span class="bdg">${fs.map(f=>f.n).join(' + ')}</span>
+          <span class="bdg t">${c.total} fx</span><span class="bdg y">${r.passiva?0:c.pa} P.A</span>
+          ${r.passiva?'<span class="bdg v">passiva</span>':''}</div>`;}).join('');
+      h += `<div class="arebody">${resumo||'<p class="note" style="margin:0">Nenhuma runa gravada.</p>'}
+        ${(a.mods||[]).length?`<div class="chips" style="margin-top:7px">${
+          a.mods.map(m=>`<span class="bdg y">${esc(m)}</span>`).join('')}</div>`:''}</div></div>`;
+      return;
+    }
+    h += `<div class="arebody">
       <div class="row">
         <div class="grp"><label>Nome</label><input type="text" data-artef="nome" data-ix="${ix}" value="${esc(a.nome)}" placeholder="nome do artefato"></div>
         <div class="grp sm"><label>Rank</label><select data-artef="rank" data-ix="${ix}">
-          ${Object.keys(RANKS).map(r=>opt(RANKS[r].n+' — '+RANKS[r].runas+' runa'+(RANKS[r].runas>1?'s':''),r,a.rank===r)).join('')}</select></div>
+          ${Object.keys(RANKS).map(r=>opt(RANKS[r].n+' — '+RANKS[r].runas+(r==='EX'?'+':'')+' runa'+(RANKS[r].runas>1?'s':''),r,a.rank===r)).join('')}</select></div>
         <div class="grp"><label>Forma</label><select data-artef="forma" data-ix="${ix}">
           ${Object.keys(FORMAS).map(f=>opt(FORMAS[f],f,a.forma===f)).join('')}</select></div>
         ${a.forma==='arma'?`<div class="grp"><label>Arma base</label><select data-artef="arma" data-ix="${ix}">
           ${opt('—','',!a.arma)}${ARMAS.filter(z=>z.tipo!=='Desarmado'&&z.tipo!=='Explosivos Arremessáveis')
             .map(z=>opt(z.n+' ('+z.tipo+')',z.n,a.arma===z.n)).join('')}</select></div>`:''}
+        <div class="grp sm" style="justify-content:flex-end"><label>&nbsp;</label>
+          <label class="check ${a.assimilado?'on':''}"><input type="checkbox" data-arteass="${ix}" ${a.assimilado?'checked':''}> assimilar</label></div>
       </div>
       <div class="row" style="margin-top:9px">
         <div class="grp sm"><label>Psique do Onírico</label><input type="number" min="0" data-artef="psiOn" data-ix="${ix}" value="${a.psiOn||0}"></div>
         <div class="grp sm"><label>Atq. Psíquico do Onírico</label><input type="number" min="0" data-artef="atqOn" data-ix="${ix}" value="${a.atqOn||0}"></div>
-        <div class="grp sm"><label>Reserva total de Fluxo</label><input type="number" min="0" data-artef="fluxoTotal" data-ix="${ix}" value="${a.fluxoTotal||0}"></div>
+        <div class="grp sm"><label>Reserva total</label><input type="number" min="0" data-artef="fluxoTotal" data-ix="${ix}" value="${a.fluxoTotal||0}"></div>
         <div class="grp sm"><label>Fluxo gasto</label><input type="number" min="0" data-artef="fluxoGasto" data-ix="${ix}" value="${a.fluxoGasto||0}"></div>
         ${a.rank!=='C'?`<div class="grp sm"><label>Emoção primária</label><select data-artef="emocao" data-ix="${ix}">
           ${opt('—','',!a.emocao)}${EMOCOES.map(x=>opt(x,x,a.emocao===x)).join('')}</select></div>`:''}
       </div>
-      <p class="note">Reserva = metade do Limite de Fluxo do Onírico do Núcleo Principal. Recupera 100% toda noite, à meia-noite.
-        ${pass?` Passivas consomem ${pass} permanentemente → disponível ${fluxoArte(a)}.`:''}
-        Disponível agora: <b style="color:var(--fluxo)">${disp}</b>.</p>
-      <div class="chips" style="margin-top:8px">
-        <span class="bdg y">${esc(R2.paTxt||('runas até '+cfg.pa+' P.A'))}</span>
-        <span class="bdg">bônus e penalidades no máximo +${cfg.bon} ou −${cfg.bon}</span>
-        <span class="bdg t">${esc(R2.preco)}</span>
-        ${a.assimilado&&R2.nd?`<span class="bdg r">risco: ND ${R2.nd} + [In]Sanidade</span>`:''}
-      </div>
-      ${ART_FORMA_REGRA[a.forma]?`<p class="note" style="margin-top:7px"><b style="color:var(--txt)">Feito de Somnium:</b> ${esc(ART_FORMA_REGRA[a.forma])}</p>`:''}
+      <p class="note">Reserva = metade do Limite de Fluxo do Onírico do Núcleo Principal; recarrega 100% à meia-noite.${
+        pass?` Passivas consomem ${pass} permanentemente → disponível ${fluxoArte(a)}.`:''}
+        Runas até <b>${esc(R2.paTxt)}</b>, bônus no máximo <b>+${cfg.bon}</b> (sempre no máximo do Rank).</p>
+      ${ART_FORMA_REGRA[a.forma]?`<p class="note"><b style="color:var(--txt)">Feito de Somnium:</b> ${esc(ART_FORMA_REGRA[a.forma])}</p>`:''}
       <details class="more"><summary>Mente-Colmeia e assimilação</summary>
         <p class="fndesc">${esc(R2.desc)}</p>
         <ul class="rules"><li>Assimilação: ${esc(R2.assim)}.</li><li>${esc(R2.risco)}</li>
-        <li>Os ataques e o ND das runas usam o Ataque Psíquico do Onírico, não o seu. O que escala com Psique usa a Psique dele.</li>
-        <li>Nenhuma Maestria Psíquica sua afeta as runas do artefato.</li></ul></details>
+        <li>Ataques e ND das runas usam o Ataque Psíquico do Onírico${a.atqOn?' (+'+a.atqOn+')':''}, não o seu. O que escala com Psique usa a dele${a.psiOn?' ('+a.psiOn+')':''}.</li>
+        <li>Nenhuma Maestria Psíquica sua afeta as runas do artefato.</li>
+        <li>Preço de comercialização: ${esc(R2.preco)}.</li></ul></details>
+      ${blocoMods(a,ix)}
       <div class="row" style="margin-top:9px"><div class="grp"><label>Anotações</label>
-        <textarea data-artef="notas" data-ix="${ix}" style="min-height:52px" placeholder="Onírico de origem, aparência, como a mente-colmeia se comporta...">${esc(a.notas)}</textarea></div></div>
-      <div style="margin-top:9px">${aberto
-        ? `<button class="btn" data-artefechar="1">Fechar as runas</button>`
-        : `<button class="btn pri" data-arteabrir="${ix}">Gravar / editar runas (${uso} de ${R2.runas})</button>`}</div>`;
-    if(aberto) h += runasArtefato(a,ix);
-    h += `</div>`;
+        <textarea data-artef="notas" data-ix="${ix}" style="min-height:52px" placeholder="Onírico de origem, aparência, comportamento da mente-colmeia...">${esc(a.notas)}</textarea></div></div>
+      ${runasArtefato(a,ix)}
+      <div style="margin-top:10px;display:flex;justify-content:flex-end">
+        <button class="btn dz" data-artedel="${ix}">Remover artefato</button></div>
+    </div></div>`;
   });
-
   h += `<button class="btn pri" id="bArteAdd" style="width:100%;margin-top:4px">+ Novo artefato</button>`;
-
-  const alterou = Object.keys(RANKS).some(r=>{const c=cfgR(r);
-    return c.pa!==RANKS[r].paDef || c.bon!==RANKS[r].bonDef;});
-  h += `<div class="hr"></div><p class="sub">Limites por Rank</p>
-  <div class="tblwrap"><table class="t"><thead><tr><th>Rank</th><th>Runas</th><th>Limite de gasto (P.A)</th><th>Bônus ou penalidade máxima</th><th>Preço de comercialização</th></tr></thead><tbody>
-  ${Object.keys(RANKS).map(r=>{const c=cfgR(r), padrao=RANKS[r];
-    return `<tr><td><b>${padrao.n}</b></td><td class="n">${padrao.runas}${r==='EX'?' ou mais':''}</td>
-    <td class="n"><input type="number" min="0" max="99" style="width:56px" data-artecfg="pa" data-rank="${r}" value="${c.pa}">
-      <br><small style="font-weight:400;color:var(--dim2)">${esc(padrao.paTxt)}</small></td>
-    <td class="n"><input type="number" min="0" max="9" style="width:56px" data-artecfg="bon" data-rank="${r}" value="${c.bon}">
-      <br><small style="font-weight:400;color:var(--dim2)">+${padrao.bonDef} ou −${padrao.bonDef}</small></td>
-    <td><small>${padrao.preco}</small></td></tr>`;}).join('')}
-  </tbody></table></div>
-  <p class="note">Valores da tabela oficial do sistema. Rank EX não tem teto de P.A — o campo fica em 99 para representar "4 ou mais". Você pode editar se a sua mesa usar outros números.${
-    alterou?' <b style="color:var(--warn)">Algum valor está diferente do oficial.</b>':''}</p>
-
-  <div class="hr"></div><p class="sub">Artefatos Utilitários — catálogo</p>
-  <div class="tblwrap"><table class="t"><thead><tr><th>Nome</th><th>Preço</th><th>Peso</th><th>Efeito</th></tr></thead><tbody>
-  ${ART_UTIL.map(x=>`<tr><td><b>${x.n}</b></td><td><small>${x.p}</small></td><td><small>${x.w}</small></td><td><small>${x.d}</small></td></tr>`).join('')}
-  </tbody></table></div>
-  <p class="note">Preços conferidos contra a tabela oficial do site.</p>`;
   return h;
+}
+
+function blocoMods(a,ix){
+  const mods=a.mods||[], aberto = PICKER && PICKER.tipo==='mod' && PICKER.id===String(ix);
+  let h=`<div class="hr"></div><p class="sub">Modificações de Artesão — ${mods.length} de 2</p>
+    <p class="note" style="margin:0 0 8px">Só marque se você é o Artesão, se pediu a um Artesão para modificar, ou se o artefato já veio modificado. Os bônus acumulam com os de Estigma, especializações e runas.</p>
+    <div class="chosen">`;
+  if(!mods.length) h += `<p class="note" style="margin:0">Nenhuma modificação.</p>`;
+  mods.forEach(nome=>{
+    const m=ART_MODS.find(z=>z.n===nome)||{n:nome};
+    h += `<div class="chip"><div class="ctxt"><b>${esc(m.n)}</b>
+      ${m.req?`<span class="bdg">${esc(m.req)}</span>`:''}${m.dano?`<span class="bdg t">+${m.dano} de dano</span>`:''}
+      ${m.d?`<i>${esc(m.d)}</i>`:''}</div>
+      <button class="cx" data-rmmod="${ix}" data-item="${esc(nome)}" title="Remover">✕</button></div>`;
+  });
+  h += `</div>`;
+  if(aberto){
+    const disp=ART_MODS.filter(m=>!mods.includes(m.n));
+    h += picker('Buscar modificação…',disp.map(m=>({n:m.n,cat:m.req,d:m.d})),
+                it=>`data-addmod="${ix}" data-item="${esc(it.n)}"`);
+  } else if(mods.length<2){
+    h += `<button class="btn" data-openmod="${ix}" style="margin-top:8px">+ Adicionar modificação</button>`;
+  } else h += `<p class="note" style="margin-top:8px">Máximo de duas modificações por artefato.</p>`;
+  return h;
+}
+
+function blocoCustom(){
+  const ls=ROOT.fnsCustom||[], aberto = PICKER && PICKER.tipo==='custom';
+  let h=`<details class="more" style="margin:10px 0 0" ${ls.length||aberto?'open':''}>
+    <summary>Funções personalizadas da mesa${ls.length?' — '+ls.length:''}</summary>
+    <p class="note">Para regras que o seu grupo criou e que não existem no guia. Elas aparecem na lista de funções junto das oficiais, marcadas como personalizadas.</p>
+    <div class="chosen" style="margin-top:8px">`;
+  ls.forEach((f,ix)=>{
+    h += `<div class="chip"><div class="ctxt"><b>${esc(f.n)}</b>
+      <span class="bdg v">${CAT[f.arq]?CAT[f.arq].n:'?'}</span>
+      <span class="bdg t">${f.b} Fluxo</span><span class="bdg y">${f.pa} P.A</span>
+      ${f.dano?'<span class="bdg">causa dano</span>':''}${f.t==='s'?'<span class="bdg">teste de resistência</span>':''}
+      ${f.ps==='s'?'<span class="bdg">pode ser passiva</span>':''}${f.rc==='s'?'<span class="bdg g">reação</span>':''}
+      ${f.d?`<i>${esc(f.d)}</i>`:''}</div>
+      <button class="cx" data-rmcustom="${ix}" title="Remover">✕</button></div>`;
+  });
+  if(!ls.length) h += `<p class="note" style="margin:0">Nenhuma função personalizada.</p>`;
+  h += `</div>`;
+  if(aberto){
+    const F=RASCUNHO;
+    h += `<div class="blk" style="border-color:var(--runa);margin-top:9px"><div class="row">
+      <div class="grp"><label>Nome da função</label><input type="text" data-cf="n" value="${esc(F.n)}" placeholder="ex.: Empuxo Reverso"></div>
+      <div class="grp sm"><label>Arquétipo</label><select data-cf="arq">
+        ${Object.keys(CAT).map(a=>opt(CAT[a].n,a,F.arq===a)).join('')}</select></div>
+      <div class="grp sm"><label>Custo base de Fluxo</label><input type="number" min="0" data-cf="b" value="${F.b}"></div>
+      <div class="grp sm"><label>Custo de P.A</label><input type="number" min="0" max="6" data-cf="pa" value="${F.pa}"></div>
+    </div>
+    <div class="row" style="margin-top:9px"><div class="grp"><label>Propriedades</label><div class="chips">
+      <label class="check ${F.dano?'on':''}"><input type="checkbox" data-cf="dano" ${F.dano?'checked':''}> causa dano</label>
+      <label class="check ${F.t?'on':''}"><input type="checkbox" data-cf="t" ${F.t?'checked':''}> teste de resistência</label>
+      <label class="check ${F.rc?'on':''}"><input type="checkbox" data-cf="rc" ${F.rc?'checked':''}> pode ser reação</label>
+      <label class="check ${F.ps?'on':''}"><input type="checkbox" data-cf="ps" ${F.ps?'checked':''}> pode ser passiva</label>
+      <label class="check ${F.cond?'on':''}"><input type="checkbox" data-cf="cond" ${F.cond?'checked':''}> aplica condição</label>
+    </div></div></div>
+    <div class="row" style="margin-top:9px"><div class="grp"><label>Descrição</label>
+      <textarea data-cf="d" style="min-height:56px" placeholder="O que a função faz.">${esc(F.d)}</textarea></div></div>
+    <div class="chips" style="margin-top:9px">
+      <button class="btn pri" id="bCustomSalvar" ${F.n?'':'disabled'}>Salvar função</button>
+      <button class="btn" data-pickclose="1">Cancelar</button></div></div>`;
+  } else {
+    h += `<button class="btn" data-opencustom="1" style="margin-top:8px">+ Criar função</button>`;
+  }
+  return h+`</details>`;
 }
 
 function runasArtefato(a,ix){
@@ -2606,7 +2886,8 @@ function runasArtefato(a,ix){
     const fs=x.fns.map(sf=>FN[sf.id]?FN[sf.id].n:'—').join(' + ');
     h += `<button class="slot ${x.k===a.sel?'on':''} ${bad?'err':'ok'}" data-sel="${x.k}"><div class="ic"></div>
       <div class="nm"><b data-slotnome="${x.k}">${esc(x.nome)||'Runa sem nome'}</b>
-      <small>${esc(fs)}${x.comb?' · combinada':''}${x.passiva?' · passiva':''}</small></div>
+      <small>${esc(fs)}${x.comb?' · combinada':''}${x.passiva?' · passiva':''}${
+        x.dur==='prol'?' · prolongada':''}${x.mira==='area'?' · área':''}</small></div>
       <div class="cost ${bad?'bad':''}">${c.total} fx<br><span style="color:var(--runa)">${runasGastas(x)}r</span></div></button>`;
   });
   h += `</div>`;
@@ -2614,7 +2895,7 @@ function runasArtefato(a,ix){
     h += `<button class="btn pri" data-artenova="${ix}" style="width:100%">+ Gravar runa${
       a.rank==='EX'&&uso>=R2.runas?' extra (+10 VF na forja)':''}</button>`;
   else h += `<p class="note">Todos os espaços de runa do ${R2.n} estão ocupados.</p>`;
-  if((a.runas||[]).length) h += `<div class="hr"></div>`+edHab();
+  if((a.runas||[]).length && a.sel) h += `<div class="hr"></div>`+edHab();
   return h;
 }
 
@@ -2626,8 +2907,10 @@ function vMesa(){
   <div class="mrow">
     <div class="mbox"><u>Pontos de Vida</u><b class="pv">${d.pvAtual} <small>/ ${d.pvTotal}</small></b>
       <div class="mbtns">${[-10,-5,-1,1,5].map(n=>`<button class="btn sm" data-pv="${n}">${n>0?'+':''}${n}</button>`).join('')}</div></div>
-    <div class="mbox"><u>Fluxo</u><b class="fx">${fx} <small>/ ${d.fluxoDisp}</small></b>
-      <div class="mbtns">${[-20,-10,-5,5,10].map(n=>`<button class="btn sm" data-fx="${-n}">${n>0?'−':'+'}${Math.abs(n)}</button>`).join('')}</div></div>
+    <div class="mbox ${d.sobrecarga>0?'over':''}"><u>Fluxo gasto</u><b class="fx">${CH.fluxoGasto} <small>/ ${d.fluxoDisp}</small></b>
+      <div class="msub">restam <b>${fx}</b>${d.sobrecarga>0?' · sobrecarga de '+d.sobrecarga:''}</div>
+      <div class="mbtns">${[5,10,20].map(n=>`<button class="btn sm" data-fx="${n}">gastar ${n}</button>`).join('')}
+        ${[5,20].map(n=>`<button class="btn sm" data-fx="${-n}">devolver ${n}</button>`).join('')}</div></div>
     <div class="mbox"><u>Pontos de Ação</u><b class="pa">${d.paLivre} <small>/ ${d.p.pa+d.aptPA}</small></b>
       <div class="mbtns">${[-1,1].map(n=>`<button class="btn sm" data-pa="${n}">${n>0?'gastar 1':'devolver 1'}</button>`).join('')}</div></div>
     <div class="mbox"><u>Rodada ${CH.rodada||1}</u><b>${d.prolRodada?d.prolRodada+' <small>fx/rodada</small>':'—'}</b>
@@ -2651,7 +2934,10 @@ function vMesa(){
       <div class="mh2">
         <span class="bdg t">${x.passiva?'−'+c.total+' do limite':c.total+' Fluxo'}</span>
         <span class="bdg y">${x.passiva?'0':c.pa} P.A</span>
-        ${c.prol?`<span class="bdg">${c.prol}/rodada</span>`:'<span class="bdg">sem custo por rodada</span>'}
+        ${c.prol?`<span class="bdg">${c.prol}/rodada</span>`
+                :`<span class="bdg ${x.concentracao?'v':''}">${x.concentracao?'concentração — sem consumo':'sem custo por rodada'}</span>`}
+        ${x.dur==='prol'&&!x.passiva&&contaMaestria('manipulacao','Concentração')
+          ?`<label class="check sm ${x.concentracao?'on':''}"><input type="checkbox" data-conc="${x.k}" ${x.concentracao?'checked':''}> concentração</label>`:''}
         ${!x.passiva?`<button class="btn ${c.total>fx?'dz':'pri'} sm" data-gastar="${x.k}">Gastar</button>`:''}
         ${podeAtivar?`<label class="check sm ${x.ativa?'on':''}"><input type="checkbox" data-habk="${x.k}" ${x.ativa?'checked':''}> ativa agora</label>`:''}
       </div></div>`;
@@ -2664,10 +2950,70 @@ function vMesa(){
   } else {
     h += `<div class="hr"></div><p class="note">Nenhuma habilidade ativa alterando a ficha. Marque "ativa agora" numa runa de duração prolongada que conceda bônus, ou use Uso Passivo na construção.</p>`;
   }
+  h += `<div class="hr"></div><p class="sub">Penalidades e bônus em jogo</p>
+  <p class="note" style="margin:0 0 8px">Para o que vem de fora da ficha: condição inimiga, item, efeito do mestre. Entra direto nos derivados.</p>
+  <div class="chosen">`;
+  (CH.mods||[]).forEach((m,ix)=>{
+    h += `<div class="chip"><div class="ctxt" style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
+      <input type="text" data-modm="nota" data-ix="${ix}" value="${esc(m.nota||'')}" placeholder="de onde vem" style="flex:1;min-width:120px">
+      <select data-modm="alvo" data-ix="${ix}" style="width:180px">
+        ${ATR.map(k=>opt(ATRN[k],k,m.alvo===k)).join('')}
+        ${Object.keys(ROT_MOD).map(k=>opt(ROT_MOD[k],k,m.alvo===k)).join('')}</select>
+      <input type="number" data-modm="valor" data-ix="${ix}" value="${m.valor||0}" style="width:70px"></div>
+      <button class="cx" data-rmmodm="${ix}" title="Remover">✕</button></div>`;
+  });
+  if(!(CH.mods||[]).length) h += `<p class="note" style="margin:0">Nada aplicado.</p>`;
+  h += `</div><button class="btn" data-addmod2="1" style="margin-top:8px">+ Adicionar penalidade ou bônus</button>`;
+  h += `<div class="hr"></div><p class="sub">Usos por descanso</p>${usosBox(d)}`;
   h += `<div class="hr"></div><p class="sub">Calculadora de dano</p>${calcBox(d)}`;
   return h;
 }
 
+/* Habilidades cujo texto menciona limite por descanso ou por rodada */
+function habsComUso(){
+  const out=[];
+  Object.keys(ESP).forEach(k=>(CH.esp[k].tal||[]).filter(Boolean).forEach(n=>{
+    const t=(TALENTOS[ESP[k].cat]||[]).find(z=>z.n.trim()===n.trim());
+    if(t && /por descanso/i.test(t.d||'')) out.push({k:'esp:'+k+':'+n,n:t.n,ctx:ESP[k].n,d:t.d});
+  }));
+  Object.keys(ECO).forEach(k=>(CH.ecos[k].hab||[]).filter(Boolean).forEach(n=>{
+    const t=(MAESTRIAS[ECO[k].n]||[]).find(z=>z.n.trim()===n.trim());
+    if(t && /por descanso|por dia/i.test(t.d||'')) out.push({k:'eco:'+k+':'+n,n:t.n,ctx:'Eco de '+ECO[k].n,d:t.d});
+  }));
+  return out;
+}
+function maxUsos(txt,d){
+  if(/metade (do|da) (seu |sua )?(atributo de )?psique/i.test(txt)) return half(d.psique);
+  if(/igual ao (seu )?(atributo de )?psique/i.test(txt)) return d.psique;
+  const m=txt.match(/(\d+) vez(?:es)? por descanso/i);
+  if(m) return +m[1];
+  if(/uma vez por descanso|1 vez por descanso/i.test(txt)) return 1;
+  if(/duas vezes por descanso/i.test(txt)) return 2;
+  return 1;
+}
+function usosBox(d){
+  const ls=habsComUso();
+  const orig=Object.keys((USOS[CH.origem]||{})).filter(nv=>CH.nivel>=+nv);
+  if(!ls.length && !orig.length) return `<p class="note">Nenhuma habilidade escolhida tem limite por descanso.</p>`;
+  let h=`<div class="chosen">`;
+  orig.forEach(nv=>{
+    const u2=USOS[CH.origem][nv], tot=limUsos(u2.f,d.psique), g=CH.usos[CH.origem+nv]||0;
+    h += linhaUso('org:'+nv,u2.l,CH.origem+' · nível '+nv,g,tot,'uso');
+  });
+  ls.forEach(x=>{
+    const tot=maxUsos(x.d,d), g=(CH.usosHab||{})[x.k]||0;
+    h += linhaUso(x.k,x.n,x.ctx,g,tot,'uso2');
+  });
+  return h+`</div>`;
+}
+function linhaUso(key,nome,ctx,gasto,tot,tipo){
+  const rest=Math.max(0,tot-gasto);
+  return `<div class="chip"><div class="ctxt"><b>${esc(nome)}</b><span class="bdg">${esc(ctx)}</span>
+    <span class="bdg ${rest?'g':'r'}">${rest} de ${tot} restante${rest===1?'':'s'}</span></div>
+    <div style="display:flex;gap:4px;flex:none">
+      <button class="btn sm" data-${tipo}delta="-1" data-key="${esc(key)}" ${gasto<=0?'disabled':''}>−</button>
+      <button class="btn sm" data-${tipo}delta="1" data-key="${esc(key)}" ${rest<=0?'disabled':''}>usar</button></div></div>`;
+}
 function calcBox(d){
   const D2=CH.dano||{};
   const armas=CH.armas.filter(w=>w.n);
@@ -2731,13 +3077,17 @@ function vEstigma(){
       <label style="margin-top:6px">Runas trocadas por +15 Fluxo</label>
       <input type="number" data-est="trade" min="0" value="${E.trade}"></div>
   </div>
-  <details class="more" style="margin:2px 0 0"><summary>Tipos de dano adicionais${
-    (CH.tiposDano||[]).length?' — '+CH.tiposDano.length+' marcado(s)':''}</summary>
-    <p class="note">O padrão é um tipo só. Marque outros se a sua mesa liberou um Estigma multi-elemental.</p>
-    <div class="chips" style="margin-top:6px">${Object.keys(DANO_TIPO).filter(t=>t!==E.tipoDano).map(t=>{
-      const on=(CH.tiposDano||[]).includes(t);
-      return `<label class="check ${on?'on':''}"><input type="checkbox" data-tipodano="${t}" ${on?'checked':''}> ${t}</label>`;
-    }).join('')}</div></details>
+  ${baseFisico()
+    ? `<p class="note" style="margin:2px 0 0">Dano base físico: cada runa que causa dano pode escolher livremente entre <b>Cortante, Perfurante e Contundente</b> — a escolha aparece no editor da runa.</p>`
+    : `<div style="margin:6px 0 0"><label class="check ${CH.multiDano?'on':''}">
+        <input type="checkbox" data-ch="multiDano" ${CH.multiDano?'checked':''}> Habilitar múltiplos tipos de dano</label>
+      ${CH.multiDano?`<p class="note">Marque abaixo os tipos que o Estigma também pode manifestar. Cada runa de dano escolhe entre eles.</p>
+        <div class="chips" style="margin-top:6px">${Object.keys(DANO_TIPO).filter(t=>t!==E.tipoDano).map(t=>{
+          const on=(CH.tiposDano||[]).includes(t);
+          return `<label class="check ${on?'on':''}"><input type="checkbox" data-tipodano="${t}" ${on?'checked':''}> ${t}</label>`;
+        }).join('')}</div>`
+        :`<p class="note">Sem isso, todas as runas usam o tipo de dano do Estigma.</p>`}</div>`}
+  ${blocoCustom()}
   ${emSec()&&CH.secTipo==='invocacao'?`<div class="al i" style="margin:10px 0 0"><i>i</i><div>O Estigma é o mesmo do personagem principal — arquétipos e tipo de dano vêm de lá. As <b>Runas podem ser próprias</b>, como interpretações diferentes da mesma marca, mas o total é a metade (${d.runasDisp}).</div></div>`:''}
   ${emSec()&&CH.secTipo==='sobreposicao'?`<div class="al i" style="margin:10px 0 0"><i>i</i><div>O Estigma da Sobreposição é <b>novo</b>: forma, conceito e especificação devem ser diferentes dos da ficha principal. A função mecânica pode ser a mesma, desde que reidealizada para a nova personalidade.</div></div>`:''}
   <div class="hr"></div><p class="sub">Habilidades — ${d.runasUso} de ${d.runasDisp} runas</p>
@@ -2791,6 +3141,15 @@ function edHab(){
       ${opt('Jogada de Ataque','ataque',res==='ataque')}${opt('Teste de Resistência','teste',res==='teste')}
       ${res==='ambos'?opt('Ataque para o dano + Teste para o efeito','ambos',true):''}
       ${res==='nenhuma'?opt('Não faz ataque nem teste','nenhuma',true):''}</select></div>`;
+  if(temDano(h) && !ar){
+    const perm=tiposPermitidos();
+    if(perm.length>1)
+      o += `<div class="grp"><label>Tipo de dano desta runa</label><select data-hab="tipoDano">
+        ${perm.map(x=>opt(x,x,tipoDaRuna(h)===x)).join('')}</select></div>`;
+    else
+      o += `<div class="grp"><label>Tipo de dano</label>
+        <input type="text" disabled value="${esc(CH.estigma.tipoDano)} — do Estigma"></div>`;
+  }
   if(fazTeste(res)&&atrs.length){
     if(escolhaAlvo(h))
       o += `<div class="grp"><label>Atributo do teste</label>
@@ -2799,10 +3158,12 @@ function edHab(){
       o += `<div class="grp"><label>Atributo do teste — escolha permanente</label><select data-hab="attr">
         ${opt('—','',!h.attr)}${atrs.map(a=>opt(a,a,h.attr===a)).join('')}</select></div>`;
   }
-  o += `<div class="grp"><label>Requisitos de ativação</label><div class="chips">
+  if(!ar) o += `<div class="grp"><label>Requisitos de ativação</label><div class="chips">
       <label class="check ${h.verbal?'on':''}"><input type="checkbox" data-hab="verbal" ${h.verbal?'checked':''}> Verbal −1</label>
       <label class="check ${h.gestual?'on':''}"><input type="checkbox" data-hab="gestual" ${h.gestual?'checked':''}> Gestual −3</label>
     </div></div>`;
+  else o += `<div class="grp"><label>Requisitos de ativação</label>
+    <input type="text" disabled value="artefatos não usam requisitos de ativação"></div>`;
   const podeReagir=h.fns.some(sf=>FN[sf.id]&&(FN[sf.id].rc==='s'||FN[sf.id].rc==='x'));
   const soReacao =h.fns.some(sf=>FN[sf.id]&&FN[sf.id].rc==='x');
   if(podeReagir) o += `<div class="grp"><label>Propriedade de Reação</label>
@@ -2832,7 +3193,9 @@ function boxFn(h,sf,i){
       + `<optgroup label="${E.arqs.length?'— outros arquétipos, não atribuídos —':'— todos os arquétipos —'}">
         ${Object.keys(CAT).filter(a=>!E.arqs.includes(a)).map(a=>CAT[a].fns.map(x=>opt(CAT[a].n+' · '+x.n,x.id,sf.id===x.id)).join('')).join('')}</optgroup>`;
   let o=`<div class="fnbox b${i+1}"><div class="fnhead"><select data-fn="${i}" data-hab="id">
-    ${opt('— escolha a função —','',!sf.id)}${grupos}</select>`;
+    ${opt('— escolha a função —','',!sf.id)}${grupos}
+    <optgroup label="— criada pela mesa —">${opt('+ Função Personalizada (configurar aqui)','__custom',false)}</optgroup>
+    </select>`;
   if(h.comb&&i===1) o+=`<button class="btn dz" data-rmfn="1">Remover</button>`;
   o+=`</div>`;
   if(!f) return o+`<p class="fndesc">Escolha uma função para ver custo, requisitos e regras.</p></div>`;
@@ -2845,7 +3208,29 @@ function boxFn(h,sf,i){
     ${f.dano?'<span class="bdg">Causa dano</span>':''}${f.cond?'<span class="bdg">Aplica condição</span>':''}
     ${f.nc?'<span class="bdg">Não combina</span>':''}${f.se?'<span class="bdg">Só no Estigma</span>':''}
     ${f.sc?'<span class="bdg">Só combinada</span>':''}
-  </div><p class="fndesc">${f.d}</p>`;
+    ${f.custom?'<span class="bdg v">personalizada da mesa</span>':''}
+  </div>`;
+  if(f.custom){
+    const ix=(ROOT.fnsCustom||[]).findIndex(z=>z.id===f.id);
+    o += `<div class="row" style="margin-top:9px">
+      <div class="grp"><label>Nome</label><input type="text" data-cfe="n" data-cix="${ix}" value="${esc(f.n)}"></div>
+      <div class="grp sm"><label>Arquétipo</label><select data-cfe="arq" data-cix="${ix}">
+        ${Object.keys(CAT).map(a=>opt(CAT[a].n,a,f.arq===a)).join('')}</select></div>
+      <div class="grp sm"><label>Custo base</label><input type="number" min="0" data-cfe="b" data-cix="${ix}" value="${f.b}"></div>
+      <div class="grp sm"><label>Custo de P.A</label><input type="number" min="0" max="6" data-cfe="pa" data-cix="${ix}" value="${f.pa}"></div>
+    </div>
+    <div class="row" style="margin-top:9px"><div class="grp"><label>Propriedades</label><div class="chips">
+      ${[['dano','causa dano',!!f.dano],['cond','aplica condição',!!f.cond],
+         ['t','teste de resistência',f.t==='s'],['rc','pode ser reação',f.rc==='s'],
+         ['ps','pode ser passiva',f.ps==='s'],['ap','aprimorável',!!f.ap]].map(([k,l,on])=>
+        `<label class="check sm ${on?'on':''}"><input type="checkbox" data-cfe="${k}" data-cix="${ix}" ${on?'checked':''}> ${l}</label>`).join('')}
+    </div></div></div>
+    <div class="row" style="margin-top:9px"><div class="grp"><label>Descrição</label>
+      <textarea data-cfe="d" data-cix="${ix}" style="min-height:52px">${esc(f.d)}</textarea></div></div>
+    <p class="note">Fica salva na ficha e reaparece na lista de funções para outras runas.</p>`;
+  } else {
+    o += `<p class="fndesc">${f.d}</p>`;
+  }
   (f.op||[]).forEach(op=>{
     if(op.num){
       const v=sf.op[op.id]??op.def;
@@ -2881,6 +3266,7 @@ function boxFn(h,sf,i){
   if(f.apRunas) o+=`<div style="margin-top:9px"><label class="check ${h.marioMult?'on':''}">
     <input type="checkbox" data-hab="marioMult" ${h.marioMult?'checked':''}> Múltiplas marionetes (+2 runas)</label></div>`;
   if(f.db) o+=`<p class="note"><b style="color:var(--txt)">Dano base:</b> ${f.db}${D().manBonus?' · +'+D().manBonus+' do Eco de Manipulação':''}</p>`;
+  if(f.esc) o+=escTxt(f,h,sf);
   if((f.id==='cura'||f.id==='aura_cura'||f.id==='escudo') && D().manBonus)
     o+=`<p class="note">Eco de Manipulação soma +${D().manBonus} também a cura e escudo.</p>`;
   if(f.pl) o+=`<p class="note"><b style="color:var(--txt)">Custo prolongado:</b> ${f.pl}.</p>`;
@@ -2889,6 +3275,37 @@ function boxFn(h,sf,i){
   return o+`</div>`;
 }
 
+/* Resolve as escalas com Psique em número concreto */
+function escTxt(f,h,sf){
+  const ar=ctxHabs().arte;
+  const P = ar ? (ar.psiOn||0) : D().psique;
+  const fonte = ar ? 'Psique do Onírico ('+P+')' : 'sua Psique ('+P+')';
+  const man = ar ? 0 : D().manBonus;
+  const calc = e => {
+    if(typeof e!=='string') return '';
+    if(e.startsWith('+1 até')) return '+1 por acerto, até +'+P;
+    let v=e.replace(/P/g,String(P));
+    try{
+      let n = Function('"use strict";return ('+v.replace('/2','/2')+')')();
+      n = e.includes('/2') ? Math.floor(Math.abs(n))*(e.startsWith('-')?-1:1) : n;
+      return String(n);
+    }catch(_){ return e; }
+  };
+  const rot={dano:'Dano',escudo:'Escudo',cura:'Cura',desloc:'Deslocamento',inic:'Iniciativa',fluxo:'Fluxo',pv:'PV'};
+  const linhas=[];
+  Object.keys(f.esc).forEach(k=>{
+    const arr=f.esc[k];
+    const ap=(sf.ap||1)-1;
+    const vals=arr.map((e,i)=>{
+      let n=calc(e);
+      if(k==='dano'&&man&&!isNaN(+n)) n=(+n+man)+' (inclui +'+man+' do Eco)';
+      return (arr.length>1?['fraco/1 P.A','médio/2 P.A','forte/3 P.A'][i]||('opção '+(i+1)):'')+
+             (arr.length>1?': ':'')+n;
+    });
+    linhas.push('<b style="color:var(--txt)">'+rot[k]+':</b> '+vals.join(' · '));
+  });
+  return `<p class="note">${linhas.join('<br>')} <em style="color:var(--dim2)">— calculado com a ${fonte}</em></p>`;
+}
 function prolTxt(h,c){
   if(h.passiva) return '—';
   const esp=h.fns.map(sf=>FN[sf.id]).filter(f=>f&&f.pl)[0];
@@ -2910,6 +3327,7 @@ function ledger(){
   if(h.passiva) l+=`<div class="lrow"><span>Passiva — custo base dobrado</span><b>×2 = ${c.base}</b></div>`;
   c.mods.forEach(m=>{ l+=`<div class="lrow ${m.v<0?'neg':''}"><span>${m.l}</span><b>${m.v>0?'+':''}${m.v}</b></div>`; });
   if(!c.det.length) l=`<div class="lrow"><span>Nenhuma função escolhida</span><b>—</b></div>`;
+  if(c.piso) l+=`<div class="lrow"><span>Piso do sistema — o custo nunca desce abaixo de 1</span><b>= 1</b></div>`;
   l+=`<div class="lrow sum"><span>${h.passiva?'Desconto permanente':'Custo de Fluxo'}</span><b>${c.total}</b></div>`;
   $('#side').innerHTML = l + `<div class="bigrow">
     <div class="big pa"><u>Custo de P.A</u><b>${h.passiva?0:c.pa}</b></div>
@@ -2927,16 +3345,20 @@ document.addEventListener('input', ev=>{
   /* Campos digitáveis nunca redesenham a árvore — o foco (e o teclado do celular) se perde. */
   const digitavel = (t.tagName==='INPUT' && (t.type==='text'||t.type==='number')) || t.tagName==='TEXTAREA';
   const leve = () => { vitals(); nav(); budget(); side(); alerts(); persist(); };
+  /* Os campos do cabeçalho não podem redesenhar o próprio cabeçalho: o input morre no meio da digitação. */
+  const leveTopo = () => { vitalsTexto(); nav(); budget(); side(); alerts(); persist(); };
 
   if(t.id==='cNome'){ CH.nome=t.value; return (slotsNome(),persist()); }
-  if(t.id==='pvAtual'){ CH.pvAtual=+t.value; return leve(); }
-  if(t.id==='fluxoGasto'){ CH.fluxoGasto=+t.value; return leve(); }
-  if(t.id==='insan'){ CH.insanidade=+t.value; return persist(); }
+  if(t.id==='pvAtual'){ CH.pvAtual = t.value===''?null:(+t.value||0); return leveTopo(); }
+  if(t.id==='fluxoGasto'){ CH.fluxoGasto = +t.value||0; return leveTopo(); }
+  if(t.id==='insan'){ CH.insanidade = +t.value||0; return leveTopo(); }
   if(t.id==='paGasto'){ CH.paGasto=Math.max(0,+t.value||0); return leve(); }
   if(t.id==='busca'){ BUSCA=t.value; return listaBusca(); }
 
   if(ds.ch!==undefined){
-    CH[ds.ch] = num ? +t.value : t.value;
+    if(t.type==='checkbox'){ CH[ds.ch]=t.checked; return render(); }
+    const numerico = num || ['nivel','escudo','reforco','fluxoTemp'].includes(ds.ch);
+    CH[ds.ch] = numerico ? (+t.value||0) : t.value;
     return digitavel ? leve() : render();
   }
   if(ds.est!==undefined){ CH.estigma[ds.est]= num?Math.max(0,+t.value||0):t.value;
@@ -2971,6 +3393,32 @@ document.addEventListener('input', ev=>{
   if(ds.sig!==undefined){ CH.sigilo[ds.sig]= t.type==='checkbox'?t.checked:t.value;
     return digitavel ? persist() : render(); }
   if(ds.sigop!==undefined){ CH.sigilo.op[ds.sigop]= t.value===''?null:+t.value; return render(); }
+  if(ds.cfe!==undefined){
+    const f=(ROOT.fnsCustom||[])[+ds.cix]; if(!f) return;
+    if(t.type==='checkbox'){
+      const v=t.checked;
+      if(ds.cfe==='t'){ f.t = v?'s':undefined; f.ta = v?ATRIBS.slice():undefined; }
+      else if(ds.cfe==='rc') f.rc = v?'s':undefined;
+      else if(ds.cfe==='ps') f.ps = v?'s':undefined;
+      else if(ds.cfe==='ap') f.ap = v?['Versão base.','Versão aprimorada.','Versão máxima.']:undefined;
+      else f[ds.cfe]=v;
+      return render();
+    }
+    f[ds.cfe] = (ds.cfe==='b'||ds.cfe==='pa') ? (+t.value||0) : t.value;
+    if(ds.cfe==='arq') return render();
+    return digitavel ? (sincCustom(),slotsNome(),ledger(),alerts(),persist()) : render();
+  }
+  if(ds.cf!==undefined){
+    RASCUNHO[ds.cf] = t.type==='checkbox' ? t.checked : (num?(+t.value||0):t.value);
+    if(digitavel){ const b=document.querySelector('#bCustomSalvar');
+      if(b) b.disabled=!RASCUNHO.n.trim(); return persist(); }
+    return render();
+  }
+  if(ds.modm!==undefined){
+    const m=CH.mods[+ds.ix]; if(!m) return;
+    m[ds.modm] = ds.modm==='valor' ? (+t.value||0) : t.value;
+    return digitavel ? leve() : render();
+  }
   if(ds.artef!==undefined){
     const a=CH.artefatos[+ds.ix]; if(!a) return;
     a[ds.artef]= num?Math.max(0,+t.value||0):t.value;
@@ -3001,7 +3449,17 @@ document.addEventListener('input', ev=>{
     if(t.checked && i<0) arr.push(ds.item); if(!t.checked && i>=0) arr.splice(i,1);
     sf.par[ds.parn]=arr; return render();
   }
-  if(h && ds.fn!==undefined && ds.hab==='id'){ h.fns[+ds.fn]={id:t.value,op:{},ap:1,par:{}}; return render(); }
+  if(h && ds.fn!==undefined && ds.hab==='id'){
+    if(t.value==='__custom'){
+      const arq = (ctxHabs().arte ? 'ofensivo' : (CH.estigma.arqs[0]||'ofensivo'));
+      const nova={id:'cf_'+uid(),n:'Função Personalizada',arq:arq,b:5,pa:1,
+        d:'Descreva o que essa função faz na sua mesa.',dano:false,cond:false};
+      ROOT.fnsCustom=ROOT.fnsCustom||[]; ROOT.fnsCustom.push(nova); registrarCustom(nova);
+      h.fns[+ds.fn]={id:nova.id,op:{},ap:1,par:{}};
+      return render();
+    }
+    h.fns[+ds.fn]={id:t.value,op:{},ap:1,par:{}}; return render();
+  }
   if(h && ds.fn!==undefined && ds.hab==='ap'){ h.fns[+ds.fn].ap=+t.value; return render(); }
   if(h && ds.hab!==undefined){
     if(t.type==='checkbox'){
@@ -3016,6 +3474,11 @@ document.addEventListener('input', ev=>{
     const alvo=CH.estigma.habs.find(x=>x.k===ds.habk);
     if(alvo){ alvo.ativa=t.checked; return render(); }
   }
+  if(ds.conc!==undefined){
+    CH.estigma.habs.forEach(x=>{ if(x.k!==ds.conc) x.concentracao=false; });
+    const alvo=CH.estigma.habs.find(x=>x.k===ds.conc);
+    if(alvo){ alvo.concentracao=t.checked; return render(); }
+  }
 });
 function slotsNome(){
   document.querySelectorAll('[data-slotnome]').forEach(el=>{
@@ -3029,20 +3492,55 @@ document.addEventListener('click', ev=>{
   const t=ev.target.closest('[data-tab],[data-attr],[data-esp],[data-eco],[data-arq],[data-sigv],[data-sel],[data-rmfn],'+
     '[data-opensub],[data-addsub],[data-rmsub],[data-openref],[data-pickclose],[data-openesp],[data-addesp],[data-rmesp],'+
     '[data-openeco],[data-addeco],[data-rmeco],[data-pa],[data-pv],[data-fx],[data-gastar],[data-limpar],[data-noop],'+
-    '[data-arteabrir],[data-artefechar],[data-artedel],[data-artenova],'+
+    '[data-artetoggle],[data-artedel],[data-artenova],[data-openmod],[data-addmod],[data-rmmod],'+
+    '[data-abrirsec],[data-addmod2],[data-rmmodm],[data-usodelta],[data-uso2delta],'+
+    '[data-opencustom],[data-rmcustom],#bCustomSalvar,'+
     '#bAdd,#bDelHab,#bNew,#bSave,#bLoad,#bFolha,#bDescanso,#bRodada,#bEditarSec,#bApagarSec,#bVoltarSec,#bArteAdd');
   if(!t) return;
   const ds=t.dataset;
   if(ds.noop) return;
   if(t.id==='bArteAdd'){ CH.artefatos=CH.artefatos||[]; CH.artefatos.push(novoArtefato());
     ARTE=CH.artefatos.length-1; return render(); }
-  if(ds.arteabrir!==undefined){ ARTE=+ds.arteabrir; return render(); }
-  if(ds.artefechar){ ARTE=null; return render(); }
+  if(ds.artetoggle!==undefined){ ARTE = (ARTE===+ds.artetoggle) ? null : +ds.artetoggle;
+    PICKER=null; return render(); }
+  if(ds.opencustom){ RASCUNHO={n:'',arq:(CH.estigma.arqs[0]||'ofensivo'),b:5,pa:1,d:'',
+    dano:false,t:false,rc:false,ps:false,cond:false}; return abrirPicker('custom','x'); }
+  if(ds.rmcustom!==undefined){
+    const f=(ROOT.fnsCustom||[])[+ds.rmcustom];
+    const usada=[ROOT,ROOT.sec].filter(Boolean).some(fi=>
+      (fi.estigma.habs||[]).some(h=>h.fns.some(sf=>sf.id===f.id)) ||
+      (fi.artefatos||[]).some(a=>(a.runas||[]).some(h=>h.fns.some(sf=>sf.id===f.id))));
+    if(usada && !confirm('"'+f.n+'" está em uso em alguma habilidade. Remover mesmo assim?')) return;
+    ROOT.fnsCustom.splice(+ds.rmcustom,1); return render();
+  }
+  if(t.id==='bCustomSalvar'){
+    if(!RASCUNHO.n.trim()) return;
+    ROOT.fnsCustom=ROOT.fnsCustom||[];
+    ROOT.fnsCustom.push({id:'cf_'+uid(),n:RASCUNHO.n.trim(),arq:RASCUNHO.arq,
+      b:+RASCUNHO.b||0,pa:+RASCUNHO.pa||0,d:RASCUNHO.d||'Função criada pela mesa.',
+      dano:!!RASCUNHO.dano, cond:!!RASCUNHO.cond,
+      t:RASCUNHO.t?'s':undefined, ta:RASCUNHO.t?ATRIBS.slice():undefined,
+      rc:RASCUNHO.rc?'s':undefined, ps:RASCUNHO.ps?'s':undefined});
+    PICKER=null; return render();
+  }
+  if(ds.openmod!==undefined) return abrirPicker('mod',ds.openmod);
+  if(ds.addmod2){ CH.mods=CH.mods||[]; CH.mods.push({nota:'',alvo:'corpo',valor:-1}); return render(); }
+  if(ds.rmmodm!==undefined){ CH.mods.splice(+ds.rmmodm,1); return render(); }
+  if(ds.usodelta!==undefined){ const k=ds.key.replace('org:',CH.origem);
+    CH.usos[k]=Math.max(0,(CH.usos[k]||0)+(+ds.usodelta)); return render(); }
+  if(ds.uso2delta!==undefined){ CH.usosHab=CH.usosHab||{};
+    CH.usosHab[ds.key]=Math.max(0,(CH.usosHab[ds.key]||0)+(+ds.uso2delta)); return render(); }
+  if(ds.addmod!==undefined){ const a=CH.artefatos[+ds.addmod]; a.mods=a.mods||[];
+    a.mods.push(ds.item); PICKER=null; return render(); }
+  if(ds.rmmod!==undefined){ const a=CH.artefatos[+ds.rmmod];
+    a.mods=(a.mods||[]).filter(x=>x!==ds.item); return render(); }
   if(ds.artedel!==undefined){ const a=CH.artefatos[+ds.artedel];
     if(!confirm('Remover "'+(a.nome||'artefato sem nome')+'"?'))return;
     CH.artefatos.splice(+ds.artedel,1); ARTE=null; return render(); }
   if(ds.artenova!==undefined){ const a=CH.artefatos[+ds.artenova];
-    const r=novaHab('runa'); a.runas=a.runas||[]; a.runas.push(r); a.sel=r.k; ARTE=+ds.artenova; return render(); }
+    const r=novaHab('runa'); r.arte=true; r.verbal=false; r.gestual=false;
+    a.runas=a.runas||[]; a.runas.push(r); a.sel=r.k; ARTE=+ds.artenova; return render(); }
+  if(ds.abrirsec){ CH=ROOT.sec; CH.tab='personagem'; PICKER=null; ARTE=null; return render(); }
   if(t.id==='bEditarSec'){
     if(!ROOT.sec || ROOT.sec.secTipo!==ROOT.sigilo.v) ROOT.sec = novaSec(ROOT.sigilo.v, ROOT);
     CH = ROOT.sec; CH.tab='personagem'; PICKER=null; ARTE=null; return render();
@@ -3079,7 +3577,7 @@ document.addEventListener('click', ev=>{
   if(t.id==='bRodada'){ CH.rodada=(CH.rodada||1)+1; CH.paGasto=0;
     CH.fluxoGasto+=D().prolRodada; return render(); }
   if(t.id==='bDescanso'){ if(!confirm('Descanso completo: zera Fluxo gasto, P.A, usos por descanso e desativa as habilidades. Confirmar?'))return;
-    CH.fluxoGasto=0; CH.paGasto=0; CH.usos={}; CH.rodada=1; CH.pvAtual=null;
+    CH.fluxoGasto=0; CH.paGasto=0; CH.usos={}; CH.usosHab={}; CH.rodada=1; CH.pvAtual=null;
     CH.estigma.habs.forEach(h=>h.ativa=false); return render(); }
   if(ds.attr){
     const d=D(), k=ds.attr, delta=+ds.delta;
@@ -3197,7 +3695,7 @@ function folha(){
       <tr><th>Área</th><td>${h.mira==='area'?AREA[h.area].l+(AREA[h.area].tam?' '+TAM[h.tam].l.split(' —')[0]:''):'—'}</td>
         <th>Duração</th><td>${h.passiva?'sempre ativa':DUR[h.dur].l}</td></tr>
       <tr><th>Atributo</th><td>${fazTeste(res)?(escolhaAlvo(h)?'o alvo escolhe entre '+attrsTeste(h).join(' ou '):(h.attr||'—')):'—'}</td>
-        <th>Tipo de dano</th><td>${[E.tipoDano,...(CH.tiposDano||[])].filter(Boolean).join(', ')}</td></tr>
+        <th>Tipo de dano</th><td>${temDano(h)?tipoDaRuna(h):'—'}</td></tr>
       ${paramTxt(h)?`<tr><th>Parâmetros</th><td colspan="3">${esc(paramTxt(h))}</td></tr>`:''}
       <tr><th>Custo P.F</th><td class="c">${c.total}</td><th>Custo P.A</th><td class="c">${h.passiva?0:c.pa}</td></tr>
       <tr><th>Prolongado</th><td>${esc((h.fns.map(sf=>FN[sf.id]).filter(f=>f&&f.pl)[0]||{}).pl || (c.prol?c.prol+' por rodada':'—'))}</td>
