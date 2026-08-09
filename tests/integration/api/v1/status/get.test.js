@@ -22,20 +22,21 @@ test("GET to /api/v1/status should return status 200 OK", async () => {
   expect(typeof responseBody.dependencies.database.version).toBe("string");
   expect(responseBody.dependencies.database.version).toBe("16.0");
   expect(typeof responseBody.dependencies.database.max_connections).toBe(
-    "number",
+    "number"
   );
   expect(responseBody.dependencies.database.max_connections).toBe(100);
   expect(typeof responseBody.dependencies.database.active_connections).toBe(
-    "number",
+    "number"
   );
   expect(typeof responseBody.dependencies.database.opened_connections).toBe(
-    "number",
+    "number"
   );
   expect(responseBody.dependencies.database.opened_connections).toBe(1);
 });
 
 test("Teste de SQL Injection", async () => {
   const response = await fetch(
-    "http://localhost:3000/api/v1/status?databaseName=local_db",
+    "http://localhost:3000/api/v1/status?databaseName=local_db"
   );
+  expect(response).toBeDefined();
 });

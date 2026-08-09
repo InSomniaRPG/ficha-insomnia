@@ -4,10 +4,10 @@ async function status(request, response) {
   const updatedAt = new Date().toISOString();
   const databaseVersion = await database.query("SHOW server_version;");
   const databaseMaxConn = await database.query(
-    "SELECT setting::int FROM pg_settings WHERE name = 'max_connections';",
+    "SELECT setting::int FROM pg_settings WHERE name = 'max_connections';"
   );
   const databaseActiveConn = await database.query(
-    "SELECT * FROM pg_stat_activity;",
+    "SELECT * FROM pg_stat_activity;"
   );
 
   const databaseName = process.env.POSTGRES_DB;
