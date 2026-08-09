@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
@@ -23,8 +23,8 @@
         --ok: #5fd48f;
         --warn: #f0b34a;
         --err: #ff6b81;
-        --mono:
-          ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+        --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas,
+          monospace;
         --ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       }
       * {
@@ -41,8 +41,7 @@
         font-family: var(--ui);
         font-size: 14px;
         line-height: 1.5;
-        background-image:
-          radial-gradient(
+        background-image: radial-gradient(
             circle at 12% -8%,
             rgba(167, 139, 250, 0.1),
             transparent 55%
@@ -1448,10 +1447,7 @@
         .arqbtn,
         .check,
         .nvsel button {
-          transition:
-            background 0.12s,
-            border-color 0.12s,
-            color 0.12s;
+          transition: background 0.12s, border-color 0.12s, color 0.12s;
         }
       }
     </style>
@@ -5315,7 +5311,7 @@
         CAT[a].fns.forEach((f) => {
           f.arq = a;
           FN[f.id] = f;
-        }),
+        })
       );
     </script>
     <script>
@@ -6472,7 +6468,7 @@
         const fs = hab.fns.map((sf) => FN[sf.id]).filter(Boolean);
         if (!fs.length) {
           i(
-            "Escolha a Função Mecânica que o Anátema do Onírico gravou nesta runa.",
+            "Escolha a Função Mecânica que o Anátema do Onírico gravou nesta runa."
           );
           return A;
         }
@@ -6483,7 +6479,7 @@
           if (f.se)
             e(
               f.n +
-                " pertence ao Estigma de um Médium e não pode ser gravada num artefato.",
+                " pertence ao Estigma de um Médium e não pode ser gravada num artefato."
             );
           if (f.r && f.r.al && !f.r.al.includes(hab.mira))
             e(
@@ -6492,7 +6488,7 @@
                 nmL("al", f.r.al) +
                 " — está como " +
                 LISTA.al[hab.mira] +
-                ".",
+                "."
             );
           if (f.r && f.r.ac && !f.ig && !f.r.ac.includes(hab.alc))
             e(
@@ -6501,7 +6497,7 @@
                 nmL("ac", f.r.ac) +
                 " — está como " +
                 LISTA.ac[hab.alc] +
-                ".",
+                "."
             );
           if (f.r && f.r.du && !hab.passiva && !f.r.du.includes(hab.dur))
             e(f.n + " exige duração " + nmL("du", f.r.du) + ".");
@@ -6519,7 +6515,7 @@
           if (f.ataque && hab.mira === "area")
             e(
               f.n +
-                " exige Jogada de Ataque, e toda habilidade em área usa Teste de Resistência.",
+                " exige Jogada de Ataque, e toda habilidade em área usa Teste de Resistência."
             );
         });
         if (hab.comb) {
@@ -6538,7 +6534,7 @@
               (RANKS[a.rank].paTxt || "até " + cfg.pa + " P.A") +
               "). Uma versão que use até " +
               cfg.pa +
-              " P.A pode ser gravada.",
+              " P.A pode ser gravada."
           );
         hab.fns.forEach((sf) => {
           const f = FN[sf.id];
@@ -6557,7 +6553,7 @@
                   cfg.bon +
                   " ou −" +
                   cfg.bon +
-                  ").",
+                  ")."
               );
             else if (grau < cfg.bon)
               i(
@@ -6566,19 +6562,19 @@
                   cfg.bon +
                   "), sem opção de usar versões menores — o efeito na mesa será +" +
                   cfg.bon +
-                  ".",
+                  "."
               );
           }
         });
         if (hab.passiva)
           i(
-            "Passiva: enquanto o artefato estiver assimilado o benefício é contínuo. O custo base dobra e sai permanentemente da reserva do artefato.",
+            "Passiva: enquanto o artefato estiver assimilado o benefício é contínuo. O custo base dobra e sai permanentemente da reserva do artefato."
           );
         else if (c.total > fluxoArte(a) - (a.fluxoGasto || 0))
           w(
             "Custo de " +
               c.total +
-              " acima do Fluxo disponível na reserva do artefato.",
+              " acima do Fluxo disponível na reserva do artefato."
           );
         if (!A.some((x) => x.l === "e"))
           A.push({ l: "g", t: "Runa válida para o " + RANKS[a.rank].n + "." });
@@ -6635,7 +6631,7 @@
    ============================================================ */
       function temTalento(nome) {
         return Object.keys(ESP).some((k) =>
-          (CH.esp[k].tal || []).some((t) => t && t.startsWith(nome)),
+          (CH.esp[k].tal || []).some((t) => t && t.startsWith(nome))
         );
       }
       function contaMaestria(eco, nome) {
@@ -6647,7 +6643,7 @@
           perm = s.nv * 2;
         const gratis = CH.origem === "Mercenário" ? subSel("gratis") : [];
         const esc = (s.tal || []).filter(
-          (t) => t && !gratis.includes(t),
+          (t) => t && !gratis.includes(t)
         ).length;
         return CUSTO_NV[s.nv] + Math.max(0, esc - perm) * 2;
       }
@@ -6684,10 +6680,10 @@
         return f === "1"
           ? 1
           : f === "half"
-            ? half(psi)
-            : f === "psique"
-              ? psi
-              : 1 + half(psi);
+          ? half(psi)
+          : f === "psique"
+          ? psi
+          : 1 + half(psi);
       }
       function subsDaOrigem() {
         return (SUBS[CH.origem] || []).filter((s) => CH.nivel >= s.nv);
@@ -6706,7 +6702,7 @@
               const k = t.n.trim();
               if (mapa[k]) mapa[k].cats.push(c);
               else mapa[k] = { n: k, cats: [c], d: t.d, c: t.t };
-            }),
+            })
           );
           return Object.values(mapa).map((x) => ({
             n: x.n,
@@ -6741,7 +6737,7 @@
             const f = FN[sf.id];
             if (!f || !f.efeito) return;
             const v = (f.op || []).find((o) => o.id === "v");
-            const idx = v ? (sf.op[v.id] ?? 0) : 0;
+            const idx = v ? sf.op[v.id] ?? 0 : 0;
             const grau = idx + 1; // +1 / +2 / +3
             const rot = (h.nome || f.n) + (h.passiva ? " (passiva)" : "");
             switch (f.efeito.tipo) {
@@ -7002,8 +6998,8 @@
                     CH.nivel *
                       (CH.secTipo === "invocacao"
                         ? { p: -1, m: 0, g: 1 }[CH.secTam] || 0
-                        : 0),
-                ),
+                        : 0)
+                )
               );
         const pvAtual =
           CH.pvAtual == null ? pvTotal : Math.min(CH.pvAtual, pvTotal);
@@ -7011,10 +7007,10 @@
           pvAtual <= 0
             ? "INCONSCIENTE"
             : pvAtual <= pvTotal * 0.25
-              ? "GRAVEMENTE FERIDO"
-              : pvAtual <= pvTotal * 0.5
-                ? "FERIDO"
-                : "NORMAL";
+            ? "GRAVEMENTE FERIDO"
+            : pvAtual <= pvTotal * 0.5
+            ? "FERIDO"
+            : "NORMAL";
         const penFerido =
           sit === "GRAVEMENTE FERIDO" ? -4 : sit === "FERIDO" ? -2 : 0;
         const ignoraFerido = af === "Corpo" || EF.ignoraFerido;
@@ -7023,7 +7019,7 @@
         const guarda = temTalento("Em Guarda") ? p.guarda : 0;
         const inic = Math.max(
           aE.agilidade + half(aE.instinto),
-          aE.instinto + half(aE.agilidade),
+          aE.instinto + half(aE.agilidade)
         );
         const rolAtk = EF.rol["Jogada de Ataque"] || 0;
         const rolEsq =
@@ -7043,7 +7039,7 @@
 
         /* combate desarmado */
         const versatil = (CH.esp.desarmado.tal || []).some(
-          (t) => t && t.startsWith("Versátil"),
+          (t) => t && t.startsWith("Versátil")
         );
         const atrDes = versatil ? Math.max(aE.forca, aE.agilidade) : aE.forca;
         const atqDes = atrDes + p.bonusEsp + rolAtk;
@@ -7188,8 +7184,8 @@
               ((10 + aE.agilidade * afd.desl + mDesl) *
                 (EF.deslocDobro ? 2 : 1)) /
                 (EF.deslocMeio ? 2 : 1) +
-                EF.desloc,
-            ),
+                EF.desloc
+            )
           ),
           levant: (120 + 50 * aE.forca) * afd.carga * EF.carga,
           carga: (60 + 10 * aE.forca) * afd.carga * EF.carga,
@@ -7303,14 +7299,14 @@
             x.tipo === "Desarmado"
               ? "Combate Desarmado"
               : x.tipo === "Corpo a Corpo"
-                ? "Marciais Corpo a Corpo — " + x.cat
-                : x.tipo === "Armas de Fogo"
-                  ? "Armas de Fogo — " + x.cat
-                  : x.tipo === "Armas à Distância"
-                    ? "Marciais à Distância — " + x.cat
-                    : x.tipo === "Marciais Arremessáveis"
-                      ? "Marciais Arremessáveis — " + x.cat
-                      : "";
+              ? "Marciais Corpo a Corpo — " + x.cat
+              : x.tipo === "Armas de Fogo"
+              ? "Armas de Fogo — " + x.cat
+              : x.tipo === "Armas à Distância"
+              ? "Marciais à Distância — " + x.cat
+              : x.tipo === "Marciais Arremessáveis"
+              ? "Marciais Arremessáveis — " + x.cat
+              : "";
           if (assin.includes(nome) && CH.nivel >= 6) {
             if (x.tipo === "Armas de Fogo" && x.cat === "Pesada")
               out.push({ l: "Arma de Assinatura", v: 1 });
@@ -7409,7 +7405,7 @@
         if (baseFisico()) return FIS.slice();
         const extra = CH.multiDano ? CH.tiposDano || [] : [];
         return [CH.estigma.tipoDano, ...extra].filter(
-          (v, i, a) => v && a.indexOf(v) === i,
+          (v, i, a) => v && a.indexOf(v) === i
         );
       }
       function tipoDaRuna(hab) {
@@ -7509,14 +7505,14 @@
                     ? m === 1
                       ? " objeto(s) × 1"
                       : " quadrado(s) × 2"
-                    : " × " + m),
+                    : " × " + m)
               );
             } else {
               const it = o.it[sf.op[o.id] ?? 0];
               if (it && it.c) {
                 sub += it.c;
                 rot.push(
-                  (it.c > 0 ? "+" : "") + it.c + " " + o.l.toLowerCase(),
+                  (it.c > 0 ? "+" : "") + it.c + " " + o.l.toLowerCase()
                 );
               }
             }
@@ -7617,17 +7613,17 @@
               f.n +
                 ": o arquétipo " +
                 CAT[f.arq].n +
-                " não está entre os atribuídos ao Estigma.",
+                " não está entre os atribuídos ao Estigma."
             );
           if (f.se && hab.tipo !== "estigma")
             e(
               f.n +
-                " só pode ser atribuída ao Estigma (marca principal), nunca como Runa.",
+                " só pode ser atribuída ao Estigma (marca principal), nunca como Runa."
             );
           if (f.sc && !hab.comb)
             e(
               f.n +
-                " só existe dentro de uma Runa Combinada, junto de outra função.",
+                " só existe dentro de uma Runa Combinada, junto de outra função."
             );
           if (hab.comb && f.nc)
             e(f.n + " não pode ser atribuída a Runa Combinada.");
@@ -7638,7 +7634,7 @@
                 nmL("al", f.r.al) +
                 " — está como " +
                 LISTA.al[hab.mira] +
-                ".",
+                "."
             );
           if (f.r && f.r.ac && !f.ig && !f.r.ac.includes(hab.alc))
             e(
@@ -7647,7 +7643,7 @@
                 nmL("ac", f.r.ac) +
                 " — está como " +
                 LISTA.ac[hab.alc] +
-                ".",
+                "."
             );
           if (f.r && f.r.du && !hab.passiva && !f.r.du.includes(hab.dur))
             e(
@@ -7656,7 +7652,7 @@
                 nmL("du", f.r.du) +
                 " — está como " +
                 LISTA.du[hab.dur] +
-                ".",
+                "."
             );
           if (
             f.r &&
@@ -7672,24 +7668,24 @@
           if (f.ataque && hab.mira === "area")
             e(
               f.n +
-                " exige Jogada de Ataque, e toda habilidade em área usa Teste de Resistência.",
+                " exige Jogada de Ataque, e toda habilidade em área usa Teste de Resistência."
             );
           if (f.ataque && resolucao(hab) === "teste" && !mostraCombOpt(hab))
             e(
               f.n +
-                " exige Jogada de Ataque, mas a habilidade resolve por Teste de Resistência.",
+                " exige Jogada de Ataque, mas a habilidade resolve por Teste de Resistência."
             );
           if (f.exigeReq && !hab.verbal && !hab.gestual)
             e(
               f.n +
-                " exige sempre requisito Verbal ou Gestual para poder ser ativada.",
+                " exige sempre requisito Verbal ou Gestual para poder ser ativada."
             );
           if (f.dano && !hab.passiva && DUR[hab.dur].semDano)
             w(
               f.n +
                 ' causa dano direto, e a duração "' +
                 DUR[hab.dur].l +
-                '" não vale para dano direto.',
+                '" não vale para dano direto.'
             );
           if (f.id === "aumento_dano" && hab.passiva && hab.mira === "area")
             e("Aumento de Dano como passiva não pode ser em área.");
@@ -7703,14 +7699,14 @@
           )
             w(
               f.n +
-                " passiva: cada runa adicional ocupa uma passiva a mais no seu limite.",
+                " passiva: cada runa adicional ocupa uma passiva a mais no seu limite."
             );
         });
 
         if (hab.comb) {
           if (hab.tipo === "estigma")
             e(
-              "A marca principal do Estigma nunca pode ser fundida em Runa Combinada.",
+              "A marca principal do Estigma nunca pode ser fundida em Runa Combinada."
             );
           if (fs.length < 2) w("Runa Combinada precisa de duas funções.");
           if (fs.length > 2)
@@ -7728,24 +7724,24 @@
                   m.n +
                     " não pode ser combinada com uma função do arquétipo " +
                     CAT[o.arq].n +
-                    ".",
+                    "."
                 );
               if (m.conflita && m.conflita.includes(o.id))
                 e(m.n + " não combina com " + o.n + ".");
             });
             const ctr = fs.filter(
-              (f) => f.arq === "controle" || f.arq === "enfraquecimento",
+              (f) => f.arq === "controle" || f.arq === "enfraquecimento"
             );
             if (ctr.length === 2 && ctr[0].ta && ctr[1].ta)
               i(
-                "Duas funções de Controle/Enfraquecimento: o atributo do teste deve ser o mesmo para as duas.",
+                "Duas funções de Controle/Enfraquecimento: o atributo do teste deve ser o mesmo para as duas."
               );
             if (x.exigeDano || y.exigeDano) {
               const outra = x.exigeDano ? y : x;
               if (!outra.dano)
                 e(
                   (x.exigeDano ? x.n : y.n) +
-                    " exige estar combinada com uma função que cause dano.",
+                    " exige estar combinada com uma função que cause dano."
                 );
             }
             if (
@@ -7753,7 +7749,7 @@
               resolucao(hab) === "nenhuma"
             )
               e(
-                "Roubo de Fluxo exige que a habilidade faça jogada de ataque ou peça teste de resistência.",
+                "Roubo de Fluxo exige que a habilidade faça jogada de ataque ou peça teste de resistência."
               );
           }
           if (hab.passiva)
@@ -7764,7 +7760,7 @@
           !fazAtaque(resolucao(hab))
         )
           e(
-            "Redução Fixa de Deslocamento exige uma habilidade que faça jogadas de ataque.",
+            "Redução Fixa de Deslocamento exige uma habilidade que faça jogadas de ataque."
           );
         if (
           fs.some((f) => f.id === "corta_cura") &&
@@ -7773,13 +7769,13 @@
           e("Corta Cura exige jogada de ataque ou teste de resistência.");
         if (fs.some((f) => f.id === "escudo") && hab.dur === "prol")
           i(
-            "Em Duração Prolongada o escudo se reestabelece sozinho no início do seu turno — a tabela de esforço extra vale para durações menores.",
+            "Em Duração Prolongada o escudo se reestabelece sozinho no início do seu turno — a tabela de esforço extra vale para durações menores."
           );
 
         const c = custo(hab);
         if (hab.passiva)
           i(
-            "Passiva: sempre ativa, não gasta P.A e não consome Fluxo por rodada. Custo dobrado e descontado permanentemente do Limite de Fluxo.",
+            "Passiva: sempre ativa, não gasta P.A e não consome Fluxo por rodada. Custo dobrado e descontado permanentemente do Limite de Fluxo."
           );
         else if (c.total > d.fluxoDisp)
           w(
@@ -7787,7 +7783,7 @@
               c.total +
               " acima do Fluxo disponível (" +
               d.fluxoDisp +
-              "). Ativar assim gera sobrecarga: 1 de [In]Sanidade a cada 5 de Fluxo além do limite.",
+              "). Ativar assim gera sobrecarga: 1 de [In]Sanidade a cada 5 de Fluxo além do limite."
           );
         if (!A.some((x) => x.l === "e"))
           A.push({ l: "g", t: "Habilidade válida pelas regras do Guia." });
@@ -7814,7 +7810,7 @@
                   d.aptAtr +
                   " da Aptidão Natural)"
                 : " no nível " + CH.nivel) +
-              ".",
+              "."
           );
         ATR.forEach((k) => {
           if (CH.attrs[k] > d.limAtr)
@@ -7824,27 +7820,27 @@
                 CH.attrs[k] +
                 ", acima do Limite de Atributo do nível (" +
                 d.limAtr +
-                ").",
+                ")."
             );
         });
         if (!CH.afinidade)
           w(
-            "Escolha a Afinidade do Fluxo — ela entra no Ataque Psíquico e nos derivados.",
+            "Escolha a Afinidade do Fluxo — ela entra no Ataque Psíquico e nos derivados."
           );
         if (!CH.origem && !CH.secTipo)
           w("Escolha a Origem para liberar as habilidades de origem.");
         if (CH.secTipo === "invocacao") {
           i(
-            "Invocação: nível, Afinidade e Estigma vêm da ficha principal. Runas e Limite de Fluxo são a metade do que o nível daria, e ela não tem Origem nem Sigilo.",
+            "Invocação: nível, Afinidade e Estigma vêm da ficha principal. Runas e Limite de Fluxo são a metade do que o nível daria, e ela não tem Origem nem Sigilo."
           );
           if (d.custoInvoc === 0)
             i(
-              'Enquanto a Invocação estiver ativa, o Limite de Fluxo do personagem principal cai pelo custo de conjuração — marque "Sigilo ativo" na aba Sigilo dele para ver o efeito.',
+              'Enquanto a Invocação estiver ativa, o Limite de Fluxo do personagem principal cai pelo custo de conjuração — marque "Sigilo ativo" na aba Sigilo dele para ver o efeito.'
             );
         }
         if (CH.secTipo === "sobreposicao")
           i(
-            "Sobreposição: a Origem é a mesma da ficha principal e o Limite Base de Fluxo é compartilhado — gastar numa ficha desconta da outra. Atributos, Especializações, Ecos, Afinidade e Estigma podem ser totalmente diferentes.",
+            "Sobreposição: a Origem é a mesma da ficha principal e o Limite Base de Fluxo é compartilhado — gastar numa ficha desconta da outra. Atributos, Especializações, Ecos, Afinidade e Estigma podem ser totalmente diferentes."
           );
         if (d.aprSobra < 0)
           e(
@@ -7859,7 +7855,7 @@
                   d.aptApr +
                   " da Aptidão Natural)"
                 : "") +
-              ".",
+              "."
           );
 
         Object.keys(ESP).forEach((k) => {
@@ -7871,7 +7867,7 @@
               ESP[k].n +
                 ": só é possível comprar " +
                 ESP[k].lista.toLowerCase() +
-                " avulsos com pelo menos 1 nível na especialização.",
+                " avulsos com pelo menos 1 nível na especialização."
             );
           else if (esc > perm)
             i(
@@ -7880,7 +7876,7 @@
                 (esc - perm) +
                 " habilidade(s) além das " +
                 perm +
-                " do nível, a 2 pontos cada.",
+                " do nível, a 2 pontos cada."
             );
           const dup = (s.tal || [])
             .filter(Boolean)
@@ -7899,7 +7895,7 @@
               CH.esp.cac.nv +
               " categoria(s) — " +
               (CH.esp.cac.prof || []).length +
-              " marcada(s).",
+              " marcada(s)."
           );
 
         Object.keys(ECO).forEach((k) => {
@@ -7910,7 +7906,7 @@
             e(
               "Eco de " +
                 ECO[k].n +
-                ": só é possível comprar habilidades avulsas com pelo menos 1 nível no Eco.",
+                ": só é possível comprar habilidades avulsas com pelo menos 1 nível no Eco."
             );
           else if (esc > perm)
             i(
@@ -7920,7 +7916,7 @@
                 (esc - perm) +
                 " habilidade(s) além das " +
                 perm +
-                " do nível, a 2 pontos cada.",
+                " do nível, a 2 pontos cada."
             );
           const dup = (s.hab || [])
             .filter(Boolean)
@@ -7932,7 +7928,7 @@
                 ECO[k].n +
                 ': "' +
                 dup[0] +
-                '" aparece mais de uma vez.',
+                '" aparece mais de uma vez.'
             );
         });
         if (contaMaestria("manipulacao", "Limite Expandido") > 3)
@@ -7941,13 +7937,13 @@
           e("Runa Adicional pode ser adquirida no máximo 3 vezes.");
         if (CH.origem === "Veratem" && !CH.veratemEco)
           w(
-            "Veratem: escolha o Eco que recebe a redução de custo (Grão-Mestre Psíquico).",
+            "Veratem: escolha o Eco que recebe a redução de custo (Grão-Mestre Psíquico)."
           );
         if (CH.afinidade === "Mente" && d.ecoSobra > 0)
           i(
             "Afinidade Mente: " +
               d.ecoSobra +
-              " dos 3 pontos bônus de Eco ainda não foram usados (só valem para Ecos).",
+              " dos 3 pontos bônus de Eco ainda não foram usados (só valem para Ecos)."
           );
 
         /* sub-opções da origem */
@@ -7964,7 +7960,7 @@
                 lim +
                 " permitida(s) — " +
                 sb.limTxt +
-                ".",
+                "."
             );
           else if (sel.length < lim && lim !== Infinity)
             i(
@@ -7973,7 +7969,7 @@
                 (lim - sel.length) +
                 " escolha(s) ainda disponível(is) de " +
                 lim +
-                ".",
+                "."
             );
         });
         Object.keys(SUBS).forEach((o) => {
@@ -7987,7 +7983,7 @@
                   o +
                   ". Elas não valem para " +
                   (CH.origem || "a origem atual") +
-                  ".",
+                  "."
               );
           });
         });
@@ -7998,8 +7994,8 @@
               sb.n +
                 " só é liberada no nível " +
                 sb.nv +
-                " e já tem escolhas marcadas.",
-            ),
+                " e já tem escolhas marcadas."
+            )
           );
         if (CH.origem === "Comum") {
           const ap = subSel("aptidao"),
@@ -8008,23 +8004,23 @@
             e(
               'Aptidão Natural: "' +
                 dup[0] +
-                '" escolhida mais de uma vez — cada liberação exige uma aptidão diferente.',
+                '" escolhida mais de uma vez — cada liberação exige uma aptidão diferente.'
             );
           if (CH.nivel >= 11)
             i(
-              "Versatilidade (nível 11): você pode trocar a Afinidade do Fluxo livremente.",
+              "Versatilidade (nível 11): você pode trocar a Afinidade do Fluxo livremente."
             );
         }
         if (CH.origem === "Mercenário") {
           const g = subSel("gratis");
           const jaTem = g.filter((t) =>
-            Object.keys(ESP).some((k) => (CH.esp[k].tal || []).includes(t)),
+            Object.keys(ESP).some((k) => (CH.esp[k].tal || []).includes(t))
           );
           if (jaTem.length)
             w(
               '"' +
                 jaTem[0] +
-                '" está marcada como habilidade gratuita e também comprada numa Especialização — vale só uma vez.',
+                '" está marcada como habilidade gratuita e também comprada numa Especialização — vale só uma vez.'
             );
         }
 
@@ -8035,17 +8031,17 @@
           e(
             "Sigilo escolhido, mas o acesso só é liberado no nível " +
               SIGILO_NV +
-              ".",
+              "."
           );
         else if (d.sigLib && !CH.sigilo.v)
           w(
             "Nível " +
               CH.nivel +
-              ": o Sigilo já está liberado e nenhuma variação foi escolhida.",
+              ": o Sigilo já está liberado e nenhuma variação foi escolhida."
           );
         if (d.sigAtivo)
           i(
-            "Sigilo de Transformação ativo: +2 em Psique e na Afinidade já aplicados nos derivados. Ao desativar, sem Estigma nem Runas até um Descanso Completo.",
+            "Sigilo de Transformação ativo: +2 em Psique e na Afinidade já aplicados nos derivados. Ao desativar, sem Estigma nem Runas até um Descanso Completo."
           );
         if (CH.sigilo.v && SIGILOS[CH.sigilo.v] && SIGILOS[CH.sigilo.v].op) {
           SIGILOS[CH.sigilo.v].op.forEach((o) => {
@@ -8055,7 +8051,7 @@
                   SIGILOS[CH.sigilo.v].n +
                   ': defina "' +
                   o.l +
-                  '".',
+                  '".'
               );
           });
         }
@@ -8066,13 +8062,13 @@
           i(
             "Arquétipos do Estigma: " +
               CH.estigma.arqs.length +
-              " atribuídos (o padrão do sistema é 4).",
+              " atribuídos (o padrão do sistema é 4)."
           );
         else if (CH.estigma.arqs.length > 4)
           i(
             "Arquétipos do Estigma: " +
               CH.estigma.arqs.length +
-              " atribuídos — acima dos 4 padrão, combinado com a mesa.",
+              " atribuídos — acima dos 4 padrão, combinado com a mesa."
           );
         if (d.runasUso > d.runasDisp)
           e(
@@ -8084,7 +8080,7 @@
               (d.runaAd
                 ? " (inclui +" + d.runaAd + " de Runa Adicional)"
                 : "") +
-              ".",
+              "."
           );
         if (d.passUso > d.passLim)
           e(
@@ -8092,20 +8088,20 @@
               d.passUso +
               " em uso, o limite é " +
               d.passLim +
-              " (1 + metade da Psique).",
+              " (1 + metade da Psique)."
           );
         Object.values(FN)
           .filter((f) => f.unica)
           .forEach((f) => {
             const n = CH.estigma.habs.filter((h) =>
-              h.fns.some((sf) => sf.id === f.id),
+              h.fns.some((sf) => sf.id === f.id)
             ).length;
             if (n > 1)
               e(
                 f.n +
                   " não pode ser escolhida mais de uma vez no mesmo Estigma/Runas (" +
                   n +
-                  " usos).",
+                  " usos)."
               );
           });
         const ass = {};
@@ -8119,9 +8115,9 @@
               if (ass[key] === 2)
                 w(
                   FN[sf.id].n +
-                    " aparece duas vezes com as mesmas regras mecânicas — funções idênticas não acumulam.",
+                    " aparece duas vezes com as mesmas regras mecânicas — funções idênticas não acumulam."
                 );
-            }),
+            })
         );
 
         (CH.artefatos || []).forEach((a) => {
@@ -8137,24 +8133,24 @@
                 RANKS[a.rank].n +
                 " comporta " +
                 limR +
-                ".",
+                "."
             );
           else if (uso > limR)
             i(
               nome +
                 ": " +
                 uso +
-                " runas num Rank EX — acima das 4 padrão, o que depende do Artesão que o forjou (+10 VF por runa extra).",
+                " runas num Rank EX — acima das 4 padrão, o que depende do Artesão que o forjou (+10 VF por runa extra)."
             );
           if (a.assimilado && !a.fluxoTotal)
             w(
               nome +
-                ": defina a reserva de Fluxo — metade do Limite do Onírico do Núcleo Principal.",
+                ": defina a reserva de Fluxo — metade do Limite do Onírico do Núcleo Principal."
             );
           if (a.assimilado && a.rank !== "C" && !a.emocao && a.rank === "B")
             i(
               nome +
-                ": defina a emoção primária — é ela que determina a Rejeição Emocional em caso de falha.",
+                ": defina a emoção primária — é ela que determina a Rejeição Emocional em caso de falha."
             );
           if ((a.mods || []).length > 2)
             e(nome + ": no máximo duas modificações por artefato.");
@@ -8164,12 +8160,12 @@
           )
             e(
               nome +
-                ": Peso Extra não pode ser aplicada numa arma com Liga Leve.",
+                ": Peso Extra não pode ser aplicada numa arma com Liga Leve."
             );
           if ((a.mods || []).length && CH.origem !== "Artesão")
             i(
               nome +
-                ": modificações marcadas — só valem se um Artesão as instalou ou se o artefato já veio modificado.",
+                ": modificações marcadas — só valem se um Artesão as instalou ou se o artefato já veio modificado."
             );
           if (passArte(a) >= (a.fluxoTotal || 0) && passArte(a) > 0)
             e(
@@ -8178,7 +8174,7 @@
                 passArte(a) +
                 " de uma reserva de " +
                 (a.fluxoTotal || 0) +
-                " — não sobra Fluxo para ativar nada.",
+                " — não sobra Fluxo para ativar nada."
             );
         });
         const limAss = half(d.psique),
@@ -8189,11 +8185,11 @@
               nAss +
               " de " +
               limAss +
-              " (metade da Psique).",
+              " (metade da Psique)."
           );
         if (CH.origem === "Artesão") {
           const alto = (CH.artefatos || []).filter(
-            (a) => CH.nivel < RANK_NV[a.rank],
+            (a) => CH.nivel < RANK_NV[a.rank]
           );
           alto.forEach((a) =>
             i(
@@ -8202,8 +8198,8 @@
                 RANKS[a.rank].n +
                 ": você só forja esse Rank a partir do nível " +
                 RANK_NV[a.rank] +
-                " — mas pode tê-lo obtido de outra forma.",
-            ),
+                " — mas pode tê-lo obtido de outra forma."
+            )
           );
         }
 
@@ -8212,13 +8208,13 @@
           e(
             "Concentração está marcada em " +
               conc.length +
-              " habilidade(s), mas a maestria não foi adquirida no Eco de Manipulação.",
+              " habilidade(s), mas a maestria não foi adquirida no Eco de Manipulação."
           );
         else if (conc.length > 1)
           e(
             "Concentração vale para uma única habilidade de duração prolongada — " +
               conc.length +
-              " estão marcadas.",
+              " estão marcadas."
           );
         else if (conc.length && conc[0].fns.some((sf) => sf.id === "aura_cura"))
           e("Concentração não se aplica à função de Aura de Cura.");
@@ -8228,13 +8224,13 @@
               (conc[0].nome || "sem nome") +
               '" pode ficar ativa sem consumo por ' +
               d.psique +
-              " hora(s) no dia. Depois disso volta a consumir.",
+              " hora(s) no dia. Depois disso volta a consumir."
           );
         if (contaMaestria("manipulacao", "Fluxo Eficiente"))
           i(
             "Fluxo Eficiente: o consumo por rodada das habilidades prolongadas cai " +
               Math.min(5, d.psique) +
-              " (Psique, no máximo 5).",
+              " (Psique, no máximo 5)."
           );
 
         if (d.sobrecarga > 0)
@@ -8243,12 +8239,12 @@
               d.sobrecarga +
               " além do limite → " +
               d.insAcum +
-              " acúmulo(s) de [In]Sanidade.",
+              " acúmulo(s) de [In]Sanidade."
           );
         if (d.sit === "FERIDO" || d.sit === "GRAVEMENTE FERIDO") {
           if (d.ignoraFerido)
             i(
-              d.sit + ": a Afinidade Corpo ignora as penalidades deste estado.",
+              d.sit + ": a Afinidade Corpo ignora as penalidades deste estado."
             );
           else
             w(d.sit + ": " + d.penFerido + " em ataque, ND, esquiva e defesa.");
@@ -8263,11 +8259,11 @@
               (d.temVinc
                 ? ""
                 : " (o Eco exige a maestria Vínculo Psíquico em Manipulação)") +
-              ".",
+              "."
           );
         if (d.revBonus && vinc)
           i(
-            "Revestimento não acumula com o Eco de Vínculo em armas leves de punho — prevalece o maior.",
+            "Revestimento não acumula com o Eco de Vínculo em armas leves de punho — prevalece o maior."
           );
         CH.armas.forEach((w2) => {
           const x = acharArma(w2.n);
@@ -8279,7 +8275,7 @@
                 x.tipo +
                 ", " +
                 x.cat +
-                "): o ataque não recebe bônus de atributo.",
+                "): o ataque não recebe bônus de atributo."
             );
         });
 
@@ -8296,10 +8292,12 @@
       const esc = (s) =>
         (s || "").replace(
           /[&<>"]/g,
-          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])
         );
       const opt = (label, v, sel, dis) =>
-        `<option value="${esc(String(v))}" ${sel ? "selected" : ""} ${dis ? "disabled" : ""}>${esc(label)}</option>`;
+        `<option value="${esc(String(v))}" ${sel ? "selected" : ""} ${
+          dis ? "disabled" : ""
+        }>${esc(label)}</option>`;
       const TABS = [
         { k: "personagem", n: "Personagem" },
         { k: "atributos", n: "Atributos" },
@@ -8361,7 +8359,7 @@
             !q || norm(el.dataset.busca).includes(q) ? "" : "none";
         });
         const n = [...document.querySelectorAll(".pickitem")].filter(
-          (e) => e.style.display !== "none",
+          (e) => e.style.display !== "none"
         ).length;
         const c = document.querySelector("#buscaCount");
         if (c)
@@ -8386,17 +8384,25 @@
       /* Painel de escolha reutilizável: busca + lista clicável */
       function picker(titulo, itens, acao) {
         return `<div class="picker"><div class="pickhead">
-    <input type="text" id="busca" placeholder="${esc(titulo)}" value="${esc(BUSCA)}" autocomplete="off">
-    <span class="mono" id="buscaCount" style="color:var(--dim2);font-size:10px">${itens.length}</span>
+    <input type="text" id="busca" placeholder="${esc(titulo)}" value="${esc(
+          BUSCA
+        )}" autocomplete="off">
+    <span class="mono" id="buscaCount" style="color:var(--dim2);font-size:10px">${
+      itens.length
+    }</span>
     <button class="btn sm" data-pickclose="1">Fechar</button></div>
     <div class="picklist">${
       itens.length
         ? itens
             .map(
               (it) =>
-                `<button class="pickitem" data-busca="${esc(it.n + " " + (it.cat || "") + " " + (it.d || ""))}" ${acao(it)}>
-        <b>${esc(it.n)}</b>${it.cat ? `<span class="bdg">${esc(it.cat)}</span>` : ""}${it.c ? `<span class="bdg t">${esc(it.c)}</span>` : ""}
-        ${it.d ? `<i>${esc(it.d)}</i>` : ""}</button>`,
+                `<button class="pickitem" data-busca="${esc(
+                  it.n + " " + (it.cat || "") + " " + (it.d || "")
+                )}" ${acao(it)}>
+        <b>${esc(it.n)}</b>${
+                  it.cat ? `<span class="bdg">${esc(it.cat)}</span>` : ""
+                }${it.c ? `<span class="bdg t">${esc(it.c)}</span>` : ""}
+        ${it.d ? `<i>${esc(it.d)}</i>` : ""}</button>`
             )
             .join("")
         : '<p class="note" style="padding:10px">Nada disponível aqui.</p>'
@@ -8438,7 +8444,11 @@
         document.body.classList.add("insec");
         const t = CH.secTipo === "invocacao" ? "Invocação" : "Sobreposição";
         b.innerHTML = `<div class="sbw"><b>Editando a ficha da ${t}</b>
-    <span>${esc(CH.nome) || "sem nome"} · nível ${CH.nivel}${CH.secTipo === "invocacao" ? " · " + { p: "Pequena", m: "Média", g: "Grande" }[CH.secTam] + "" : ""}</span>
+    <span>${esc(CH.nome) || "sem nome"} · nível ${CH.nivel}${
+          CH.secTipo === "invocacao"
+            ? " · " + { p: "Pequena", m: "Média", g: "Grande" }[CH.secTam] + ""
+            : ""
+        }</span>
     <button class="btn" id="bVoltarSec">← Voltar à ficha principal</button></div>`;
       }
 
@@ -8464,7 +8474,9 @@
       function vitals() {
         const d = D();
         const v = (c, l, val, t) =>
-          `<div class="vital ${c}" title="${t || ""}"><u>${l}</u><b>${val}</b></div>`;
+          `<div class="vital ${c}" title="${
+            t || ""
+          }"><u>${l}</u><b>${val}</b></div>`;
         $("#vitals").innerHTML =
           v(
             "",
@@ -8474,28 +8486,36 @@
               "</span> <small>" +
               d.p.cl +
               "</small>",
-            "Classificação do nível",
+            "Classificação do nível"
           ) +
           v("", "Psique", d.psique, "Igual ao Limite de Atributo do nível") +
-          `<div class="vital pv ${d.sit !== "NORMAL" ? "bad" : ""}" id="boxPv" title="${d.sit}"><u>PV — ${d.sit.toLowerCase()}</u>
-      <b><input type="number" id="pvAtual" value="${d.pvAtual}"><small id="vPvMax">/ ${d.pvTotal}</small></b></div>` +
-          `<div class="vital fx ${d.sobrecarga > 0 ? "bad" : ""}" id="boxFx" title="Limite ${d.limFluxo}${d.descPass ? " − " + d.descPass + " de passivas" : ""}">
-      <u>Fluxo gasto</u><b><input type="number" id="fluxoGasto" value="${CH.fluxoGasto}"><small id="vFxMax">/ ${d.fluxoDisp}</small></b></div>` +
+          `<div class="vital pv ${
+            d.sit !== "NORMAL" ? "bad" : ""
+          }" id="boxPv" title="${d.sit}"><u>PV — ${d.sit.toLowerCase()}</u>
+      <b><input type="number" id="pvAtual" value="${
+        d.pvAtual
+      }"><small id="vPvMax">/ ${d.pvTotal}</small></b></div>` +
+          `<div class="vital fx ${
+            d.sobrecarga > 0 ? "bad" : ""
+          }" id="boxFx" title="Limite ${d.limFluxo}${
+            d.descPass ? " − " + d.descPass + " de passivas" : ""
+          }">
+      <u>Fluxo gasto</u><b><input type="number" id="fluxoGasto" value="${
+        CH.fluxoGasto
+      }"><small id="vFxMax">/ ${d.fluxoDisp}</small></b></div>` +
           v(
             "pa",
             "P.A",
             d.paTotal + (d.aptPA ? " <small>(+" + d.aptPA + ")</small>" : ""),
             "Pontos de Ação por turno" +
-              (d.aptPA
-                ? " — inclui +" + d.aptPA + " de Eficiência Máxima"
-                : ""),
+              (d.aptPA ? " — inclui +" + d.aptPA + " de Eficiência Máxima" : "")
           ) +
           v(
             "",
             "Atq. Psíquico / ND",
             "+" + d.atqPsi,
             "Psique + metade da Afinidade" +
-              (d.afd.atk ? " + " + d.afd.atk + " (Carisma)" : ""),
+              (d.afd.atk ? " + " + d.afd.atk + " (Carisma)" : "")
           ) +
           `<div class="vital ins"><u>[In]Sanidade</u><b><input type="number" id="insan" value="${CH.insanidade}"></b></div>`;
       }
@@ -8562,8 +8582,12 @@
               return `<button class="nb sec" data-abrirsec="1"><i>↗</i><span>Ficha da ${tp}</span>
         <b class="ok">${esc(ROOT.sec.nome) || "abrir"}</b></button>`;
             }
-            return `<button class="nb ${CH.tab === t.k ? "on" : ""}" data-tab="${t.k}">
-      <i>${ix + 1}</i><span>${t.n}</span>${m ? `<b class="${m[1]}">${m[0]}</b>` : ""}</button>`;
+            return `<button class="nb ${
+              CH.tab === t.k ? "on" : ""
+            }" data-tab="${t.k}">
+      <i>${ix + 1}</i><span>${t.n}</span>${
+              m ? `<b class="${m[1]}">${m[0]}</b>` : ""
+            }</button>`;
           })
           .join("");
       }
@@ -8574,8 +8598,8 @@
             c === "bad"
               ? "color:var(--err)"
               : c === "ok"
-                ? "color:var(--ok)"
-                : ""
+              ? "color:var(--ok)"
+              : ""
           }">${a}<em style="color:var(--dim2)"> / ${b}</em></b></div>`;
         $("#budget").innerHTML =
           r("Atributos", d.gastoAtr, d.ptsAtr, d.atrDisp < 0 ? "bad" : "ok") +
@@ -8586,7 +8610,7 @@
             "Aprimoramento",
             d.usadosApr,
             d.aprTotal,
-            d.aprSobra < 0 ? "bad" : "ok",
+            d.aprSobra < 0 ? "bad" : "ok"
           ) +
           (d.aptApr
             ? `<div class="lrow"><span>&nbsp;↳ Treinamento Intensivo</span><b class="mono">+${d.aptApr}</b></div>`
@@ -8596,27 +8620,29 @@
                 "&nbsp;↳ bônus de Ecos (Mente)",
                 Math.min(d.gEco, d.bonusEco),
                 d.bonusEco,
-                "",
+                ""
               )
             : "") +
           r(
             "Runas",
             d.runasUso,
             d.runasDisp,
-            d.runasUso > d.runasDisp ? "bad" : "ok",
+            d.runasUso > d.runasDisp ? "bad" : "ok"
           ) +
           r(
             "Passivas",
             d.passUso,
             d.passLim,
-            d.passUso > d.passLim ? "bad" : "ok",
+            d.passUso > d.passLim ? "bad" : "ok"
           ) +
           `<div class="lrow"><span>Limite de Fluxo</span><b style="color:var(--fluxo)">${d.fluxoDisp}</b></div>` +
           (d.aptRun
             ? `<div class="lrow"><span>&nbsp;↳ Expansão de Estigma</span><b class="mono">+${d.aptRun}</b></div>`
             : "") +
           (d.limExp
-            ? `<div class="lrow"><span>&nbsp;↳ Limite Expandido ×${d.limExp}</span><b class="mono">+${40 * d.limExp}</b></div>`
+            ? `<div class="lrow"><span>&nbsp;↳ Limite Expandido ×${
+                d.limExp
+              }</span><b class="mono">+${40 * d.limExp}</b></div>`
             : "") +
           (d.aptFlx
             ? `<div class="lrow"><span>&nbsp;↳ Limite Aumentado</span><b class="mono">+${d.aptFlx}</b></div>`
@@ -8646,46 +8672,48 @@
             (CH.secTipo === "invocacao" ? "Invocação" : "Sobreposição")
           : "Valores derivados";
         const L = (l, v, t) =>
-          `<div class="lrow" title="${t || ""}"><span>${l}</span><b>${v}</b></div>`;
+          `<div class="lrow" title="${
+            t || ""
+          }"><span>${l}</span><b>${v}</b></div>`;
         $("#side").innerHTML =
           L(
             "Pontos de Vida",
             d.pvTotal,
             "10 + Corpo + (nível−1) × (5 + metade do Corpo)" +
-              (d.afd.hp ? " + " + d.afd.hp + "/nível pela Afinidade" : ""),
+              (d.afd.hp ? " + " + d.afd.hp + "/nível pela Afinidade" : "")
           ) +
           L(
             "Iniciativa",
             "+" + d.inic,
-            "Agilidade + metade do Instinto, ou o inverso",
+            "Agilidade + metade do Instinto, ou o inverso"
           ) +
           L(
             "Esquiva",
             "+" + d.esquiva,
             "Iniciativa" +
               (d.afd.esq ? " + " + d.afd.esq + " (Afinidade)" : "") +
-              (d.guarda ? " + " + d.guarda + " (Em Guarda)" : ""),
+              (d.guarda ? " + " + d.guarda + " (Em Guarda)" : "")
           ) +
           L(
             "Defesa",
             "+" + d.defesa,
             "Força + metade do maior entre Agilidade e Instinto" +
-              (d.guarda ? " + " + d.guarda + " (Em Guarda)" : ""),
+              (d.guarda ? " + " + d.guarda + " (Em Guarda)" : "")
           ) +
           L("Ataque Psíquico / ND", "+" + d.atqPsi) +
           L("Ataque Desarmado", "+" + d.atqDes + " · dano " + d.danoDes) +
           ataquesArma(L) +
           L(
             "Deslocamento",
-            d.desloc + " m" + (d.afd.desl > 1 ? " (dobrado)" : ""),
+            d.desloc + " m" + (d.afd.desl > 1 ? " (dobrado)" : "")
           ) +
           L(
             "Levantamento de peso",
-            d.levant + " kg" + (d.afd.carga > 1 ? " (dobrado)" : ""),
+            d.levant + " kg" + (d.afd.carga > 1 ? " (dobrado)" : "")
           ) +
           L(
             "Carga geral",
-            d.carga + " kg" + (d.afd.carga > 1 ? " (dobrada)" : ""),
+            d.carga + " kg" + (d.afd.carga > 1 ? " (dobrada)" : "")
           ) +
           L("Detecção passiva de Fluxo", d.detPassiva + " m", "3 × Instinto") +
           L("ND Passiva", "+" + d.ndPassiva, "6 + Instinto") +
@@ -8693,10 +8721,12 @@
           L(
             "Recuperação de Fluxo",
             d.psique * 2 + " / 10 min",
-            "dobro da Psique a cada 10 minutos",
+            "dobro da Psique a cada 10 minutos"
           ) +
           (d.penFerido && !d.ignoraFerido
-            ? `<div class="lrow" style="background:#2a1219"><span>Estado ${d.sit.toLowerCase()}</span><b style="color:var(--err)">${d.penFerido} em ataque/ND/esquiva/defesa</b></div>`
+            ? `<div class="lrow" style="background:#2a1219"><span>Estado ${d.sit.toLowerCase()}</span><b style="color:var(--err)">${
+                d.penFerido
+              } em ataque/ND/esquiva/defesa</b></div>`
             : "");
       }
       /* Modificadores de ataque corpo a corpo e à distância, pela especialização e pelas armas */
@@ -8720,8 +8750,8 @@
         out.push(
           L(
             '<b style="color:var(--txt)">Corpo a corpo</b>',
-            CH.esp.cac.nv ? "nível " + CH.esp.cac.nv : "sem especialização",
-          ),
+            CH.esp.cac.nv ? "nível " + CH.esp.cac.nv : "sem especialização"
+          )
         );
         cc.forEach(([k, lab, src, at]) => {
           const prof =
@@ -8729,23 +8759,23 @@
           out.push(
             L(
               "&nbsp;↳ " + lab + " <em>(" + src + ")</em>",
-              prof ? "+" + (at + bonus + d.rolAtk) : "sem proficiência",
-            ),
+              prof ? "+" + (at + bonus + d.rolAtk) : "sem proficiência"
+            )
           );
         });
         out.push(
           L(
             '<b style="color:var(--txt)">À distância</b>',
-            CH.esp.dist.nv ? "nível " + CH.esp.dist.nv : "sem especialização",
-          ),
+            CH.esp.dist.nv ? "nível " + CH.esp.dist.nv : "sem especialização"
+          )
         );
         out.push(
           L(
             "&nbsp;↳ Arremesso / arco <em>(AGI)</em>",
             CH.esp.dist.nv > 0 || CH.origem === "Mercenário"
               ? "+" + (d.aE.agilidade + bonusD + d.rolAtk)
-              : "sem proficiência",
-          ),
+              : "sem proficiência"
+          )
         );
         ["Leve", "Média", "Pesada"].forEach((cat, ix) => {
           const ok = CH.origem === "Mercenário" || CH.esp.dist.nv >= ix + 1;
@@ -8754,8 +8784,8 @@
               "&nbsp;↳ Fogo " + cat + " <em>(AGI)</em>",
               ok
                 ? "+" + (d.aE.agilidade + bonusD + d.rolAtk)
-                : "sem proficiência",
-            ),
+                : "sem proficiência"
+            )
           );
         });
         if (d.bonusDanoAtivo)
@@ -8775,7 +8805,7 @@
           rows
             .map(
               (r) =>
-                `<div class="lrow"><span>Diferença ${r[0]}</span><b>${r[1]}</b></div>`,
+                `<div class="lrow"><span>Diferença ${r[0]}</span><b>${r[1]}</b></div>`
             )
             .join("") +
           `<div class="cbody" style="border-top:1px solid var(--line)"><p class="note">Dano Total = Dano Garantido (o valor da arma/habilidade) + Dano por Diferença (só quando houve Jogada de Ataque). Efeitos que pedem Teste de Resistência não somam a diferença.</p></div>`;
@@ -8789,17 +8819,17 @@
                 ...validaHab(curHab()),
               ]
             : ar && (ar.runas || []).length
-              ? [
-                  ...validaFicha().filter((x) => x.l === "e"),
-                  ...validaRuna(curHab(), ar),
-                ]
-              : validaFicha();
+            ? [
+                ...validaFicha().filter((x) => x.l === "e"),
+                ...validaRuna(curHab(), ar),
+              ]
+            : validaFicha();
         $("#alerts").innerHTML = a
           .map(
             (x) =>
               `<div class="al ${x.l}"><i>${
                 x.l === "e" ? "✕" : x.l === "w" ? "!" : x.l === "g" ? "✓" : "i"
-              }</i><div>${x.t}</div></div>`,
+              }</i><div>${x.t}</div></div>`
           )
           .join("");
       }
@@ -8830,51 +8860,103 @@
         const d = D();
         if (emSec()) return vPersonagemSec(d);
         return `<div class="row">
-    <div class="grp"><label>Jogador</label><input type="text" data-ch="jogador" value="${esc(CH.jogador)}"></div>
+    <div class="grp"><label>Jogador</label><input type="text" data-ch="jogador" value="${esc(
+      CH.jogador
+    )}"></div>
     <div class="grp sm"><label>Nível</label><select data-ch="nivel">
       ${Object.keys(PROG)
         .map((n) => opt(n + " · " + PROG[n].cl, n, +n === CH.nivel))
         .join("")}</select></div>
     <div class="grp"><label>Origem</label><select data-ch="origem">
       ${opt("—", "", !CH.origem)}${Object.keys(ORIGENS)
-        .map((o) => opt(o, o, CH.origem === o))
-        .join("")}</select></div>
+          .map((o) => opt(o, o, CH.origem === o))
+          .join("")}</select></div>
     <div class="grp"><label>Afinidade do Fluxo</label><select data-ch="afinidade">
       ${opt("—", "", !CH.afinidade)}${Object.keys(AFIN)
-        .map((k) => opt(k, k, CH.afinidade === k))
-        .join("")}</select></div>
+          .map((k) => opt(k, k, CH.afinidade === k))
+          .join("")}</select></div>
   </div>
   ${
     CH.afinidade
-      ? `<div class="hr"></div><p class="sub">Bônus da Afinidade — ${CH.afinidade}</p>
+      ? `<div class="hr"></div><p class="sub">Bônus da Afinidade — ${
+          CH.afinidade
+        }</p>
     <div class="longtext">${esc(AFIN[CH.afinidade].txt)}</div>
     <div class="chips" style="margin-top:9px">
-      ${AFIN[CH.afinidade].hp ? `<span class="bdg g">+${AFIN[CH.afinidade].hp} PV por nível</span>` : ""}
-      ${AFIN[CH.afinidade].dmg ? `<span class="bdg y">+${AFIN[CH.afinidade].dmg} dano corpo a corpo/arremesso</span>` : ""}
-      ${AFIN[CH.afinidade].desl > 1 ? '<span class="bdg">deslocamento dobrado</span>' : ""}
-      ${AFIN[CH.afinidade].carga > 1 ? '<span class="bdg">carga e levantamento dobrados</span>' : ""}
-      ${AFIN[CH.afinidade].esq ? `<span class="bdg">+${AFIN[CH.afinidade].esq} esquiva</span>` : ""}
-      ${AFIN[CH.afinidade].atk ? `<span class="bdg t">+${AFIN[CH.afinidade].atk} ataque e ND</span>` : ""}
-      ${AFIN[CH.afinidade].eco ? `<span class="bdg v">+${AFIN[CH.afinidade].eco} pontos de Eco</span>` : ""}
+      ${
+        AFIN[CH.afinidade].hp
+          ? `<span class="bdg g">+${AFIN[CH.afinidade].hp} PV por nível</span>`
+          : ""
+      }
+      ${
+        AFIN[CH.afinidade].dmg
+          ? `<span class="bdg y">+${
+              AFIN[CH.afinidade].dmg
+            } dano corpo a corpo/arremesso</span>`
+          : ""
+      }
+      ${
+        AFIN[CH.afinidade].desl > 1
+          ? '<span class="bdg">deslocamento dobrado</span>'
+          : ""
+      }
+      ${
+        AFIN[CH.afinidade].carga > 1
+          ? '<span class="bdg">carga e levantamento dobrados</span>'
+          : ""
+      }
+      ${
+        AFIN[CH.afinidade].esq
+          ? `<span class="bdg">+${AFIN[CH.afinidade].esq} esquiva</span>`
+          : ""
+      }
+      ${
+        AFIN[CH.afinidade].atk
+          ? `<span class="bdg t">+${AFIN[CH.afinidade].atk} ataque e ND</span>`
+          : ""
+      }
+      ${
+        AFIN[CH.afinidade].eco
+          ? `<span class="bdg v">+${
+              AFIN[CH.afinidade].eco
+            } pontos de Eco</span>`
+          : ""
+      }
     </div>`
       : ""
   }
   <div class="hr"></div><p class="sub">Recursos em jogo</p><div class="row">
-    <div class="grp sm"><label>Escudo</label><input type="number" data-ch="escudo" value="${CH.escudo}" min="0"></div>
-    <div class="grp sm"><label>Reforço</label><input type="number" data-ch="reforco" value="${CH.reforco}" min="0"></div>
-    <div class="grp sm"><label>Fluxo temporário</label><input type="number" data-ch="fluxoTemp" value="${CH.fluxoTemp}" min="0"></div>
-    <div class="grp sm"><label>Instinto passivo</label><input type="text" disabled value="${d.detPassiva} m / ND +${d.ndPassiva}"></div>
+    <div class="grp sm"><label>Escudo</label><input type="number" data-ch="escudo" value="${
+      CH.escudo
+    }" min="0"></div>
+    <div class="grp sm"><label>Reforço</label><input type="number" data-ch="reforco" value="${
+      CH.reforco
+    }" min="0"></div>
+    <div class="grp sm"><label>Fluxo temporário</label><input type="number" data-ch="fluxoTemp" value="${
+      CH.fluxoTemp
+    }" min="0"></div>
+    <div class="grp sm"><label>Instinto passivo</label><input type="text" disabled value="${
+      d.detPassiva
+    } m / ND +${d.ndPassiva}"></div>
   </div>
   <div class="hr"></div><p class="sub">História, personalidade e objetivos</p>
-  <textarea data-ch="historia" style="min-height:170px" placeholder="Quem é esse médium?">${esc(CH.historia)}</textarea>`;
+  <textarea data-ch="historia" style="min-height:170px" placeholder="Quem é esse médium?">${esc(
+    CH.historia
+  )}</textarea>`;
       }
 
       function vPersonagemSec(d) {
         const inv = CH.secTipo === "invocacao";
         let h = `<div class="row">
-    <div class="grp"><label>Nome da ${inv ? "Invocação" : "segunda personalidade"}</label>
-      <input type="text" data-ch="nome" value="${esc(CH.nome)}" placeholder="${inv ? "como você chama essa forma?" : "quem é o alter ego?"}"></div>
-    <div class="grp sm"><label>Nível</label><input type="text" disabled value="${CH.nivel} · herdado"></div>`;
+    <div class="grp"><label>Nome da ${
+      inv ? "Invocação" : "segunda personalidade"
+    }</label>
+      <input type="text" data-ch="nome" value="${esc(CH.nome)}" placeholder="${
+          inv ? "como você chama essa forma?" : "quem é o alter ego?"
+        }"></div>
+    <div class="grp sm"><label>Nível</label><input type="text" disabled value="${
+      CH.nivel
+    } · herdado"></div>`;
         if (inv) {
           h += `<div class="grp sm"><label>Tamanho</label><select data-sectam="1">
       ${[
@@ -8884,13 +8966,17 @@
       ]
         .map((x) => opt(x[1], x[0], CH.secTam === x[0]))
         .join("")}</select></div>
-      <div class="grp sm"><label>Afinidade</label><input type="text" disabled value="${CH.afinidade || "—"} · herdada"></div>`;
+      <div class="grp sm"><label>Afinidade</label><input type="text" disabled value="${
+        CH.afinidade || "—"
+      } · herdada"></div>`;
         } else {
           h += `<div class="grp"><label>Afinidade do Fluxo — pode diferir da principal</label><select data-ch="afinidade">
       ${opt("—", "", !CH.afinidade)}${Object.keys(AFIN)
-        .map((k) => opt(k, k, CH.afinidade === k))
-        .join("")}</select></div>
-      <div class="grp sm"><label>Origem</label><input type="text" disabled value="${CH.origem || "—"} · herdada"></div>`;
+            .map((k) => opt(k, k, CH.afinidade === k))
+            .join("")}</select></div>
+      <div class="grp sm"><label>Origem</label><input type="text" disabled value="${
+        CH.origem || "—"
+      } · herdada"></div>`;
         }
         h += `</div>`;
         h += `<div class="al i" style="margin-top:10px"><i>i</i><div>${
@@ -8905,18 +8991,34 @@
         else
           h += `<div class="al w" style="margin-top:8px"><i>!</i><div>Se uma das fichas morrer, a outra morre junto.</div></div>`;
         h += `<div class="hr"></div><p class="sub">Recursos em jogo</p><div class="row">
-    <div class="grp sm"><label>Escudo</label><input type="number" data-ch="escudo" value="${CH.escudo}" min="0"></div>
-    <div class="grp sm"><label>Reforço</label><input type="number" data-ch="reforco" value="${CH.reforco}" min="0"></div>
-    <div class="grp sm"><label>Fluxo temporário</label><input type="number" data-ch="fluxoTemp" value="${CH.fluxoTemp}" min="0"></div>
+    <div class="grp sm"><label>Escudo</label><input type="number" data-ch="escudo" value="${
+      CH.escudo
+    }" min="0"></div>
+    <div class="grp sm"><label>Reforço</label><input type="number" data-ch="reforco" value="${
+      CH.reforco
+    }" min="0"></div>
+    <div class="grp sm"><label>Fluxo temporário</label><input type="number" data-ch="fluxoTemp" value="${
+      CH.fluxoTemp
+    }" min="0"></div>
   </div>
   <div class="hr"></div><p class="sub">Personalidade e história</p>
-  <textarea data-ch="historia" style="min-height:170px" placeholder="${inv ? "Que traço da sua Psique ganhou corpo?" : "Quem é a contraparte reprimida? Os traços devem ser nitidamente opostos aos da ficha principal."}">${esc(CH.historia)}</textarea>`;
+  <textarea data-ch="historia" style="min-height:170px" placeholder="${
+    inv
+      ? "Que traço da sua Psique ganhou corpo?"
+      : "Quem é a contraparte reprimida? Os traços devem ser nitidamente opostos aos da ficha principal."
+  }">${esc(CH.historia)}</textarea>`;
         return h;
       }
 
       function vAtributos() {
         const d = D();
-        return `<p class="note" style="margin-bottom:10px">Nível ${CH.nivel}: ${d.ptsAtr} pontos para distribuir${d.aptAtr ? " (inclui +" + d.aptAtr + " da Aptidão Natural)" : ""}, nenhum atributo acima de ${d.limAtr}. A Psique é sempre igual ao Limite de Atributo e não consome pontos.</p>
+        return `<p class="note" style="margin-bottom:10px">Nível ${CH.nivel}: ${
+          d.ptsAtr
+        } pontos para distribuir${
+          d.aptAtr ? " (inclui +" + d.aptAtr + " da Aptidão Natural)" : ""
+        }, nenhum atributo acima de ${
+          d.limAtr
+        }. A Psique é sempre igual ao Limite de Atributo e não consome pontos.</p>
   <div class="attrs">${ATR.map((k) => {
     const v = CH.attrs[k],
       over = v > d.limAtr,
@@ -8924,30 +9026,97 @@
     return `<div class="attr ${isAf ? "af" : ""} ${over ? "over" : ""}">
       <u>${ATRN[k]}${isAf ? " · afinidade" : ""}</u>
       <div class="st">
-        <button data-attr="${k}" data-delta="-1" ${v <= 0 ? "disabled" : ""}>−</button>
+        <button data-attr="${k}" data-delta="-1" ${
+      v <= 0 ? "disabled" : ""
+    }>−</button>
         <b>${v}</b>
-        <button data-attr="${k}" data-delta="1" ${d.atrDisp <= 0 || v >= d.limAtr ? "disabled" : ""}>+</button>
+        <button data-attr="${k}" data-delta="1" ${
+      d.atrDisp <= 0 || v >= d.limAtr ? "disabled" : ""
+    }>+</button>
       </div><small>${derivadoDe(k, d)}</small></div>`;
   }).join("")}
-  <div class="attr" style="border-color:var(--runa)"><u>Psique</u><div class="st"><b>${d.psique}</b></div>
+  <div class="attr" style="border-color:var(--runa)"><u>Psique</u><div class="st"><b>${
+    d.psique
+  }</b></div>
     <small>= limite do nível</small></div></div>
   <div class="hr"></div><p class="sub">De onde cada número sai</p>
   <table class="t"><tbody>
-    <tr><td>Pontos de Vida</td><td class="n">${d.pvTotal}</td><td><small>10 + Corpo + (nível−1) × (5 + metade do Corpo)${d.afd.hp ? " + " + d.afd.hp + " por nível (Afinidade Corpo)" : ""}</small></td></tr>
-    <tr><td>Iniciativa</td><td class="n">+${d.inic}</td><td><small>1d12 + Agilidade + metade do Instinto, ou 1d12 + Instinto + metade da Agilidade</small></td></tr>
-    <tr><td>Esquiva</td><td class="n">+${d.esquiva}</td><td><small>igual à iniciativa${d.afd.esq ? " + " + d.afd.esq + " da Afinidade Agilidade" : ""}${d.guarda ? " + " + d.guarda + " de Em Guarda" : ""}</small></td></tr>
-    <tr><td>Defesa</td><td class="n">+${d.defesa}</td><td><small>Força + metade do maior entre Agilidade e Instinto${d.guarda ? " + " + d.guarda + " de Em Guarda" : ""}</small></td></tr>
-    <tr><td>Ataque Psíquico / ND</td><td class="n">+${d.atqPsi}</td><td><small>Psique + metade da ${CH.afinidade || "Afinidade"}${d.afd.atk ? " + " + d.afd.atk + " da Afinidade Carisma" : ""}${d.rolAtk ? " + " + d.rolAtk + " de habilidade ativa" : ""}</small></td></tr>
-    <tr><td>Ataque Desarmado</td><td class="n">+${d.atqDes}</td><td><small>${d.versatil ? "maior entre Força e Agilidade" : "Força"} + ${d.p.bonusEsp} da especialização · dano ${d.danoDes}</small></td></tr>
-    <tr><td>Corpo a Corpo</td><td class="n">${CH.esp.cac.nv || CH.origem === "Mercenário" ? "+" + (d.aE.forca + d.p.bonusEsp) + " a +" + (Math.max(d.aE.agilidade, d.aE.forca) + d.p.bonusEsp) : "—"}</td>
-      <td><small>Leve usa Agilidade, Média o maior dos dois, Pesada usa Força${CH.esp.cac.nv ? ", + " + d.p.bonusEsp + " da especialização" : " — sem especialização não há bônus de atributo"}</small></td></tr>
-    <tr><td>À Distância</td><td class="n">${CH.esp.dist.nv || CH.origem === "Mercenário" ? "+" + (d.aE.agilidade + d.p.bonusEsp) : "—"}</td>
-      <td><small>Agilidade${CH.esp.dist.nv ? " + " + d.p.bonusEsp + " da especialização" : " — sem especialização não há bônus de atributo"}. Proficiência de fogo por categoria vem do nível.</small></td></tr>
-    <tr><td>Deslocamento</td><td class="n">${d.desloc} m</td><td><small>10 + Agilidade${d.afd.desl > 1 ? ", com o bônus de Agilidade dobrado pela Afinidade" : ""}</small></td></tr>
-    <tr><td>Levantamento / Carga</td><td class="n">${d.levant} / ${d.carga}</td><td><small>120 + 50 × Força e 60 + 10 × Força${d.afd.carga > 1 ? ", dobrados pela Afinidade Força" : ""}</small></td></tr>
-    <tr><td>Pontos de Ação</td><td class="n">${d.paTotal}</td><td><small>${d.p.pa} do nível${d.aptPA ? " + " + d.aptPA + " de Eficiência Máxima" : ""}</small></td></tr>
-    <tr><td>Detecção passiva</td><td class="n">${d.detPassiva} m</td><td><small>3 × Instinto · ND Passiva 6 + Instinto</small></td></tr>
-    <tr><td>Idiomas</td><td class="n">${d.idiomas}</td><td><small>1 + metade da Mente</small></td></tr>
+    <tr><td>Pontos de Vida</td><td class="n">${
+      d.pvTotal
+    }</td><td><small>10 + Corpo + (nível−1) × (5 + metade do Corpo)${
+          d.afd.hp ? " + " + d.afd.hp + " por nível (Afinidade Corpo)" : ""
+        }</small></td></tr>
+    <tr><td>Iniciativa</td><td class="n">+${
+      d.inic
+    }</td><td><small>1d12 + Agilidade + metade do Instinto, ou 1d12 + Instinto + metade da Agilidade</small></td></tr>
+    <tr><td>Esquiva</td><td class="n">+${
+      d.esquiva
+    }</td><td><small>igual à iniciativa${
+          d.afd.esq ? " + " + d.afd.esq + " da Afinidade Agilidade" : ""
+        }${d.guarda ? " + " + d.guarda + " de Em Guarda" : ""}</small></td></tr>
+    <tr><td>Defesa</td><td class="n">+${
+      d.defesa
+    }</td><td><small>Força + metade do maior entre Agilidade e Instinto${
+          d.guarda ? " + " + d.guarda + " de Em Guarda" : ""
+        }</small></td></tr>
+    <tr><td>Ataque Psíquico / ND</td><td class="n">+${
+      d.atqPsi
+    }</td><td><small>Psique + metade da ${CH.afinidade || "Afinidade"}${
+          d.afd.atk ? " + " + d.afd.atk + " da Afinidade Carisma" : ""
+        }${
+          d.rolAtk ? " + " + d.rolAtk + " de habilidade ativa" : ""
+        }</small></td></tr>
+    <tr><td>Ataque Desarmado</td><td class="n">+${d.atqDes}</td><td><small>${
+          d.versatil ? "maior entre Força e Agilidade" : "Força"
+        } + ${d.p.bonusEsp} da especialização · dano ${
+          d.danoDes
+        }</small></td></tr>
+    <tr><td>Corpo a Corpo</td><td class="n">${
+      CH.esp.cac.nv || CH.origem === "Mercenário"
+        ? "+" +
+          (d.aE.forca + d.p.bonusEsp) +
+          " a +" +
+          (Math.max(d.aE.agilidade, d.aE.forca) + d.p.bonusEsp)
+        : "—"
+    }</td>
+      <td><small>Leve usa Agilidade, Média o maior dos dois, Pesada usa Força${
+        CH.esp.cac.nv
+          ? ", + " + d.p.bonusEsp + " da especialização"
+          : " — sem especialização não há bônus de atributo"
+      }</small></td></tr>
+    <tr><td>À Distância</td><td class="n">${
+      CH.esp.dist.nv || CH.origem === "Mercenário"
+        ? "+" + (d.aE.agilidade + d.p.bonusEsp)
+        : "—"
+    }</td>
+      <td><small>Agilidade${
+        CH.esp.dist.nv
+          ? " + " + d.p.bonusEsp + " da especialização"
+          : " — sem especialização não há bônus de atributo"
+      }. Proficiência de fogo por categoria vem do nível.</small></td></tr>
+    <tr><td>Deslocamento</td><td class="n">${
+      d.desloc
+    } m</td><td><small>10 + Agilidade${
+          d.afd.desl > 1
+            ? ", com o bônus de Agilidade dobrado pela Afinidade"
+            : ""
+        }</small></td></tr>
+    <tr><td>Levantamento / Carga</td><td class="n">${d.levant} / ${
+          d.carga
+        }</td><td><small>120 + 50 × Força e 60 + 10 × Força${
+          d.afd.carga > 1 ? ", dobrados pela Afinidade Força" : ""
+        }</small></td></tr>
+    <tr><td>Pontos de Ação</td><td class="n">${d.paTotal}</td><td><small>${
+          d.p.pa
+        } do nível${
+          d.aptPA ? " + " + d.aptPA + " de Eficiência Máxima" : ""
+        }</small></td></tr>
+    <tr><td>Detecção passiva</td><td class="n">${
+      d.detPassiva
+    } m</td><td><small>3 × Instinto · ND Passiva 6 + Instinto</small></td></tr>
+    <tr><td>Idiomas</td><td class="n">${
+      d.idiomas
+    }</td><td><small>1 + metade da Mente</small></td></tr>
   </tbody></table>`;
       }
       function derivadoDe(k, d) {
@@ -8965,13 +9134,17 @@
         if (!CH.origem)
           return `<div class="row"><div class="grp"><label>Origem</label><select data-ch="origem">
     ${opt("— escolha —", "", true)}${Object.keys(ORIGENS)
-      .map((o) => opt(o, o, false))
-      .join("")}</select></div></div>
+            .map((o) => opt(o, o, false))
+            .join("")}</select></div></div>
     <div class="empty"><b>Nenhuma origem escolhida</b>As quatro habilidades de origem aparecem aqui, liberadas nos níveis 1, 6, 11 e 16.</div>`;
         const hs = ORIGENS[CH.origem];
         let h = emSec()
-          ? `<div class="al i" style="margin-bottom:10px"><i>i</i><div>A Origem da Sobreposição é sempre a mesma da ficha principal — <b>${esc(CH.origem)}</b> — e as escolhas dela também. Para mudar qualquer coisa aqui, volte à ficha principal.</div></div>
-       <div class="row"><div class="grp"><label>Origem</label><input type="text" disabled value="${esc(CH.origem)} · herdada"></div>`
+          ? `<div class="al i" style="margin-bottom:10px"><i>i</i><div>A Origem da Sobreposição é sempre a mesma da ficha principal — <b>${esc(
+              CH.origem
+            )}</b> — e as escolhas dela também. Para mudar qualquer coisa aqui, volte à ficha principal.</div></div>
+       <div class="row"><div class="grp"><label>Origem</label><input type="text" disabled value="${esc(
+         CH.origem
+       )} · herdada"></div>`
           : `<div class="row"><div class="grp"><label>Origem</label><select data-ch="origem">
        ${Object.keys(ORIGENS)
          .map((o) => opt(o, o, CH.origem === o))
@@ -8986,17 +9159,35 @@
             u = (USOS[CH.origem] || {})[x.nv];
           h += `<div class="blk"><div class="blkh">
       <h4>${esc(x.n || "—")}</h4>
-      <span class="bdg ${lib ? "g" : "r"}">Nível ${x.nv}${lib ? "" : " · bloqueado"}</span>
-      ${lib && u ? `<span class="bdg y">${u.l}: ${limUsos(u.f, d.psique)} uso(s) por descanso</span>` : ""}</div>`;
+      <span class="bdg ${lib ? "g" : "r"}">Nível ${x.nv}${
+            lib ? "" : " · bloqueado"
+          }</span>
+      ${
+        lib && u
+          ? `<span class="bdg y">${u.l}: ${limUsos(
+              u.f,
+              d.psique
+            )} uso(s) por descanso</span>`
+          : ""
+      }</div>`;
           if (lib && u && !jaFeitos["uso" + x.nv]) {
             jaFeitos["uso" + x.nv] = 1;
             const usados = CH.usos[CH.origem + x.nv] || 0,
               tot = limUsos(u.f, d.psique);
             h += `<div class="row" style="margin-bottom:9px"><div class="grp sm">
-        <label>${esc(u.l)} — ${CH.origem === "Exorcista" && x.nv === 6 ? "dados d6 gastos" : "usos gastos"}</label>
-        <input type="number" data-uso="${CH.origem + x.nv}" min="0" max="${tot}" value="${usados}"></div>
+        <label>${esc(u.l)} — ${
+              CH.origem === "Exorcista" && x.nv === 6
+                ? "dados d6 gastos"
+                : "usos gastos"
+            }</label>
+        <input type="number" data-uso="${
+          CH.origem + x.nv
+        }" min="0" max="${tot}" value="${usados}"></div>
         <div class="grp sm"><label>Restantes</label>
-        <input type="text" disabled value="${Math.max(0, tot - usados)} de ${tot}"></div></div>`;
+        <input type="text" disabled value="${Math.max(
+          0,
+          tot - usados
+        )} de ${tot}"></div></div>`;
           }
           h += lib
             ? `<div class="longtext">${esc(x.t)}</div>`
@@ -9010,8 +9201,8 @@
                   ? sb.depois === x.n
                   : sb.nv === x.nv &&
                     !(SUBS[CH.origem] || []).some(
-                      (o) => o.id === sb.id && o.depois,
-                    )),
+                      (o) => o.id === sb.id && o.depois
+                    ))
             )
             .forEach((sb) => {
               jaFeitos[sb.id] = 1;
@@ -9034,13 +9225,19 @@
           lim = limSub(sb, d.psique),
           lista = listaSub(sb);
         const aberto = PICKER && PICKER.tipo === "sub" && PICKER.id === sb.id;
-        let h = `<div class="blk" style="border-color:${lib ? "var(--runa)" : "var(--line)"}"><div class="blkh">
+        let h = `<div class="blk" style="border-color:${
+          lib ? "var(--runa)" : "var(--line)"
+        }"><div class="blkh">
     <h4>${esc(sb.n)}</h4>
-    <span class="bdg ${lib ? "v" : "r"}">Nível ${sb.nv}${lib ? "" : " · bloqueado"}</span>
+    <span class="bdg ${lib ? "v" : "r"}">Nível ${sb.nv}${
+          lib ? "" : " · bloqueado"
+        }</span>
     ${
       sb.ref
         ? '<span class="bdg">acesso a toda a lista</span>'
-        : `<span class="bdg ${sel.length > lim ? "r" : sel.length === lim ? "g" : "y"}">${sel.length} de ${lim}</span>`
+        : `<span class="bdg ${
+            sel.length > lim ? "r" : sel.length === lim ? "g" : "y"
+          }">${sel.length} de ${lim}</span>`
     }</div>`;
         if (!lib)
           return h + `<p class="note">Liberada no nível ${sb.nv}.</p></div>`;
@@ -9060,9 +9257,13 @@
           h += `<p class="note" style="margin:0">Nada escolhido ainda.</p>`;
         sel.forEach((x) => {
           const it = lista.find((y) => (y.k || y.n) === x) || { n: x };
-          h += `<div class="chip"><div class="ctxt"><b>${esc(it.n)}</b>${it.c ? `<span class="bdg t">${esc(it.c)}</span>` : ""}
+          h += `<div class="chip"><div class="ctxt"><b>${esc(it.n)}</b>${
+            it.c ? `<span class="bdg t">${esc(it.c)}</span>` : ""
+          }
       ${it.d ? `<i>${esc(it.d)}</i>` : ""}</div>
-      <button class="cx" data-rmsub="${sb.id}" data-item="${esc(it.k || it.n)}" title="Remover">✕</button></div>`;
+      <button class="cx" data-rmsub="${sb.id}" data-item="${esc(
+            it.k || it.n
+          )}" title="Remover">✕</button></div>`;
         });
         h += `</div>`;
         if (aberto) {
@@ -9070,10 +9271,12 @@
           h += picker(
             "Buscar…",
             disp,
-            (it) => `data-addsub="${sb.id}" data-item="${esc(it.k || it.n)}"`,
+            (it) => `data-addsub="${sb.id}" data-item="${esc(it.k || it.n)}"`
           );
         } else if (sel.length < lim) {
-          h += `<button class="btn pri" data-opensub="${sb.id}" style="margin-top:8px">+ Adicionar${
+          h += `<button class="btn pri" data-opensub="${
+            sb.id
+          }" style="margin-top:8px">+ Adicionar${
             lim !== Infinity
               ? ' <span style="opacity:.7">(' +
                 (lim - sel.length) +
@@ -9101,51 +9304,82 @@
           const gratis = CH.origem === "Mercenário" ? subSel("gratis") : [];
           const aberto = PICKER && PICKER.tipo === "esp" && PICKER.id === k;
           h += `<div class="blk"><div class="blkh"><h4>${ESP[k].n}</h4>
-      <div class="nvsel">${[0, 1, 2, 3].map((n) => `<button data-esp="${k}" data-nv="${n}" class="${s.nv === n ? "on" : ""}">${n ? "Nv " + n : "—"}</button>`).join("")}</div>
-      <span class="bdg">${custoEsp(k)} pontos${extra ? " · " + extra + " avulsa" + (extra > 1 ? "s" : "") : ""}</span>
+      <div class="nvsel">${[0, 1, 2, 3]
+        .map(
+          (n) =>
+            `<button data-esp="${k}" data-nv="${n}" class="${
+              s.nv === n ? "on" : ""
+            }">${n ? "Nv " + n : "—"}</button>`
+        )
+        .join("")}</div>
+      <span class="bdg">${custoEsp(k)} pontos${
+            extra ? " · " + extra + " avulsa" + (extra > 1 ? "s" : "") : ""
+          }</span>
       <span class="bdg y">ataque +${bonus}</span>
-      ${k === "desarmado" ? `<span class="bdg t">dano ${d.danoDes}</span>` : ""}</div>`;
+      ${
+        k === "desarmado" ? `<span class="bdg t">dano ${d.danoDes}</span>` : ""
+      }</div>`;
           if (k === "cac") {
-            h += `<div class="row" style="margin-bottom:9px"><div class="grp"><label>Proficiências — escolha ${s.nv} categoria(s)</label>
+            h += `<div class="row" style="margin-bottom:9px"><div class="grp"><label>Proficiências — escolha ${
+              s.nv
+            } categoria(s)</label>
         <div class="chips">${["Leve", "Média", "Pesada"]
           .map((c) => {
             const on = (s.prof || []).includes(c);
-            return `<label class="check ${on ? "on" : ""}"><input type="checkbox" data-prof="${c}" ${on ? "checked" : ""}> ${c}</label>`;
+            return `<label class="check ${
+              on ? "on" : ""
+            }"><input type="checkbox" data-prof="${c}" ${
+              on ? "checked" : ""
+            }> ${c}</label>`;
           })
           .join("")}</div></div></div>`;
           }
           if (k === "dist")
             h += `<p class="note" style="margin:0 0 9px">Proficiência automática: nível 1 dá fogo leves e todas as marciais arremessáveis/à distância; nível 2 acrescenta fogo médias; nível 3, fogo pesadas.</p>`;
-          h += `<p class="lbl" style="margin:0 0 6px">${ESP[k].lista} — ${tal.length}${perm ? " (2 por nível: " + perm + " inclusas)" : ""}</p><div class="chosen">`;
+          h += `<p class="lbl" style="margin:0 0 6px">${ESP[k].lista} — ${
+            tal.length
+          }${
+            perm ? " (2 por nível: " + perm + " inclusas)" : ""
+          }</p><div class="chosen">`;
           if (!tal.length)
             h += `<p class="note" style="margin:0">Nenhuma habilidade ainda.</p>`;
           tal.forEach((n, ix) => {
             const t = (TALENTOS[ESP[k].cat] || []).find(
-              (y) => y.n.trim() === n.trim(),
+              (y) => y.n.trim() === n.trim()
             ) || { n: n };
             const free = gratis.includes(n);
             h += `<div class="chip"><div class="ctxt"><b>${esc(t.n)}</b>
         ${t.t ? `<span class="bdg">${esc(t.t)}</span>` : ""}
-        ${free ? '<span class="bdg g">gratuita — Senhor da Guerra</span>' : ix >= perm ? '<span class="bdg y">avulsa · 2 pts</span>' : ""}
+        ${
+          free
+            ? '<span class="bdg g">gratuita — Senhor da Guerra</span>'
+            : ix >= perm
+            ? '<span class="bdg y">avulsa · 2 pts</span>'
+            : ""
+        }
         ${t.d ? `<i>${esc(t.d)}</i>` : ""}</div>
         <button class="cx" data-rmesp="${k}" data-ix="${ix}" title="Remover">✕</button></div>`;
           });
           h += `</div>`;
           if (aberto) {
             const disp = (TALENTOS[ESP[k].cat] || []).filter(
-              (t) => !tal.some((x) => x.trim() === t.n.trim()),
+              (t) => !tal.some((x) => x.trim() === t.n.trim())
             );
             h += picker(
               "Buscar em " + ESP[k].lista + "…",
               disp.map((t) => ({ n: t.n, c: t.t, d: t.d })),
-              (it) => `data-addesp="${k}" data-item="${esc(it.n)}"`,
+              (it) => `data-addesp="${k}" data-item="${esc(it.n)}"`
             );
           } else if (s.nv > 0) {
             const sobra = perm - tal.length;
             h += `<button class="btn pri" data-openesp="${k}" style="margin-top:8px">+ Adicionar habilidade ${
               sobra > 0
-                ? `<span style="opacity:.7">(${sobra} inclusa${sobra > 1 ? "s" : ""} no nível)</span>`
-                : `<span style="opacity:.7">(avulsa · 2 pontos · ${d.aprSobra} disponíve${d.aprSobra === 1 ? "l" : "is"})</span>`
+                ? `<span style="opacity:.7">(${sobra} inclusa${
+                    sobra > 1 ? "s" : ""
+                  } no nível)</span>`
+                : `<span style="opacity:.7">(avulsa · 2 pontos · ${
+                    d.aprSobra
+                  } disponíve${d.aprSobra === 1 ? "l" : "is"})</span>`
             }</button>`;
           } else {
             h += `<p class="note" style="margin-top:8px">Suba para o nível 1 para escolher habilidades.</p>`;
@@ -9179,17 +9413,32 @@
               : CUSTO_NV;
           const aberto = PICKER && PICKER.tipo === "eco" && PICKER.id === k;
           h += `<div class="blk"><div class="blkh"><h4>Eco de ${ECO[k].n}</h4>
-      <div class="nvsel">${[0, 1, 2, 3].map((n) => `<button data-eco="${k}" data-nv="${n}" class="${s.nv === n ? "on" : ""}">${n ? "Nv " + n : "—"}</button>`).join("")}</div>
-      <span class="bdg">${custoEco(k)} pontos${extra ? " · " + extra + " avulsa" + (extra > 1 ? "s" : "") : ""}</span>${ecoBadges(k, d)}</div>`;
-          h += `<p class="lbl" style="margin:0 0 6px">${ECO[k].lista} — ${hab.length}${perm ? " (2 por nível: " + perm + " inclusas)" : ""}</p><div class="chosen">`;
+      <div class="nvsel">${[0, 1, 2, 3]
+        .map(
+          (n) =>
+            `<button data-eco="${k}" data-nv="${n}" class="${
+              s.nv === n ? "on" : ""
+            }">${n ? "Nv " + n : "—"}</button>`
+        )
+        .join("")}</div>
+      <span class="bdg">${custoEco(k)} pontos${
+            extra ? " · " + extra + " avulsa" + (extra > 1 ? "s" : "") : ""
+          }</span>${ecoBadges(k, d)}</div>`;
+          h += `<p class="lbl" style="margin:0 0 6px">${ECO[k].lista} — ${
+            hab.length
+          }${
+            perm ? " (2 por nível: " + perm + " inclusas)" : ""
+          }</p><div class="chosen">`;
           if (!hab.length)
             h += `<p class="note" style="margin:0">Nenhuma habilidade ainda.</p>`;
           hab.forEach((n, ix) => {
             const t = (MAESTRIAS[ECO[k].n] || []).find(
-              (y) => y.n.trim() === n.trim(),
+              (y) => y.n.trim() === n.trim()
             ) || { n: n };
             h += `<div class="chip"><div class="ctxt"><b>${esc(t.n)}</b>
-        ${t.t ? `<span class="bdg">${esc(t.t)}</span>` : ""}${ix >= perm ? '<span class="bdg y">avulsa · 2 pts</span>' : ""}
+        ${t.t ? `<span class="bdg">${esc(t.t)}</span>` : ""}${
+              ix >= perm ? '<span class="bdg y">avulsa · 2 pts</span>' : ""
+            }
         ${t.d ? `<i>${esc(t.d)}</i>` : ""}</div>
         <button class="cx" data-rmeco="${k}" data-ix="${ix}" title="Remover">✕</button></div>`;
           });
@@ -9198,19 +9447,23 @@
             const rep = (MAESTRIAS[ECO[k].n] || []).filter((t) =>
               t.n.includes("até 3x")
                 ? hab.filter((x) => x.trim() === t.n.trim()).length < 3
-                : !hab.some((x) => x.trim() === t.n.trim()),
+                : !hab.some((x) => x.trim() === t.n.trim())
             );
             h += picker(
               "Buscar em " + ECO[k].lista + "…",
               rep.map((t) => ({ n: t.n, c: t.t, d: t.d })),
-              (it) => `data-addeco="${k}" data-item="${esc(it.n)}"`,
+              (it) => `data-addeco="${k}" data-item="${esc(it.n)}"`
             );
           } else if (s.nv > 0) {
             const sobra = perm - hab.length;
             h += `<button class="btn pri" data-openeco="${k}" style="margin-top:8px">+ Adicionar habilidade ${
               sobra > 0
-                ? `<span style="opacity:.7">(${sobra} inclusa${sobra > 1 ? "s" : ""} no nível)</span>`
-                : `<span style="opacity:.7">(avulsa · 2 pontos · ${d.aprSobra} disponíve${d.aprSobra === 1 ? "l" : "is"})</span>`
+                ? `<span style="opacity:.7">(${sobra} inclusa${
+                    sobra > 1 ? "s" : ""
+                  } no nível)</span>`
+                : `<span style="opacity:.7">(avulsa · 2 pontos · ${
+                    d.aprSobra
+                  } disponíve${d.aprSobra === 1 ? "l" : "is"})</span>`
             }</button>`;
           } else {
             h += `<p class="note" style="margin-top:8px">Suba para o nível 1 para escolher habilidades.</p>`;
@@ -9261,10 +9514,18 @@
     <th>Ataque</th><th>Modificador</th><th>Dano garantido</th><th>Composição</th></tr></thead><tbody>
     <tr><td><b>Desarmado</b><br><small>sempre proficiente</small></td>
         <td class="n">+${d.atqDes}</td><td class="n">${dd.tot} contundente</td>
-        <td><small>${dd.comp.map((c) => c.l + " " + (c.v >= 0 ? "+" : "") + c.v).join(" · ")}</small></td></tr>
+        <td><small>${dd.comp
+          .map((c) => c.l + " " + (c.v >= 0 ? "+" : "") + c.v)
+          .join(" · ")}</small></td></tr>
     <tr><td><b>Psíquico</b><br><small>Estigma, Runas e Ecos</small></td>
         <td class="n">+${d.atqPsi}</td><td class="n">—</td>
-        <td><small>o dano vem de cada habilidade${d.manBonus ? ", com +" + d.manBonus + " do Eco de Manipulação em dano, cura e escudo" : ""}</small></td></tr>
+        <td><small>o dano vem de cada habilidade${
+          d.manBonus
+            ? ", com +" +
+              d.manBonus +
+              " do Eco de Manipulação em dano, cura e escudo"
+            : ""
+        }</small></td></tr>
   </tbody></table>
   <div class="hr"></div><p class="sub">Armas equipadas</p>
   <div class="tblwrap"><table class="t"><thead><tr><th>Arma</th><th>Cat.</th><th>Alcance</th><th>Ataque</th><th>Dano</th><th>Vínc.</th></tr></thead><tbody>`;
@@ -9272,7 +9533,11 @@
           const x = acharArma(w.n),
             at = atqArma(x),
             dn = danoArma(x, w.v);
-          h += `<tr><td><select data-arma="${i}" style="min-width:180px">${opt("— vazio —", "", !w.n)}
+          h += `<tr><td><select data-arma="${i}" style="min-width:180px">${opt(
+            "— vazio —",
+            "",
+            !w.n
+          )}
         ${[
           "Corpo a Corpo",
           "Marciais Arremessáveis",
@@ -9284,14 +9549,28 @@
             (t) =>
               `<optgroup label="${t}">${ARMAS.filter((z) => z.tipo === t)
                 .map((z) => opt(z.n, z.n, w.n === z.n))
-                .join("")}</optgroup>`,
+                .join("")}</optgroup>`
           )
           .join("")}
-      </select>${x && !at.prof ? '<br><span class="bdg r">sem proficiência</span>' : ""}</td>
-      <td><small>${x ? x.cat : "—"}</small></td><td><small>${alcanceArma(x)}</small></td>
-      <td class="n">${x ? (at.prof ? "+" + at.mod : "—") : "—"}<br><small style="font-weight:400">${x ? at.base : ""}</small></td>
-      <td class="n">${x ? dn.txt : "—"}${x && dn.comp && dn.comp.length > 1 ? '<br><small style="font-weight:400">' + dn.comp.map((c) => (c.v >= 0 ? "+" : "") + c.v).join(" ") + "</small>" : ""}</td>
-      <td class="n"><input type="checkbox" data-vinc="${i}" ${w.v ? "checked" : ""} ${d.nvVinculo ? "" : "disabled"}></td></tr>`;
+      </select>${
+        x && !at.prof ? '<br><span class="bdg r">sem proficiência</span>' : ""
+      }</td>
+      <td><small>${x ? x.cat : "—"}</small></td><td><small>${alcanceArma(
+            x
+          )}</small></td>
+      <td class="n">${
+        x ? (at.prof ? "+" + at.mod : "—") : "—"
+      }<br><small style="font-weight:400">${x ? at.base : ""}</small></td>
+      <td class="n">${x ? dn.txt : "—"}${
+            x && dn.comp && dn.comp.length > 1
+              ? '<br><small style="font-weight:400">' +
+                dn.comp.map((c) => (c.v >= 0 ? "+" : "") + c.v).join(" ") +
+                "</small>"
+              : ""
+          }</td>
+      <td class="n"><input type="checkbox" data-vinc="${i}" ${
+            w.v ? "checked" : ""
+          } ${d.nvVinculo ? "" : "disabled"}></td></tr>`;
         });
         h += `</tbody></table></div>
   <p class="note">O Dano Garantido das armas é o valor fixo da lista; o resto do dano vem da diferença entre a sua rolagem e a defesa do alvo. Sem proficiência não há bônus de atributo na jogada.</p>
@@ -9302,7 +9581,7 @@
               .map((w) => acharArma(w.n))
               .filter(Boolean)
               .map((x) => x.car)
-              .filter(Boolean),
+              .filter(Boolean)
           ),
         ];
         h += cars.length
@@ -9321,12 +9600,16 @@
           S = SIGILOS[v];
         let h = `<div class="row">
     <div class="grp"><label>Nome do Sigilo</label>
-      <input type="text" data-sig="nome" value="${esc(CH.sigilo.nome)}" placeholder="clamar o nome na ativação é prática comum"></div>
+      <input type="text" data-sig="nome" value="${esc(
+        CH.sigilo.nome
+      )}" placeholder="clamar o nome na ativação é prática comum"></div>
     <div class="grp sm" style="justify-content:flex-end">
       ${
         v === "transformacao"
           ? `<label class="check p ${CH.sigilo.ativo ? "on" : ""}">
-        <input type="checkbox" data-sig="ativo" ${CH.sigilo.ativo ? "checked" : ""}> Sigilo ativo</label>`
+        <input type="checkbox" data-sig="ativo" ${
+          CH.sigilo.ativo ? "checked" : ""
+        }> Sigilo ativo</label>`
           : "&nbsp;"
       }</div>
   </div>
@@ -9335,7 +9618,7 @@
     ${Object.keys(SIGILOS)
       .map(
         (k) => `<button class="arqbtn ${v === k ? "on" : ""}" data-sigv="${k}"
-      style="--ac:#3a2b56;--acb:var(--runa)">${SIGILOS[k].n}</button>`,
+      style="--ac:#3a2b56;--acb:var(--runa)">${SIGILOS[k].n}</button>`
       )
       .join("")}</div>`;
         if (!S)
@@ -9348,26 +9631,40 @@
         h += `<div class="hr"></div><div class="blk" style="border-color:var(--runa)">
     <div class="blkh"><h4>${S.n}</h4>
       <span class="bdg y">${S.pa} P.A</span>
-      <span class="bdg t">${custo != null ? custo + " de Fluxo" : "custo pela opção"}</span>
+      <span class="bdg t">${
+        custo != null ? custo + " de Fluxo" : "custo pela opção"
+      }</span>
       <span class="bdg">${esc(S.dur)}</span></div>
     <p class="fndesc" style="margin:0 0 9px">${esc(S.conceito)}</p>
-    <ul class="rules">${S.ef.map((x) => "<li>" + esc(x) + "</li>").join("")}</ul>`;
+    <ul class="rules">${S.ef
+      .map((x) => "<li>" + esc(x) + "</li>")
+      .join("")}</ul>`;
         (S.op || []).forEach((o) => {
-          h += `<div class="row" style="margin-top:11px"><div class="grp"><label>${esc(o.l)}</label>
+          h += `<div class="row" style="margin-top:11px"><div class="grp"><label>${esc(
+            o.l
+          )}</label>
       <select data-sigop="${o.id}">${opt("—", "", CH.sigilo.op[o.id] == null)}
-      ${o.it.map((it, j) => opt(it.l, j, CH.sigilo.op[o.id] === j)).join("")}</select></div></div>`;
+      ${o.it
+        .map((it, j) => opt(it.l, j, CH.sigilo.op[o.id] === j))
+        .join("")}</select></div></div>`;
           const sel = o.it[CH.sigilo.op[o.id]];
           if (sel && sel.d)
-            h += `<div class="tdesc" style="padding-left:2px">${esc(sel.d)}</div>`;
+            h += `<div class="tdesc" style="padding-left:2px">${esc(
+              sel.d
+            )}</div>`;
         });
         if (S.opNota) h += `<p class="note">${esc(S.opNota)}</p>`;
-        h += `<p class="note" style="margin-top:11px"><b style="color:var(--err)">Colateral:</b> ${esc(S.col)}</p></div>`;
+        h += `<p class="note" style="margin-top:11px"><b style="color:var(--err)">Colateral:</b> ${esc(
+          S.col
+        )}</p></div>`;
 
         if (v === "invocacao" || v === "sobreposicao") {
           const existe = !!ROOT.sec && ROOT.sec.secTipo === v;
           h += `<div class="blk" style="border-color:var(--fluxo)"><div class="blkh">
       <h4>Ficha da ${S.n}</h4>
-      <span class="bdg ${existe ? "g" : "y"}">${existe ? "criada" : "ainda não criada"}</span></div>
+      <span class="bdg ${existe ? "g" : "y"}">${
+            existe ? "criada" : "ainda não criada"
+          }</span></div>
       <p class="note" style="margin:0 0 9px">${
         v === "invocacao"
           ? "Criatura separada, com ficha própria no seu nível. Herda Afinidade e Estigma, mas tem metade das runas e metade do Limite de Fluxo, sem Origem e sem Sigilo."
@@ -9377,39 +9674,49 @@
         v === "invocacao"
           ? `<div class="row" style="margin-bottom:9px"><div class="grp sm">
         <label>Tamanho</label><select data-sigop="tam">
-        ${S.op[0].it.map((it, j) => opt(it.l, j, CH.sigilo.op.tam === j)).join("")}</select></div></div>`
+        ${S.op[0].it
+          .map((it, j) => opt(it.l, j, CH.sigilo.op.tam === j))
+          .join("")}</select></div></div>`
           : ""
       }
       <div class="chips">
-        <button class="btn pri" id="bEditarSec">${existe ? "Abrir a ficha da " + S.n : "Criar a ficha da " + S.n}</button>
-        ${existe ? '<button class="btn dz" id="bApagarSec">Apagar essa ficha</button>' : ""}</div>
+        <button class="btn pri" id="bEditarSec">${
+          existe ? "Abrir a ficha da " + S.n : "Criar a ficha da " + S.n
+        }</button>
+        ${
+          existe
+            ? '<button class="btn dz" id="bApagarSec">Apagar essa ficha</button>'
+            : ""
+        }</div>
       ${existe ? resumoSec() : ""}</div>`;
         }
         h += `<p class="sub">Valores do seu Sigilo</p><table class="t"><tbody>`;
         const L = (a, b, c) =>
-          `<tr><td>${a}</td><td class="n">${b}</td><td><small>${c || ""}</small></td></tr>`;
+          `<tr><td>${a}</td><td class="n">${b}</td><td><small>${
+            c || ""
+          }</small></td></tr>`;
         if (v === "transformacao") {
           h +=
             L(
               "PV da transformação",
               d.sigPV,
-              "Psique " + (d.p.limAtr + 2) + " (já com o +2 do Sigilo) × 10",
+              "Psique " + (d.p.limAtr + 2) + " (já com o +2 do Sigilo) × 10"
             ) +
             L(
               "Psique enquanto ativo",
               d.p.limAtr + 2,
-              "+2 sobre " + d.p.limAtr,
+              "+2 sobre " + d.p.limAtr
             ) +
             L(
               "Afinidade enquanto ativa",
               CH.afinidade ? (d.a[AF2ATR[CH.afinidade]] || 0) + 2 : "—",
-              "+2 em " + (CH.afinidade || "—"),
+              "+2 em " + (CH.afinidade || "—")
             ) +
             L(
               "Ataque Psíquico / ND com o Sigilo em pé",
               "+" +
                 (d.sigAtivo ? d.atqPsi : d.atqPsi + 2 + (CH.afinidade ? 1 : 0)),
-              "Psique +2 e metade da Afinidade +2",
+              "Psique +2 e metade da Afinidade +2"
             );
         }
         if (v === "territorio")
@@ -9418,7 +9725,7 @@
             L(
               "Fluxo consumido pelo totem",
               "igual ao dano sofrido",
-              "a 100% do Limite (" + d.limFluxo + ") o Território se desfaz",
+              "a 100% do Limite (" + d.limFluxo + ") o Território se desfaz"
             );
         if (v === "invocacao") {
           const it = (S.op[0].it || [])[CH.sigilo.op.tam];
@@ -9426,22 +9733,22 @@
             L(
               "Limite de Fluxo da invocação",
               d.sigInvFluxo,
-              "metade do seu Limite base",
+              "metade do seu Limite base"
             ) +
             L(
               "Runas da invocação",
               Math.floor(d.runasDisp / 2),
-              "metade das suas",
+              "metade das suas"
             ) +
             L(
               "Modificador de PV",
               it ? (it.pv > 0 ? "+" : "") + it.pv + " por nível" : "—",
-              "ficha própria no nível " + CH.nivel,
+              "ficha própria no nível " + CH.nivel
             ) +
             L(
               "Redução do seu Limite",
               it ? it.fx : "—",
-              "enquanto a invocação estiver ativa",
+              "enquanto a invocação estiver ativa"
             );
         }
         if (v === "maximizacao") {
@@ -9450,12 +9757,12 @@
             L(
               "Custo do efeito",
               it ? it.fx + " de Fluxo" : "escolha o efeito",
-              "a habilidade em si não consome Fluxo",
+              "a habilidade em si não consome Fluxo"
             ) +
             L(
               "Usos por dia sem risco",
               1,
-              "a partir do 2º: 1d12, 6 ou menos falha e ainda gasta o Fluxo",
+              "a partir do 2º: 1d12, 6 ou menos falha e ainda gasta o Fluxo"
             );
         }
         if (v === "sobreposicao")
@@ -9463,12 +9770,12 @@
             L(
               "Limite base compartilhado",
               d.limFluxo,
-              "o gasto de uma ficha afeta a outra",
+              "o gasto de uma ficha afeta a outra"
             ) +
             L(
               "Nível da segunda ficha",
               CH.nivel,
-              "mesmos recursos, Afinidade e atributos podem diferir",
+              "mesmos recursos, Afinidade e atributos podem diferir"
             );
         return h + `</tbody></table>`;
       }
@@ -9487,7 +9794,13 @@
           `<div class="lrow"><span>${a}</span><b>${b}</b></div>`;
         return `<div class="ledger" style="margin-top:10px;border:1px solid var(--line);border-radius:6px;overflow:hidden">
     ${L("Nome", esc(s.nome) || "—")}
-    ${L("Pontos de Vida", d.pvTotal + (d.tamPV ? " (" + (d.tamPV > 0 ? "+" : "") + d.tamPV + " por nível)" : ""))}
+    ${L(
+      "Pontos de Vida",
+      d.pvTotal +
+        (d.tamPV
+          ? " (" + (d.tamPV > 0 ? "+" : "") + d.tamPV + " por nível)"
+          : "")
+    )}
     ${L("Limite de Fluxo", d.limFluxo)}
     ${L("Runas", d.runasUso + " / " + d.runasDisp)}
     ${L("Atributos", d.gastoAtr + " / " + d.ptsAtr)}
@@ -9512,7 +9825,9 @@
           lim = half(d.psique);
         let h = `<p class="note" style="margin-bottom:10px">Artefatos Oníricos ferem Oníricos sem precisar de Eco de Vínculo e podem carregar Runas do Anátema da criatura purificada. Assimilados ao mesmo tempo: no máximo metade da Psique.</p>
   <div class="mrow">
-    <div class="mbox"><u>Assimilados</u><b class="${assimilados() > lim ? "pv" : ""}">${assimilados()} <small>/ ${lim}</small></b></div>
+    <div class="mbox"><u>Assimilados</u><b class="${
+      assimilados() > lim ? "pv" : ""
+    }">${assimilados()} <small>/ ${lim}</small></b></div>
     <div class="mbox"><u>No inventário</u><b>${lista.length}</b></div>
     ${
       CH.origem === "Artesão"
@@ -9526,8 +9841,10 @@
   </div>`;
         if (CH.origem === "Artesão")
           h += `<div class="al i" style="margin-bottom:10px"><i>i</i><div>Como Artesão você começa com ${esc(
-            ART_INICIAL[d.p.cl] || ART_INICIAL.Inceptor,
-          )} (classificação ${d.p.cl}). O Valor de Forja de um núcleo é igual ao Nível de Ameaça do Onírico purificado.${
+            ART_INICIAL[d.p.cl] || ART_INICIAL.Inceptor
+          )} (classificação ${
+            d.p.cl
+          }). O Valor de Forja de um núcleo é igual ao Nível de Ameaça do Onírico purificado.${
             CH.nivel >= 6
               ? " A partir do 6º nível, o Toque de Mestre permite instalar até duas Modificações por artefato."
               : ""
@@ -9543,18 +9860,26 @@
             pass = passArte(a),
             disp = fluxoArte(a) - (a.fluxoGasto || 0);
           const erros = validaFicha().filter(
-            (z) => z.l === "e" && z.t.startsWith(a.nome || "artefato sem nome"),
+            (z) => z.l === "e" && z.t.startsWith(a.nome || "artefato sem nome")
           ).length;
-          h += `<div class="blk arte ${aberto ? "open" : ""}" style="border-color:${
+          h += `<div class="blk arte ${
+            aberto ? "open" : ""
+          }" style="border-color:${
             erros ? "var(--err)" : a.assimilado ? "var(--fluxo)" : "var(--line)"
           }">
       <button class="artehead" data-artetoggle="${ix}">
         <span class="ah1"><b>${esc(a.nome) || "Artefato sem nome"}</b>
-          <span class="bdg ${a.rank === "EX" ? "r" : a.rank === "A" ? "y" : "v"}">${R2.n}</span>
+          <span class="bdg ${
+            a.rank === "EX" ? "r" : a.rank === "A" ? "y" : "v"
+          }">${R2.n}</span>
           ${a.assimilado ? '<span class="bdg g">assimilado</span>' : ""}
           ${erros ? '<span class="bdg r">verificar</span>' : ""}</span>
-        <span class="ah2">${esc(FORMAS[a.forma] || "")}${a.arma ? " · " + esc(a.arma) : ""}
-          · ${uso}${a.rank === "EX" && uso > 4 ? "" : "/" + R2.runas} runa${uso === 1 ? "" : "s"}
+        <span class="ah2">${esc(FORMAS[a.forma] || "")}${
+            a.arma ? " · " + esc(a.arma) : ""
+          }
+          · ${uso}${a.rank === "EX" && uso > 4 ? "" : "/" + R2.runas} runa${
+            uso === 1 ? "" : "s"
+          }
           · reserva ${disp}/${a.fluxoTotal || 0}</span>
         <span class="ahx">${aberto ? "▾" : "▸"}</span></button>`;
           if (!aberto) {
@@ -9565,11 +9890,16 @@
                   fs = r.fns.map((sf) => FN[sf.id]).filter(Boolean);
                 return `<div class="aruna"><b>${esc(r.nome) || "Runa"}</b>
           <span class="bdg">${fs.map((f) => f.n).join(" + ")}</span>
-          <span class="bdg t">${c.total} fx</span><span class="bdg y">${r.passiva ? 0 : c.pa} P.A</span>
+          <span class="bdg t">${c.total} fx</span><span class="bdg y">${
+                  r.passiva ? 0 : c.pa
+                } P.A</span>
           ${r.passiva ? '<span class="bdg v">passiva</span>' : ""}</div>`;
               })
               .join("");
-            h += `<div class="arebody">${resumo || '<p class="note" style="margin:0">Nenhuma runa gravada.</p>'}
+            h += `<div class="arebody">${
+              resumo ||
+              '<p class="note" style="margin:0">Nenhuma runa gravada.</p>'
+            }
         ${
           (a.mods || []).length
             ? `<div class="chips" style="margin-top:7px">${a.mods
@@ -9581,7 +9911,9 @@
           }
           h += `<div class="arebody">
       <div class="row">
-        <div class="grp"><label>Nome</label><input type="text" data-artef="nome" data-ix="${ix}" value="${esc(a.nome)}" placeholder="nome do artefato"></div>
+        <div class="grp"><label>Nome</label><input type="text" data-artef="nome" data-ix="${ix}" value="${esc(
+            a.nome
+          )}" placeholder="nome do artefato"></div>
         <div class="grp sm"><label>Rank</label><select data-artef="rank" data-ix="${ix}">
           ${Object.keys(RANKS)
             .map((r) =>
@@ -9593,8 +9925,8 @@
                   " runa" +
                   (RANKS[r].runas > 1 ? "s" : ""),
                 r,
-                a.rank === r,
-              ),
+                a.rank === r
+              )
             )
             .join("")}</select></div>
         <div class="grp"><label>Forma</label><select data-artef="forma" data-ix="${ix}">
@@ -9605,44 +9937,77 @@
           a.forma === "arma"
             ? `<div class="grp"><label>Arma base</label><select data-artef="arma" data-ix="${ix}">
           ${opt("—", "", !a.arma)}${ARMAS.filter(
-            (z) =>
-              z.tipo !== "Desarmado" && z.tipo !== "Explosivos Arremessáveis",
-          )
-            .map((z) => opt(z.n + " (" + z.tipo + ")", z.n, a.arma === z.n))
-            .join("")}</select></div>`
+                (z) =>
+                  z.tipo !== "Desarmado" &&
+                  z.tipo !== "Explosivos Arremessáveis"
+              )
+                .map((z) => opt(z.n + " (" + z.tipo + ")", z.n, a.arma === z.n))
+                .join("")}</select></div>`
             : ""
         }
         <div class="grp sm" style="justify-content:flex-end"><label>&nbsp;</label>
-          <label class="check ${a.assimilado ? "on" : ""}"><input type="checkbox" data-arteass="${ix}" ${a.assimilado ? "checked" : ""}> assimilar</label></div>
+          <label class="check ${
+            a.assimilado ? "on" : ""
+          }"><input type="checkbox" data-arteass="${ix}" ${
+            a.assimilado ? "checked" : ""
+          }> assimilar</label></div>
       </div>
       <div class="row" style="margin-top:9px">
-        <div class="grp sm"><label>Psique do Onírico</label><input type="number" min="0" data-artef="psiOn" data-ix="${ix}" value="${a.psiOn || 0}"></div>
-        <div class="grp sm"><label>Atq. Psíquico do Onírico</label><input type="number" min="0" data-artef="atqOn" data-ix="${ix}" value="${a.atqOn || 0}"></div>
-        <div class="grp sm"><label>Reserva total</label><input type="number" min="0" data-artef="fluxoTotal" data-ix="${ix}" value="${a.fluxoTotal || 0}"></div>
-        <div class="grp sm"><label>Fluxo gasto</label><input type="number" min="0" data-artef="fluxoGasto" data-ix="${ix}" value="${a.fluxoGasto || 0}"></div>
+        <div class="grp sm"><label>Psique do Onírico</label><input type="number" min="0" data-artef="psiOn" data-ix="${ix}" value="${
+            a.psiOn || 0
+          }"></div>
+        <div class="grp sm"><label>Atq. Psíquico do Onírico</label><input type="number" min="0" data-artef="atqOn" data-ix="${ix}" value="${
+            a.atqOn || 0
+          }"></div>
+        <div class="grp sm"><label>Reserva total</label><input type="number" min="0" data-artef="fluxoTotal" data-ix="${ix}" value="${
+            a.fluxoTotal || 0
+          }"></div>
+        <div class="grp sm"><label>Fluxo gasto</label><input type="number" min="0" data-artef="fluxoGasto" data-ix="${ix}" value="${
+            a.fluxoGasto || 0
+          }"></div>
         ${
           a.rank !== "C"
             ? `<div class="grp sm"><label>Emoção primária</label><select data-artef="emocao" data-ix="${ix}">
-          ${opt("—", "", !a.emocao)}${EMOCOES.map((x) => opt(x, x, a.emocao === x)).join("")}</select></div>`
+          ${opt("—", "", !a.emocao)}${EMOCOES.map((x) =>
+                opt(x, x, a.emocao === x)
+              ).join("")}</select></div>`
             : ""
         }
       </div>
       <p class="note">Reserva = metade do Limite de Fluxo do Onírico do Núcleo Principal; recarrega 100% à meia-noite.${
         pass
-          ? ` Passivas consomem ${pass} permanentemente → disponível ${fluxoArte(a)}.`
+          ? ` Passivas consomem ${pass} permanentemente → disponível ${fluxoArte(
+              a
+            )}.`
           : ""
       }
-        Runas até <b>${esc(R2.paTxt)}</b>, bônus no máximo <b>+${cfg.bon}</b> (sempre no máximo do Rank).</p>
-      ${ART_FORMA_REGRA[a.forma] ? `<p class="note"><b style="color:var(--txt)">Feito de Somnium:</b> ${esc(ART_FORMA_REGRA[a.forma])}</p>` : ""}
+        Runas até <b>${esc(R2.paTxt)}</b>, bônus no máximo <b>+${
+            cfg.bon
+          }</b> (sempre no máximo do Rank).</p>
+      ${
+        ART_FORMA_REGRA[a.forma]
+          ? `<p class="note"><b style="color:var(--txt)">Feito de Somnium:</b> ${esc(
+              ART_FORMA_REGRA[a.forma]
+            )}</p>`
+          : ""
+      }
       <details class="more"><summary>Mente-Colmeia e assimilação</summary>
         <p class="fndesc">${esc(R2.desc)}</p>
-        <ul class="rules"><li>Assimilação: ${esc(R2.assim)}.</li><li>${esc(R2.risco)}</li>
-        <li>Ataques e ND das runas usam o Ataque Psíquico do Onírico${a.atqOn ? " (+" + a.atqOn + ")" : ""}, não o seu. O que escala com Psique usa a dele${a.psiOn ? " (" + a.psiOn + ")" : ""}.</li>
+        <ul class="rules"><li>Assimilação: ${esc(R2.assim)}.</li><li>${esc(
+            R2.risco
+          )}</li>
+        <li>Ataques e ND das runas usam o Ataque Psíquico do Onírico${
+          a.atqOn ? " (+" + a.atqOn + ")" : ""
+        }, não o seu. O que escala com Psique usa a dele${
+            a.psiOn ? " (" + a.psiOn + ")" : ""
+          }.</li>
         <li>Nenhuma Maestria Psíquica sua afeta as runas do artefato.</li>
         <li>Preço de comercialização: ${esc(R2.preco)}.</li></ul></details>
       ${blocoMods(a, ix)}
       <div class="row" style="margin-top:9px"><div class="grp"><label>Anotações</label>
-        <textarea data-artef="notas" data-ix="${ix}" style="min-height:52px" placeholder="Onírico de origem, aparência, comportamento da mente-colmeia...">${esc(a.notas)}</textarea></div></div>
+        <textarea data-artef="notas" data-ix="${ix}" style="min-height:52px" placeholder="Onírico de origem, aparência, comportamento da mente-colmeia...">${esc(
+            a.notas
+          )}</textarea></div></div>
       ${runasArtefato(a, ix)}
       <div style="margin-top:10px;display:flex;justify-content:flex-end">
         <button class="btn dz" data-artedel="${ix}">Remover artefato</button></div>
@@ -9663,9 +10028,13 @@
         mods.forEach((nome) => {
           const m = ART_MODS.find((z) => z.n === nome) || { n: nome };
           h += `<div class="chip"><div class="ctxt"><b>${esc(m.n)}</b>
-      ${m.req ? `<span class="bdg">${esc(m.req)}</span>` : ""}${m.dano ? `<span class="bdg t">+${m.dano} de dano</span>` : ""}
+      ${m.req ? `<span class="bdg">${esc(m.req)}</span>` : ""}${
+            m.dano ? `<span class="bdg t">+${m.dano} de dano</span>` : ""
+          }
       ${m.d ? `<i>${esc(m.d)}</i>` : ""}</div>
-      <button class="cx" data-rmmod="${ix}" data-item="${esc(nome)}" title="Remover">✕</button></div>`;
+      <button class="cx" data-rmmod="${ix}" data-item="${esc(
+            nome
+          )}" title="Remover">✕</button></div>`;
         });
         h += `</div>`;
         if (aberto) {
@@ -9673,7 +10042,7 @@
           h += picker(
             "Buscar modificação…",
             disp.map((m) => ({ n: m.n, cat: m.req, d: m.d })),
-            (it) => `data-addmod="${ix}" data-item="${esc(it.n)}"`,
+            (it) => `data-addmod="${ix}" data-item="${esc(it.n)}"`
           );
         } else if (mods.length < 2) {
           h += `<button class="btn" data-openmod="${ix}" style="margin-top:8px">+ Adicionar modificação</button>`;
@@ -9685,16 +10054,26 @@
       function blocoCustom() {
         const ls = ROOT.fnsCustom || [],
           aberto = PICKER && PICKER.tipo === "custom";
-        let h = `<details class="more" style="margin:10px 0 0" ${ls.length || aberto ? "open" : ""}>
-    <summary>Funções personalizadas da mesa${ls.length ? " — " + ls.length : ""}</summary>
+        let h = `<details class="more" style="margin:10px 0 0" ${
+          ls.length || aberto ? "open" : ""
+        }>
+    <summary>Funções personalizadas da mesa${
+      ls.length ? " — " + ls.length : ""
+    }</summary>
     <p class="note">Para regras que o seu grupo criou e que não existem no guia. Elas aparecem na lista de funções junto das oficiais, marcadas como personalizadas.</p>
     <div class="chosen" style="margin-top:8px">`;
         ls.forEach((f, ix) => {
           h += `<div class="chip"><div class="ctxt"><b>${esc(f.n)}</b>
       <span class="bdg v">${CAT[f.arq] ? CAT[f.arq].n : "?"}</span>
-      <span class="bdg t">${f.b} Fluxo</span><span class="bdg y">${f.pa} P.A</span>
-      ${f.dano ? '<span class="bdg">causa dano</span>' : ""}${f.t === "s" ? '<span class="bdg">teste de resistência</span>' : ""}
-      ${f.ps === "s" ? '<span class="bdg">pode ser passiva</span>' : ""}${f.rc === "s" ? '<span class="bdg g">reação</span>' : ""}
+      <span class="bdg t">${f.b} Fluxo</span><span class="bdg y">${
+            f.pa
+          } P.A</span>
+      ${f.dano ? '<span class="bdg">causa dano</span>' : ""}${
+            f.t === "s" ? '<span class="bdg">teste de resistência</span>' : ""
+          }
+      ${f.ps === "s" ? '<span class="bdg">pode ser passiva</span>' : ""}${
+            f.rc === "s" ? '<span class="bdg g">reação</span>' : ""
+          }
       ${f.d ? `<i>${esc(f.d)}</i>` : ""}</div>
       <button class="cx" data-rmcustom="${ix}" title="Remover">✕</button></div>`;
         });
@@ -9704,25 +10083,55 @@
         if (aberto) {
           const F = RASCUNHO;
           h += `<div class="blk" style="border-color:var(--runa);margin-top:9px"><div class="row">
-      <div class="grp"><label>Nome da função</label><input type="text" data-cf="n" value="${esc(F.n)}" placeholder="ex.: Empuxo Reverso"></div>
+      <div class="grp"><label>Nome da função</label><input type="text" data-cf="n" value="${esc(
+        F.n
+      )}" placeholder="ex.: Empuxo Reverso"></div>
       <div class="grp sm"><label>Arquétipo</label><select data-cf="arq">
         ${Object.keys(CAT)
           .map((a) => opt(CAT[a].n, a, F.arq === a))
           .join("")}</select></div>
-      <div class="grp sm"><label>Custo base de Fluxo</label><input type="number" min="0" data-cf="b" value="${F.b}"></div>
-      <div class="grp sm"><label>Custo de P.A</label><input type="number" min="0" max="6" data-cf="pa" value="${F.pa}"></div>
+      <div class="grp sm"><label>Custo base de Fluxo</label><input type="number" min="0" data-cf="b" value="${
+        F.b
+      }"></div>
+      <div class="grp sm"><label>Custo de P.A</label><input type="number" min="0" max="6" data-cf="pa" value="${
+        F.pa
+      }"></div>
     </div>
     <div class="row" style="margin-top:9px"><div class="grp"><label>Propriedades</label><div class="chips">
-      <label class="check ${F.dano ? "on" : ""}"><input type="checkbox" data-cf="dano" ${F.dano ? "checked" : ""}> causa dano</label>
-      <label class="check ${F.t ? "on" : ""}"><input type="checkbox" data-cf="t" ${F.t ? "checked" : ""}> teste de resistência</label>
-      <label class="check ${F.rc ? "on" : ""}"><input type="checkbox" data-cf="rc" ${F.rc ? "checked" : ""}> pode ser reação</label>
-      <label class="check ${F.ps ? "on" : ""}"><input type="checkbox" data-cf="ps" ${F.ps ? "checked" : ""}> pode ser passiva</label>
-      <label class="check ${F.cond ? "on" : ""}"><input type="checkbox" data-cf="cond" ${F.cond ? "checked" : ""}> aplica condição</label>
+      <label class="check ${
+        F.dano ? "on" : ""
+      }"><input type="checkbox" data-cf="dano" ${
+            F.dano ? "checked" : ""
+          }> causa dano</label>
+      <label class="check ${
+        F.t ? "on" : ""
+      }"><input type="checkbox" data-cf="t" ${
+            F.t ? "checked" : ""
+          }> teste de resistência</label>
+      <label class="check ${
+        F.rc ? "on" : ""
+      }"><input type="checkbox" data-cf="rc" ${
+            F.rc ? "checked" : ""
+          }> pode ser reação</label>
+      <label class="check ${
+        F.ps ? "on" : ""
+      }"><input type="checkbox" data-cf="ps" ${
+            F.ps ? "checked" : ""
+          }> pode ser passiva</label>
+      <label class="check ${
+        F.cond ? "on" : ""
+      }"><input type="checkbox" data-cf="cond" ${
+            F.cond ? "checked" : ""
+          }> aplica condição</label>
     </div></div></div>
     <div class="row" style="margin-top:9px"><div class="grp"><label>Descrição</label>
-      <textarea data-cf="d" style="min-height:56px" placeholder="O que a função faz.">${esc(F.d)}</textarea></div></div>
+      <textarea data-cf="d" style="min-height:56px" placeholder="O que a função faz.">${esc(
+        F.d
+      )}</textarea></div></div>
     <div class="chips" style="margin-top:9px">
-      <button class="btn pri" id="bCustomSalvar" ${F.n ? "" : "disabled"}>Salvar função</button>
+      <button class="btn pri" id="bCustomSalvar" ${
+        F.n ? "" : "disabled"
+      }>Salvar função</button>
       <button class="btn" data-pickclose="1">Cancelar</button></div></div>`;
         } else {
           h += `<button class="btn" data-opencustom="1" style="margin-top:8px">+ Criar função</button>`;
@@ -9745,12 +10154,22 @@
           const fs = x.fns
             .map((sf) => (FN[sf.id] ? FN[sf.id].n : "—"))
             .join(" + ");
-          h += `<button class="slot ${x.k === a.sel ? "on" : ""} ${bad ? "err" : "ok"}" data-sel="${x.k}"><div class="ic"></div>
-      <div class="nm"><b data-slotnome="${x.k}">${esc(x.nome) || "Runa sem nome"}</b>
-      <small>${esc(fs)}${x.comb ? " · combinada" : ""}${x.passiva ? " · passiva" : ""}${
-        x.dur === "prol" ? " · prolongada" : ""
-      }${x.mira === "area" ? " · área" : ""}</small></div>
-      <div class="cost ${bad ? "bad" : ""}">${c.total} fx<br><span style="color:var(--runa)">${runasGastas(x)}r</span></div></button>`;
+          h += `<button class="slot ${x.k === a.sel ? "on" : ""} ${
+            bad ? "err" : "ok"
+          }" data-sel="${x.k}"><div class="ic"></div>
+      <div class="nm"><b data-slotnome="${x.k}">${
+            esc(x.nome) || "Runa sem nome"
+          }</b>
+      <small>${esc(fs)}${x.comb ? " · combinada" : ""}${
+            x.passiva ? " · passiva" : ""
+          }${x.dur === "prol" ? " · prolongada" : ""}${
+            x.mira === "area" ? " · área" : ""
+          }</small></div>
+      <div class="cost ${bad ? "bad" : ""}">${
+            c.total
+          } fx<br><span style="color:var(--runa)">${runasGastas(
+            x
+          )}r</span></div></button>`;
         });
         h += `</div>`;
         if (uso < R2.runas || a.rank === "EX")
@@ -9770,15 +10189,50 @@
         const fx = d.fluxoDisp - CH.fluxoGasto;
         let h = `<p class="note" style="margin-bottom:10px">Esta aba é para usar na mesa. Nada aqui altera a construção da ficha — só os recursos gastos e o que está ligado agora.</p>
   <div class="mrow">
-    <div class="mbox"><u>Pontos de Vida</u><b class="pv">${d.pvAtual} <small>/ ${d.pvTotal}</small></b>
-      <div class="mbtns">${[-10, -5, -1, 1, 5].map((n) => `<button class="btn sm" data-pv="${n}">${n > 0 ? "+" : ""}${n}</button>`).join("")}</div></div>
-    <div class="mbox ${d.sobrecarga > 0 ? "over" : ""}"><u>Fluxo gasto</u><b class="fx">${CH.fluxoGasto} <small>/ ${d.fluxoDisp}</small></b>
-      <div class="msub">restam <b>${fx}</b>${d.sobrecarga > 0 ? " · sobrecarga de " + d.sobrecarga : ""}</div>
-      <div class="mbtns">${[5, 10, 20].map((n) => `<button class="btn sm" data-fx="${n}">gastar ${n}</button>`).join("")}
-        ${[5, 20].map((n) => `<button class="btn sm" data-fx="${-n}">devolver ${n}</button>`).join("")}</div></div>
-    <div class="mbox"><u>Pontos de Ação</u><b class="pa">${d.paLivre} <small>/ ${d.p.pa + d.aptPA}</small></b>
-      <div class="mbtns">${[-1, 1].map((n) => `<button class="btn sm" data-pa="${n}">${n > 0 ? "gastar 1" : "devolver 1"}</button>`).join("")}</div></div>
-    <div class="mbox"><u>Rodada ${CH.rodada || 1}</u><b>${d.prolRodada ? d.prolRodada + " <small>fx/rodada</small>" : "—"}</b>
+    <div class="mbox"><u>Pontos de Vida</u><b class="pv">${
+      d.pvAtual
+    } <small>/ ${d.pvTotal}</small></b>
+      <div class="mbtns">${[-10, -5, -1, 1, 5]
+        .map(
+          (n) =>
+            `<button class="btn sm" data-pv="${n}">${
+              n > 0 ? "+" : ""
+            }${n}</button>`
+        )
+        .join("")}</div></div>
+    <div class="mbox ${
+      d.sobrecarga > 0 ? "over" : ""
+    }"><u>Fluxo gasto</u><b class="fx">${CH.fluxoGasto} <small>/ ${
+          d.fluxoDisp
+        }</small></b>
+      <div class="msub">restam <b>${fx}</b>${
+          d.sobrecarga > 0 ? " · sobrecarga de " + d.sobrecarga : ""
+        }</div>
+      <div class="mbtns">${[5, 10, 20]
+        .map(
+          (n) => `<button class="btn sm" data-fx="${n}">gastar ${n}</button>`
+        )
+        .join("")}
+        ${[5, 20]
+          .map(
+            (n) =>
+              `<button class="btn sm" data-fx="${-n}">devolver ${n}</button>`
+          )
+          .join("")}</div></div>
+    <div class="mbox"><u>Pontos de Ação</u><b class="pa">${
+      d.paLivre
+    } <small>/ ${d.p.pa + d.aptPA}</small></b>
+      <div class="mbtns">${[-1, 1]
+        .map(
+          (n) =>
+            `<button class="btn sm" data-pa="${n}">${
+              n > 0 ? "gastar 1" : "devolver 1"
+            }</button>`
+        )
+        .join("")}</div></div>
+    <div class="mbox"><u>Rodada ${CH.rodada || 1}</u><b>${
+          d.prolRodada ? d.prolRodada + " <small>fx/rodada</small>" : "—"
+        }</b>
       <div class="mbtns"><button class="btn sm" id="bRodada">Próxima rodada</button>
         <button class="btn sm dz" id="bDescanso">Descanso</button></div></div>
   </div>`;
@@ -9794,27 +10248,57 @@
             fs = x.fns.map((sf) => FN[sf.id]).filter(Boolean);
           const podeAtivar = x.dur === "prol" && !x.passiva;
           h += `<div class="mhab ${x.ativa || x.passiva ? "on" : ""}">
-      <div class="mh1"><b>${esc(x.nome) || (x.tipo === "estigma" ? "Estigma" : "Runa")}</b>
+      <div class="mh1"><b>${
+        esc(x.nome) || (x.tipo === "estigma" ? "Estigma" : "Runa")
+      }</b>
         <span class="bdg">${fs.map((f) => f.n).join(" + ")}</span>
         ${x.passiva ? '<span class="bdg v">passiva — sempre ativa</span>' : ""}
-        ${fs.some((f) => f.rc === "s" || f.rc === "x") ? '<span class="bdg g">reação</span>' : ""}</div>
+        ${
+          fs.some((f) => f.rc === "s" || f.rc === "x")
+            ? '<span class="bdg g">reação</span>'
+            : ""
+        }</div>
       <div class="mh2">
-        <span class="bdg t">${x.passiva ? "−" + c.total + " do limite" : c.total + " Fluxo"}</span>
+        <span class="bdg t">${
+          x.passiva ? "−" + c.total + " do limite" : c.total + " Fluxo"
+        }</span>
         <span class="bdg y">${x.passiva ? "0" : c.pa} P.A</span>
         ${
           c.prol
             ? `<span class="bdg">${c.prol}/rodada</span>`
-            : `<span class="bdg ${x.concentracao ? "v" : ""}">${x.concentracao ? "concentração — sem consumo" : "sem custo por rodada"}</span>`
+            : `<span class="bdg ${x.concentracao ? "v" : ""}">${
+                x.concentracao
+                  ? "concentração — sem consumo"
+                  : "sem custo por rodada"
+              }</span>`
         }
         ${
           x.dur === "prol" &&
           !x.passiva &&
           contaMaestria("manipulacao", "Concentração")
-            ? `<label class="check sm ${x.concentracao ? "on" : ""}"><input type="checkbox" data-conc="${x.k}" ${x.concentracao ? "checked" : ""}> concentração</label>`
+            ? `<label class="check sm ${
+                x.concentracao ? "on" : ""
+              }"><input type="checkbox" data-conc="${x.k}" ${
+                x.concentracao ? "checked" : ""
+              }> concentração</label>`
             : ""
         }
-        ${!x.passiva ? `<button class="btn ${c.total > fx ? "dz" : "pri"} sm" data-gastar="${x.k}">Gastar</button>` : ""}
-        ${podeAtivar ? `<label class="check sm ${x.ativa ? "on" : ""}"><input type="checkbox" data-habk="${x.k}" ${x.ativa ? "checked" : ""}> ativa agora</label>` : ""}
+        ${
+          !x.passiva
+            ? `<button class="btn ${
+                c.total > fx ? "dz" : "pri"
+              } sm" data-gastar="${x.k}">Gastar</button>`
+            : ""
+        }
+        ${
+          podeAtivar
+            ? `<label class="check sm ${
+                x.ativa ? "on" : ""
+              }"><input type="checkbox" data-habk="${x.k}" ${
+                x.ativa ? "checked" : ""
+              }> ativa agora</label>`
+            : ""
+        }
       </div></div>`;
         });
         h += `</div>`;
@@ -9822,7 +10306,9 @@
           h += `<div class="hr"></div><p class="sub">Efeitos aplicados na ficha agora</p><div class="chosen">`;
           d.EF.lista.forEach(
             (x) =>
-              (h += `<div class="chip"><div class="ctxt"><b>${esc(x.l)}</b><i>${esc(x.t)}</i></div></div>`),
+              (h += `<div class="chip"><div class="ctxt"><b>${esc(
+                x.l
+              )}</b><i>${esc(x.t)}</i></div></div>`)
           );
           h += `</div><button class="btn" data-limpar="1" style="margin-top:8px">Desligar todas as ativas</button>`;
         } else {
@@ -9833,20 +10319,28 @@
   <div class="chosen">`;
         (CH.mods || []).forEach((m, ix) => {
           h += `<div class="chip"><div class="ctxt" style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
-      <input type="text" data-modm="nota" data-ix="${ix}" value="${esc(m.nota || "")}" placeholder="de onde vem" style="flex:1;min-width:120px">
+      <input type="text" data-modm="nota" data-ix="${ix}" value="${esc(
+            m.nota || ""
+          )}" placeholder="de onde vem" style="flex:1;min-width:120px">
       <select data-modm="alvo" data-ix="${ix}" style="width:180px">
         ${ATR.map((k) => opt(ATRN[k], k, m.alvo === k)).join("")}
         ${Object.keys(ROT_MOD)
           .map((k) => opt(ROT_MOD[k], k, m.alvo === k))
           .join("")}</select>
-      <input type="number" data-modm="valor" data-ix="${ix}" value="${m.valor || 0}" style="width:70px"></div>
+      <input type="number" data-modm="valor" data-ix="${ix}" value="${
+            m.valor || 0
+          }" style="width:70px"></div>
       <button class="cx" data-rmmodm="${ix}" title="Remover">✕</button></div>`;
         });
         if (!(CH.mods || []).length)
           h += `<p class="note" style="margin:0">Nada aplicado.</p>`;
         h += `</div><button class="btn" data-addmod2="1" style="margin-top:8px">+ Adicionar penalidade ou bônus</button>`;
-        h += `<div class="hr"></div><p class="sub">Usos por descanso</p>${usosBox(d)}`;
-        h += `<div class="hr"></div><p class="sub">Calculadora de dano</p>${calcBox(d)}`;
+        h += `<div class="hr"></div><p class="sub">Usos por descanso</p>${usosBox(
+          d
+        )}`;
+        h += `<div class="hr"></div><p class="sub">Calculadora de dano</p>${calcBox(
+          d
+        )}`;
         return h;
       }
 
@@ -9856,7 +10350,7 @@
         Object.keys(ESP).forEach((k) =>
           (CH.esp[k].tal || []).filter(Boolean).forEach((n) => {
             const t = (TALENTOS[ESP[k].cat] || []).find(
-              (z) => z.n.trim() === n.trim(),
+              (z) => z.n.trim() === n.trim()
             );
             if (t && /por descanso/i.test(t.d || ""))
               out.push({
@@ -9865,12 +10359,12 @@
                 ctx: ESP[k].n,
                 d: t.d,
               });
-          }),
+          })
         );
         Object.keys(ECO).forEach((k) =>
           (CH.ecos[k].hab || []).filter(Boolean).forEach((n) => {
             const t = (MAESTRIAS[ECO[k].n] || []).find(
-              (z) => z.n.trim() === n.trim(),
+              (z) => z.n.trim() === n.trim()
             );
             if (t && /por descanso|por dia/i.test(t.d || ""))
               out.push({
@@ -9879,7 +10373,7 @@
                 ctx: "Eco de " + ECO[k].n,
                 d: t.d,
               });
-          }),
+          })
         );
         return out;
       }
@@ -9896,7 +10390,7 @@
       function usosBox(d) {
         const ls = habsComUso();
         const orig = Object.keys(USOS[CH.origem] || {}).filter(
-          (nv) => CH.nivel >= +nv,
+          (nv) => CH.nivel >= +nv
         );
         if (!ls.length && !orig.length)
           return `<p class="note">Nenhuma habilidade escolhida tem limite por descanso.</p>`;
@@ -9911,7 +10405,7 @@
             CH.origem + " · nível " + nv,
             g,
             tot,
-            "uso",
+            "uso"
           );
         });
         ls.forEach((x) => {
@@ -9923,22 +10417,42 @@
       }
       function linhaUso(key, nome, ctx, gasto, tot, tipo) {
         const rest = Math.max(0, tot - gasto);
-        return `<div class="chip"><div class="ctxt"><b>${esc(nome)}</b><span class="bdg">${esc(ctx)}</span>
-    <span class="bdg ${rest ? "g" : "r"}">${rest} de ${tot} restante${rest === 1 ? "" : "s"}</span></div>
+        return `<div class="chip"><div class="ctxt"><b>${esc(
+          nome
+        )}</b><span class="bdg">${esc(ctx)}</span>
+    <span class="bdg ${rest ? "g" : "r"}">${rest} de ${tot} restante${
+          rest === 1 ? "" : "s"
+        }</span></div>
     <div style="display:flex;gap:4px;flex:none">
-      <button class="btn sm" data-${tipo}delta="-1" data-key="${esc(key)}" ${gasto <= 0 ? "disabled" : ""}>−</button>
-      <button class="btn sm" data-${tipo}delta="1" data-key="${esc(key)}" ${rest <= 0 ? "disabled" : ""}>usar</button></div></div>`;
+      <button class="btn sm" data-${tipo}delta="-1" data-key="${esc(key)}" ${
+          gasto <= 0 ? "disabled" : ""
+        }>−</button>
+      <button class="btn sm" data-${tipo}delta="1" data-key="${esc(key)}" ${
+          rest <= 0 ? "disabled" : ""
+        }>usar</button></div></div>`;
       }
       function calcBox(d) {
         const D2 = CH.dano || {};
         const armas = CH.armas.filter((w) => w.n);
         return `<div class="row">
-    <div class="grp sm"><label>Sua rolagem de ataque</label><input type="number" data-dano="atk" value="${D2.atk || 0}"></div>
-    <div class="grp sm"><label>Esquiva/defesa do alvo</label><input type="number" data-dano="def" value="${D2.def || 0}"></div>
-    <div class="grp sm"><label>Dano garantido</label><input type="number" data-dano="base" value="${D2.base || 0}"></div>
-    <div class="grp sm"><label>Bônus de dano</label><input type="number" data-dano="bonus" value="${D2.bonus || 0}"></div>
-    <div class="grp sm"><label>Escudo do alvo</label><input type="number" data-dano="esc" value="${D2.esc || 0}"></div>
-    <div class="grp sm"><label>Redução/armadura do alvo</label><input type="number" data-dano="red" value="${D2.red || 0}"></div>
+    <div class="grp sm"><label>Sua rolagem de ataque</label><input type="number" data-dano="atk" value="${
+      D2.atk || 0
+    }"></div>
+    <div class="grp sm"><label>Esquiva/defesa do alvo</label><input type="number" data-dano="def" value="${
+      D2.def || 0
+    }"></div>
+    <div class="grp sm"><label>Dano garantido</label><input type="number" data-dano="base" value="${
+      D2.base || 0
+    }"></div>
+    <div class="grp sm"><label>Bônus de dano</label><input type="number" data-dano="bonus" value="${
+      D2.bonus || 0
+    }"></div>
+    <div class="grp sm"><label>Escudo do alvo</label><input type="number" data-dano="esc" value="${
+      D2.esc || 0
+    }"></div>
+    <div class="grp sm"><label>Redução/armadura do alvo</label><input type="number" data-dano="red" value="${
+      D2.red || 0
+    }"></div>
   </div>
   ${
     armas.length
@@ -9960,7 +10474,9 @@
         if (!D2.atk && !D2.base)
           return `<p class="note">Preencha a rolagem e o dano garantido para ver o resultado.</p>`;
         if (dif < 0)
-          return `<div class="al e"><i>✕</i><div>Ataque errou por ${Math.abs(dif)}. Nenhum dano.</div></div>`;
+          return `<div class="al e"><i>✕</i><div>Ataque errou por ${Math.abs(
+            dif
+          )}. Nenhum dano.</div></div>`;
         const tab = [
           [2, 1],
           [4, 2],
@@ -9976,8 +10492,12 @@
         const escAbs = Math.min(bruto, +D2.esc || 0);
         return `<div class="al g"><i>✓</i><div>
     <b>Dano final: ${final}</b><br>
-    diferença ${dif} → +${pd} de dano pela diferença${dif === 0 ? " (empate: só o garantido)" : ""}<br>
-    ${D2.base || 0} garantido${D2.bonus ? " + " + D2.bonus + " de bônus" : ""} + ${pd} = <b>${bruto}</b>
+    diferença ${dif} → +${pd} de dano pela diferença${
+          dif === 0 ? " (empate: só o garantido)" : ""
+        }<br>
+    ${D2.base || 0} garantido${
+          D2.bonus ? " + " + D2.bonus + " de bônus" : ""
+        } + ${pd} = <b>${bruto}</b>
     ${escAbs ? ` · escudo absorve ${escAbs} → ${posEsc}` : ""}
     ${D2.red ? ` · redução −${D2.red} → ${final}` : ""}
   </div></div>`;
@@ -9990,9 +10510,13 @@
 
       function vNotas() {
         return `<p class="sub">Inventário</p>
-  <textarea data-ch="inventario" style="min-height:180px" placeholder="Equipamentos, artefatos, munição, dinheiro...">${esc(CH.inventario)}</textarea>
+  <textarea data-ch="inventario" style="min-height:180px" placeholder="Equipamentos, artefatos, munição, dinheiro...">${esc(
+    CH.inventario
+  )}</textarea>
   <div class="hr"></div><p class="sub">Anotações</p>
-  <textarea data-ch="notas" style="min-height:180px" placeholder="Contatos, contratos, pistas, credibilidade...">${esc(CH.notas)}</textarea>`;
+  <textarea data-ch="notas" style="min-height:180px" placeholder="Contatos, contratos, pistas, credibilidade...">${esc(
+    CH.notas
+  )}</textarea>`;
       }
 
       /* ============================================================
@@ -10002,9 +10526,13 @@
         const E = CH.estigma,
           d = D();
         const tipos = [E.tipoDano, ...(CH.tiposDano || [])].filter(
-          (v, i, a) => v && a.indexOf(v) === i,
+          (v, i, a) => v && a.indexOf(v) === i
         );
-        let h = `<div class="row"><div class="grp"><label>Arquétipos do Estigma — ${E.arqs.length} escolhido${E.arqs.length === 1 ? "" : "s"}${E.arqs.length === 4 ? "" : " (padrão: 4)"}</label>
+        let h = `<div class="row"><div class="grp"><label>Arquétipos do Estigma — ${
+          E.arqs.length
+        } escolhido${E.arqs.length === 1 ? "" : "s"}${
+          E.arqs.length === 4 ? "" : " (padrão: 4)"
+        }</label>
     <div class="arqgrid">${Object.keys(CAT)
       .map((k) => {
         const on = E.arqs.includes(k);
@@ -10013,8 +10541,12 @@
           .join(", ")
           .replace(/"/g, "");
         const trava = emSec() && CH.secTipo === "invocacao";
-        return `<button class="arqbtn ${on ? "on" : ""}" data-arq="${k}" ${trava ? "disabled" : ""}
-        title="${CAT[k].fns.length} funções — ${tip}" style="--ac:${CAT[k].bg};--acb:${CAT[k].c}">${CAT[k].n}</button>`;
+        return `<button class="arqbtn ${on ? "on" : ""}" data-arq="${k}" ${
+          trava ? "disabled" : ""
+        }
+        title="${CAT[k].fns.length} funções — ${tip}" style="--ac:${
+          CAT[k].bg
+        };--acb:${CAT[k].c}">${CAT[k].n}</button>`;
       })
       .join("")}</div>
     <p class="note">Sem trava: o padrão do sistema é 4, mas várias mesas jogam sem esse limite. Passando de 4, a verificação só avisa.</p></div>
@@ -10028,8 +10560,12 @@
   ${
     baseFisico()
       ? `<p class="note" style="margin:2px 0 0">Dano base físico: cada runa que causa dano pode escolher livremente entre <b>Cortante, Perfurante e Contundente</b> — a escolha aparece no editor da runa.</p>`
-      : `<div style="margin:6px 0 0"><label class="check ${CH.multiDano ? "on" : ""}">
-        <input type="checkbox" data-ch="multiDano" ${CH.multiDano ? "checked" : ""}> Habilitar múltiplos tipos de dano</label>
+      : `<div style="margin:6px 0 0"><label class="check ${
+          CH.multiDano ? "on" : ""
+        }">
+        <input type="checkbox" data-ch="multiDano" ${
+          CH.multiDano ? "checked" : ""
+        }> Habilitar múltiplos tipos de dano</label>
       ${
         CH.multiDano
           ? `<p class="note">Marque abaixo os tipos que o Estigma também pode manifestar. Cada runa de dano escolhe entre eles.</p>
@@ -10037,16 +10573,30 @@
           .filter((t) => t !== E.tipoDano)
           .map((t) => {
             const on = (CH.tiposDano || []).includes(t);
-            return `<label class="check ${on ? "on" : ""}"><input type="checkbox" data-tipodano="${t}" ${on ? "checked" : ""}> ${t}</label>`;
+            return `<label class="check ${
+              on ? "on" : ""
+            }"><input type="checkbox" data-tipodano="${t}" ${
+              on ? "checked" : ""
+            }> ${t}</label>`;
           })
           .join("")}</div>`
           : `<p class="note">Sem isso, todas as runas usam o tipo de dano do Estigma.</p>`
       }</div>`
   }
   ${blocoCustom()}
-  ${emSec() && CH.secTipo === "invocacao" ? `<div class="al i" style="margin:10px 0 0"><i>i</i><div>O Estigma é o mesmo do personagem principal — arquétipos e tipo de dano vêm de lá. As <b>Runas podem ser próprias</b>, como interpretações diferentes da mesma marca, mas o total é a metade (${d.runasDisp}).</div></div>` : ""}
-  ${emSec() && CH.secTipo === "sobreposicao" ? `<div class="al i" style="margin:10px 0 0"><i>i</i><div>O Estigma da Sobreposição é <b>novo</b>: forma, conceito e especificação devem ser diferentes dos da ficha principal. A função mecânica pode ser a mesma, desde que reidealizada para a nova personalidade.</div></div>` : ""}
-  <div class="hr"></div><p class="sub">Habilidades — ${d.runasUso} de ${d.runasDisp} runas</p>
+  ${
+    emSec() && CH.secTipo === "invocacao"
+      ? `<div class="al i" style="margin:10px 0 0"><i>i</i><div>O Estigma é o mesmo do personagem principal — arquétipos e tipo de dano vêm de lá. As <b>Runas podem ser próprias</b>, como interpretações diferentes da mesma marca, mas o total é a metade (${d.runasDisp}).</div></div>`
+      : ""
+  }
+  ${
+    emSec() && CH.secTipo === "sobreposicao"
+      ? `<div class="al i" style="margin:10px 0 0"><i>i</i><div>O Estigma da Sobreposição é <b>novo</b>: forma, conceito e especificação devem ser diferentes dos da ficha principal. A função mecânica pode ser a mesma, desde que reidealizada para a nova personalidade.</div></div>`
+      : ""
+  }
+  <div class="hr"></div><p class="sub">Habilidades — ${d.runasUso} de ${
+          d.runasDisp
+        } runas</p>
   <div class="row" style="margin-bottom:10px"><div class="grp"><div class="slots" style="padding:0">
     ${E.habs
       .map((x) => {
@@ -10057,10 +10607,19 @@
         const fs = x.fns
           .map((sf) => (FN[sf.id] ? FN[sf.id].n : "—"))
           .join(" + ");
-        return `<button class="slot ${x.k === E.sel ? "on" : ""} ${bad ? "err" : "ok"}" data-sel="${x.k}"><div class="ic"></div>
-        <div class="nm"><b data-slotnome="${x.k}">${esc(x.nome) || (x.tipo === "estigma" ? "Estigma sem nome" : "Runa sem nome")}</b>
-        <small>${x.tipo === "estigma" ? "marca principal · " : ""}${esc(fs)}${x.comb ? " · combinada" : ""}${x.passiva ? " · passiva" : ""}</small></div>
-        <div class="cost ${bad ? "bad" : ""}">${c.total} fx${rg ? '<br><span style="color:var(--runa)">' + rg + "r</span>" : ""}</div></button>`;
+        return `<button class="slot ${x.k === E.sel ? "on" : ""} ${
+          bad ? "err" : "ok"
+        }" data-sel="${x.k}"><div class="ic"></div>
+        <div class="nm"><b data-slotnome="${x.k}">${
+          esc(x.nome) ||
+          (x.tipo === "estigma" ? "Estigma sem nome" : "Runa sem nome")
+        }</b>
+        <small>${x.tipo === "estigma" ? "marca principal · " : ""}${esc(fs)}${
+          x.comb ? " · combinada" : ""
+        }${x.passiva ? " · passiva" : ""}</small></div>
+        <div class="cost ${bad ? "bad" : ""}">${c.total} fx${
+          rg ? '<br><span style="color:var(--runa)">' + rg + "r</span>" : ""
+        }</div></button>`;
       })
       .join("")}
   </div><button class="btn pri" id="bAdd" style="width:100%;margin-top:7px">+ Nova runa</button></div></div>
@@ -10075,16 +10634,32 @@
           atrs = attrsTeste(h),
           E = CH.estigma,
           ar = ctxHabs().arte;
-        let o = `<p class="sub">${ar ? "Runa do artefato" : h.tipo === "estigma" ? "Estigma — marca principal" : "Runa"}</p><div class="row">
+        let o = `<p class="sub">${
+          ar
+            ? "Runa do artefato"
+            : h.tipo === "estigma"
+            ? "Estigma — marca principal"
+            : "Runa"
+        }</p><div class="row">
     <div class="grp" style="flex:2"><label>Nome</label>
-      <input type="text" data-hab="nome" value="${esc(h.nome)}" placeholder="${h.tipo === "estigma" ? "ex.: Punho Míssel" : "ex.: Punho Turbo"}"></div>
+      <input type="text" data-hab="nome" value="${esc(h.nome)}" placeholder="${
+          h.tipo === "estigma" ? "ex.: Punho Míssel" : "ex.: Punho Turbo"
+        }"></div>
     <div class="grp" style="flex:0 0 auto;justify-content:flex-end"><label>&nbsp;</label>
-      <label class="check ${h.comb ? "on" : ""}"><input type="checkbox" data-hab="comb" ${h.comb ? "checked" : ""}
+      <label class="check ${
+        h.comb ? "on" : ""
+      }"><input type="checkbox" data-hab="comb" ${h.comb ? "checked" : ""}
         ${h.tipo === "estigma" ? "disabled" : ""}> Runa Combinada</label></div>
     <div class="grp" style="flex:0 0 auto;justify-content:flex-end"><label>&nbsp;</label>
-      <label class="check p ${h.passiva ? "on" : ""}"><input type="checkbox" data-hab="passiva" ${h.passiva ? "checked" : ""}> Uso Passivo</label></div>
+      <label class="check p ${
+        h.passiva ? "on" : ""
+      }"><input type="checkbox" data-hab="passiva" ${
+          h.passiva ? "checked" : ""
+        }> Uso Passivo</label></div>
   </div>
-  <p class="sub" style="margin-top:14px">Função${h.comb ? "ões" : ""} Mecânica${h.comb ? "s" : ""}</p>`;
+  <p class="sub" style="margin-top:14px">Função${h.comb ? "ões" : ""} Mecânica${
+          h.comb ? "s" : ""
+        }</p>`;
         h.fns.forEach((sf, i) => {
           o += boxFn(h, sf, i);
         });
@@ -10096,8 +10671,8 @@
           opt(
             MIRA[k].l + " (" + (MIRA[k].c ? "+" + MIRA[k].c : "0") + ")",
             k,
-            h.mira === k,
-          ),
+            h.mira === k
+          )
         )
         .join("")}</select></div>`;
         if (h.mira === "area") {
@@ -10111,72 +10686,127 @@
         .map((k) => opt(TAM[k].l + " (+" + TAM[k].c + ")", k, h.tam === k))
         .join("")}</select></div>`;
         }
-        o += `<div class="grp"><label>Alcance${ignoraAlcance(h) ? " (ignorado)" : ""}</label>
+        o += `<div class="grp"><label>Alcance${
+          ignoraAlcance(h) ? " (ignorado)" : ""
+        }</label>
       <select data-hab="alc" ${ignoraAlcance(h) ? "disabled" : ""}>
       ${Object.keys(ALC)
         .map((k) => opt(ALC[k].l + " (+" + ALC[k].c + ")", k, h.alc === k))
         .join("")}</select></div>
-    <div class="grp"><label>Duração${h.passiva ? " — passiva, sempre ativa" : ""}</label>
+    <div class="grp"><label>Duração${
+      h.passiva ? " — passiva, sempre ativa" : ""
+    }</label>
       <select data-hab="dur" ${h.passiva ? "disabled" : ""}>
       ${Object.keys(DUR)
         .map((k) =>
           opt(
             DUR[k].l + " (" + (DUR[k].c ? "+" + DUR[k].c : "0") + ")",
             k,
-            h.dur === k,
-          ),
+            h.dur === k
+          )
         )
         .join("")}</select></div></div>
   <div class="row" style="margin-top:10px">
     <div class="grp"><label>Resolução</label>
-      <select data-hab="modo" ${res === "nenhuma" || !h.fns.some((sf) => FN[sf.id] && FN[sf.id].t === "o") ? "disabled" : ""}>
-      ${opt("Jogada de Ataque", "ataque", res === "ataque")}${opt("Teste de Resistência", "teste", res === "teste")}
-      ${res === "ambos" ? opt("Ataque para o dano + Teste para o efeito", "ambos", true) : ""}
-      ${res === "nenhuma" ? opt("Não faz ataque nem teste", "nenhuma", true) : ""}</select></div>`;
+      <select data-hab="modo" ${
+        res === "nenhuma" ||
+        !h.fns.some((sf) => FN[sf.id] && FN[sf.id].t === "o")
+          ? "disabled"
+          : ""
+      }>
+      ${opt("Jogada de Ataque", "ataque", res === "ataque")}${opt(
+          "Teste de Resistência",
+          "teste",
+          res === "teste"
+        )}
+      ${
+        res === "ambos"
+          ? opt("Ataque para o dano + Teste para o efeito", "ambos", true)
+          : ""
+      }
+      ${
+        res === "nenhuma"
+          ? opt("Não faz ataque nem teste", "nenhuma", true)
+          : ""
+      }</select></div>`;
         if (temDano(h) && !ar) {
           const perm = tiposPermitidos();
           if (perm.length > 1)
             o += `<div class="grp"><label>Tipo de dano desta runa</label><select data-hab="tipoDano">
-        ${perm.map((x) => opt(x, x, tipoDaRuna(h) === x)).join("")}</select></div>`;
+        ${perm
+          .map((x) => opt(x, x, tipoDaRuna(h) === x))
+          .join("")}</select></div>`;
           else
             o += `<div class="grp"><label>Tipo de dano</label>
-        <input type="text" disabled value="${esc(CH.estigma.tipoDano)} — do Estigma"></div>`;
+        <input type="text" disabled value="${esc(
+          CH.estigma.tipoDano
+        )} — do Estigma"></div>`;
         }
         if (fazTeste(res) && atrs.length) {
           if (escolhaAlvo(h))
             o += `<div class="grp"><label>Atributo do teste</label>
-        <input type="text" disabled value="o alvo escolhe: ${atrs.join(" ou ")}"></div>`;
+        <input type="text" disabled value="o alvo escolhe: ${atrs.join(
+          " ou "
+        )}"></div>`;
           else
             o += `<div class="grp"><label>Atributo do teste — escolha permanente</label><select data-hab="attr">
-        ${opt("—", "", !h.attr)}${atrs.map((a) => opt(a, a, h.attr === a)).join("")}</select></div>`;
+        ${opt("—", "", !h.attr)}${atrs
+              .map((a) => opt(a, a, h.attr === a))
+              .join("")}</select></div>`;
         }
         if (!ar)
           o += `<div class="grp"><label>Requisitos de ativação</label><div class="chips">
-      <label class="check ${h.verbal ? "on" : ""}"><input type="checkbox" data-hab="verbal" ${h.verbal ? "checked" : ""}> Verbal −1</label>
-      <label class="check ${h.gestual ? "on" : ""}"><input type="checkbox" data-hab="gestual" ${h.gestual ? "checked" : ""}> Gestual −3</label>
+      <label class="check ${
+        h.verbal ? "on" : ""
+      }"><input type="checkbox" data-hab="verbal" ${
+            h.verbal ? "checked" : ""
+          }> Verbal −1</label>
+      <label class="check ${
+        h.gestual ? "on" : ""
+      }"><input type="checkbox" data-hab="gestual" ${
+            h.gestual ? "checked" : ""
+          }> Gestual −3</label>
     </div></div>`;
         else
           o += `<div class="grp"><label>Requisitos de ativação</label>
     <input type="text" disabled value="artefatos não usam requisitos de ativação"></div>`;
         const podeReagir = h.fns.some(
-          (sf) => FN[sf.id] && (FN[sf.id].rc === "s" || FN[sf.id].rc === "x"),
+          (sf) => FN[sf.id] && (FN[sf.id].rc === "s" || FN[sf.id].rc === "x")
         );
         const soReacao = h.fns.some((sf) => FN[sf.id] && FN[sf.id].rc === "x");
         if (podeReagir)
           o += `<div class="grp"><label>Propriedade de Reação</label>
-    <label class="check ${h.reacao || soReacao ? "on" : ""}"><input type="checkbox" data-hab="reacao"
+    <label class="check ${
+      h.reacao || soReacao ? "on" : ""
+    }"><input type="checkbox" data-hab="reacao"
       ${h.reacao || soReacao ? "checked" : ""} ${soReacao ? "disabled" : ""}>
-      ${soReacao ? "só funciona por reação" : "usar como reação"}</label></div>`;
+      ${
+        soReacao ? "só funciona por reação" : "usar como reação"
+      }</label></div>`;
         o += `</div>`;
         if (h.dur === "prol" && fazTeste(res))
-          o += `<div style="margin-top:10px"><label class="check ${h.testeFim ? "on" : ""}">
-      <input type="checkbox" data-hab="testeFim" ${h.testeFim ? "checked" : ""}> Teste no fim do turno do alvo (+5)</label></div>`;
+          o += `<div style="margin-top:10px"><label class="check ${
+            h.testeFim ? "on" : ""
+          }">
+      <input type="checkbox" data-hab="testeFim" ${
+        h.testeFim ? "checked" : ""
+      }> Teste no fim do turno do alvo (+5)</label></div>`;
         if (mostraCombOpt(h))
           o += `<div class="row" style="margin-top:10px"><div class="grp"><label>Dano + Controle na mesma runa</label>
-      <select data-hab="combOpt">${opt("Teste único define dano e efeito (0)", "unico", h.combOpt === "unico")}
-      ${opt("Ataque para o dano + teste para o efeito (−3)", "ataque_teste", h.combOpt === "ataque_teste")}</select></div></div>`;
+      <select data-hab="combOpt">${opt(
+        "Teste único define dano e efeito (0)",
+        "unico",
+        h.combOpt === "unico"
+      )}
+      ${opt(
+        "Ataque para o dano + teste para o efeito (−3)",
+        "ataque_teste",
+        h.combOpt === "ataque_teste"
+      )}</select></div></div>`;
         o += `<div class="hr"></div><p class="sub">Descrição mecânica / narrativa</p>
-    <textarea data-hab="desc" placeholder="Como essa habilidade se manifesta?">${esc(h.desc)}</textarea>`;
+    <textarea data-hab="desc" placeholder="Como essa habilidade se manifesta?">${esc(
+      h.desc
+    )}</textarea>`;
         if (ar || h.tipo !== "estigma")
           o += `<div style="margin-top:12px;display:flex;justify-content:flex-end"><button class="btn dz" id="bDelHab">Excluir runa</button></div>`;
         return o;
@@ -10190,27 +10820,41 @@
           ? Object.keys(CAT)
               .map(
                 (a) =>
-                  `<optgroup label="${CAT[a].n}">${CAT[a].fns.map((x) => opt(x.n, x.id, sf.id === x.id)).join("")}</optgroup>`,
+                  `<optgroup label="${CAT[a].n}">${CAT[a].fns
+                    .map((x) => opt(x.n, x.id, sf.id === x.id))
+                    .join("")}</optgroup>`
               )
               .join("")
           : E.arqs
               .map(
                 (a) =>
-                  `<optgroup label="${CAT[a].n}">${CAT[a].fns.map((x) => opt(x.n, x.id, sf.id === x.id)).join("")}</optgroup>`,
+                  `<optgroup label="${CAT[a].n}">${CAT[a].fns
+                    .map((x) => opt(x.n, x.id, sf.id === x.id))
+                    .join("")}</optgroup>`
               )
               .join("") +
-            `<optgroup label="${E.arqs.length ? "— outros arquétipos, não atribuídos —" : "— todos os arquétipos —"}">
+            `<optgroup label="${
+              E.arqs.length
+                ? "— outros arquétipos, não atribuídos —"
+                : "— todos os arquétipos —"
+            }">
         ${Object.keys(CAT)
           .filter((a) => !E.arqs.includes(a))
           .map((a) =>
             CAT[a].fns
               .map((x) => opt(CAT[a].n + " · " + x.n, x.id, sf.id === x.id))
-              .join(""),
+              .join("")
           )
           .join("")}</optgroup>`;
-        let o = `<div class="fnbox b${i + 1}"><div class="fnhead"><select data-fn="${i}" data-hab="id">
+        let o = `<div class="fnbox b${
+          i + 1
+        }"><div class="fnhead"><select data-fn="${i}" data-hab="id">
     ${opt("— escolha a função —", "", !sf.id)}${grupos}
-    <optgroup label="— criada pela mesa —">${opt("+ Função Personalizada (configurar aqui)", "__custom", false)}</optgroup>
+    <optgroup label="— criada pela mesa —">${opt(
+      "+ Função Personalizada (configurar aqui)",
+      "__custom",
+      false
+    )}</optgroup>
     </select>`;
         if (h.comb && i === 1)
           o += `<button class="btn dz" data-rmfn="1">Remover</button>`;
@@ -10223,24 +10867,40 @@
         o += `<div class="badges">
     <span class="bdg t">Fluxo ${f.b != null ? f.b : f.bv || "variável"}</span>
     <span class="bdg y">P.A ${fnPA(h, i)}</span>
-    ${f.rc === "s" ? '<span class="bdg g">Reação</span>' : ""}${f.rc === "x" ? '<span class="bdg g">Só por reação</span>' : ""}
-    ${f.ps === "s" ? '<span class="bdg v">Pode ser passiva</span>' : ""}${f.ps === "x" ? '<span class="bdg v">Só por passiva</span>' : ""}
-    ${f.t === "s" ? '<span class="bdg">Teste de resistência</span>' : ""}${f.t === "o" ? '<span class="bdg">Ataque ou teste</span>' : ""}
-    ${f.dano ? '<span class="bdg">Causa dano</span>' : ""}${f.cond ? '<span class="bdg">Aplica condição</span>' : ""}
-    ${f.nc ? '<span class="bdg">Não combina</span>' : ""}${f.se ? '<span class="bdg">Só no Estigma</span>' : ""}
+    ${f.rc === "s" ? '<span class="bdg g">Reação</span>' : ""}${
+          f.rc === "x" ? '<span class="bdg g">Só por reação</span>' : ""
+        }
+    ${f.ps === "s" ? '<span class="bdg v">Pode ser passiva</span>' : ""}${
+          f.ps === "x" ? '<span class="bdg v">Só por passiva</span>' : ""
+        }
+    ${f.t === "s" ? '<span class="bdg">Teste de resistência</span>' : ""}${
+          f.t === "o" ? '<span class="bdg">Ataque ou teste</span>' : ""
+        }
+    ${f.dano ? '<span class="bdg">Causa dano</span>' : ""}${
+          f.cond ? '<span class="bdg">Aplica condição</span>' : ""
+        }
+    ${f.nc ? '<span class="bdg">Não combina</span>' : ""}${
+          f.se ? '<span class="bdg">Só no Estigma</span>' : ""
+        }
     ${f.sc ? '<span class="bdg">Só combinada</span>' : ""}
     ${f.custom ? '<span class="bdg v">personalizada da mesa</span>' : ""}
   </div>`;
         if (f.custom) {
           const ix = (ROOT.fnsCustom || []).findIndex((z) => z.id === f.id);
           o += `<div class="row" style="margin-top:9px">
-      <div class="grp"><label>Nome</label><input type="text" data-cfe="n" data-cix="${ix}" value="${esc(f.n)}"></div>
+      <div class="grp"><label>Nome</label><input type="text" data-cfe="n" data-cix="${ix}" value="${esc(
+            f.n
+          )}"></div>
       <div class="grp sm"><label>Arquétipo</label><select data-cfe="arq" data-cix="${ix}">
         ${Object.keys(CAT)
           .map((a) => opt(CAT[a].n, a, f.arq === a))
           .join("")}</select></div>
-      <div class="grp sm"><label>Custo base</label><input type="number" min="0" data-cfe="b" data-cix="${ix}" value="${f.b}"></div>
-      <div class="grp sm"><label>Custo de P.A</label><input type="number" min="0" max="6" data-cfe="pa" data-cix="${ix}" value="${f.pa}"></div>
+      <div class="grp sm"><label>Custo base</label><input type="number" min="0" data-cfe="b" data-cix="${ix}" value="${
+            f.b
+          }"></div>
+      <div class="grp sm"><label>Custo de P.A</label><input type="number" min="0" max="6" data-cfe="pa" data-cix="${ix}" value="${
+            f.pa
+          }"></div>
     </div>
     <div class="row" style="margin-top:9px"><div class="grp"><label>Propriedades</label><div class="chips">
       ${[
@@ -10253,12 +10913,18 @@
       ]
         .map(
           ([k, l, on]) =>
-            `<label class="check sm ${on ? "on" : ""}"><input type="checkbox" data-cfe="${k}" data-cix="${ix}" ${on ? "checked" : ""}> ${l}</label>`,
+            `<label class="check sm ${
+              on ? "on" : ""
+            }"><input type="checkbox" data-cfe="${k}" data-cix="${ix}" ${
+              on ? "checked" : ""
+            }> ${l}</label>`
         )
         .join("")}
     </div></div></div>
     <div class="row" style="margin-top:9px"><div class="grp"><label>Descrição</label>
-      <textarea data-cfe="d" data-cix="${ix}" style="min-height:52px">${esc(f.d)}</textarea></div></div>
+      <textarea data-cfe="d" data-cix="${ix}" style="min-height:52px">${esc(
+            f.d
+          )}</textarea></div></div>
     <p class="note">Fica salva na ficha e reaparece na lista de funções para outras runas.</p>`;
         } else {
           o += `<p class="fndesc">${f.d}</p>`;
@@ -10270,26 +10936,36 @@
         <input type="number" data-fn="${i}" data-op="${op.id}" value="${v}" min="${op.min}" max="${op.max}"></div></div>`;
           } else {
             const s = sf.op[op.id] ?? 0;
-            o += `<div class="row" style="margin-top:9px"><div class="grp"><label>${op.l}</label>
+            o += `<div class="row" style="margin-top:9px"><div class="grp"><label>${
+              op.l
+            }</label>
         <select data-fn="${i}" data-op="${op.id}">${op.it
-          .map((it, j) =>
-            opt(
-              it.l +
-                (it.c
-                  ? "  (" + (it.c > 0 ? "+" : "") + it.c + " Fluxo)"
-                  : "  (0)"),
-              j,
-              s === j,
-            ),
-          )
-          .join("")}</select></div></div>`;
+              .map((it, j) =>
+                opt(
+                  it.l +
+                    (it.c
+                      ? "  (" + (it.c > 0 ? "+" : "") + it.c + " Fluxo)"
+                      : "  (0)"),
+                  j,
+                  s === j
+                )
+              )
+              .join("")}</select></div></div>`;
           }
         });
         if (f.param) {
           const v = (sf.par || {})[f.param.id] || "";
-          o += `<div class="row" style="margin-top:9px"><div class="grp"><label>${f.param.l} — escolha permanente</label>
-      <select data-fn="${i}" data-par="${f.param.id}">${opt("— escolha —", "", !v)}
-      ${f.param.it.map((x) => opt(x, x, v === x)).join("")}</select></div></div>`;
+          o += `<div class="row" style="margin-top:9px"><div class="grp"><label>${
+            f.param.l
+          } — escolha permanente</label>
+      <select data-fn="${i}" data-par="${f.param.id}">${opt(
+            "— escolha —",
+            "",
+            !v
+          )}
+      ${f.param.it
+        .map((x) => opt(x, x, v === x))
+        .join("")}</select></div></div>`;
           if (!v)
             o += `<p class="note" style="color:var(--warn)">Defina ${f.param.l.toLowerCase()} — sem isso a habilidade fica incompleta na ficha.</p>`;
         }
@@ -10302,31 +10978,55 @@
         .map((x) => {
           const on = arr.includes(x),
             cheio = !on && arr.length >= lim;
-          return `<label class="check sm ${on ? "on" : ""}" ${cheio ? 'style="opacity:.4"' : ""}>
-          <input type="checkbox" data-fn="${i}" data-parn="${f.paramN.id}" data-item="${esc(x)}"
+          return `<label class="check sm ${on ? "on" : ""}" ${
+            cheio ? 'style="opacity:.4"' : ""
+          }>
+          <input type="checkbox" data-fn="${i}" data-parn="${
+            f.paramN.id
+          }" data-item="${esc(x)}"
           ${on ? "checked" : ""} ${cheio ? "disabled" : ""}> ${esc(x)}</label>`;
         })
         .join("")}</div></div></div>`;
         }
         if (f.ap)
           o += `<div class="row" style="margin-top:9px"><div class="grp"><label>Aprimoramento — runas investidas</label>
-    <select data-fn="${i}" data-hab="ap">${f.ap.map((t, j) => opt(j + 1 + " runa" + (j ? "s" : "") + " — " + t, j + 1, (sf.ap || 1) === j + 1)).join("")}</select></div></div>`;
+    <select data-fn="${i}" data-hab="ap">${f.ap
+            .map((t, j) =>
+              opt(
+                j + 1 + " runa" + (j ? "s" : "") + " — " + t,
+                j + 1,
+                (sf.ap || 1) === j + 1
+              )
+            )
+            .join("")}</select></div></div>`;
         if (f.apRunas)
-          o += `<div style="margin-top:9px"><label class="check ${h.marioMult ? "on" : ""}">
-    <input type="checkbox" data-hab="marioMult" ${h.marioMult ? "checked" : ""}> Múltiplas marionetes (+2 runas)</label></div>`;
+          o += `<div style="margin-top:9px"><label class="check ${
+            h.marioMult ? "on" : ""
+          }">
+    <input type="checkbox" data-hab="marioMult" ${
+      h.marioMult ? "checked" : ""
+    }> Múltiplas marionetes (+2 runas)</label></div>`;
         if (f.db)
-          o += `<p class="note"><b style="color:var(--txt)">Dano base:</b> ${f.db}${D().manBonus ? " · +" + D().manBonus + " do Eco de Manipulação" : ""}</p>`;
+          o += `<p class="note"><b style="color:var(--txt)">Dano base:</b> ${
+            f.db
+          }${
+            D().manBonus ? " · +" + D().manBonus + " do Eco de Manipulação" : ""
+          }</p>`;
         if (f.esc) o += escTxt(f, h, sf);
         if (
           (f.id === "cura" || f.id === "aura_cura" || f.id === "escudo") &&
           D().manBonus
         )
-          o += `<p class="note">Eco de Manipulação soma +${D().manBonus} também a cura e escudo.</p>`;
+          o += `<p class="note">Eco de Manipulação soma +${
+            D().manBonus
+          } também a cura e escudo.</p>`;
         if (f.pl)
           o += `<p class="note"><b style="color:var(--txt)">Custo prolongado:</b> ${f.pl}.</p>`;
         if (f.ta_nota) o += `<p class="note">${f.ta_nota}</p>`;
         if (f.rg)
-          o += `<details class="more"><summary>Regras específicas</summary><ul class="rules">${f.rg.map((r) => "<li>" + r + "</li>").join("")}</ul></details>`;
+          o += `<details class="more"><summary>Regras específicas</summary><ul class="rules">${f.rg
+            .map((r) => "<li>" + r + "</li>")
+            .join("")}</ul></details>`;
         return o + `</div>`;
       }
 
@@ -10344,7 +11044,7 @@
           let v = e.replace(/P/g, String(P));
           try {
             let n = Function(
-              '"use strict";return (' + v.replace("/2", "/2") + ")",
+              '"use strict";return (' + v.replace("/2", "/2") + ")"
             )();
             n = e.includes("/2")
               ? Math.floor(Math.abs(n)) * (e.startsWith("-") ? -1 : 1)
@@ -10384,10 +11084,12 @@
             '<b style="color:var(--txt)">' +
               rot[k] +
               ":</b> " +
-              vals.join(" · "),
+              vals.join(" · ")
           );
         });
-        return `<p class="note">${linhas.join("<br>")} <em style="color:var(--dim2)">— calculado com a ${fonte}</em></p>`;
+        return `<p class="note">${linhas.join(
+          "<br>"
+        )} <em style="color:var(--dim2)">— calculado com a ${fonte}</em></p>`;
       }
       function prolTxt(h, c) {
         if (h.passiva) return "—";
@@ -10418,26 +11120,40 @@
           d = D();
         let l = "";
         c.det.forEach((x) => {
-          l += `<div class="lrow"><span>${x.n}${x.r ? " <em>— " + x.r + "</em>" : ""}</span><b>${x.v}</b></div>`;
+          l += `<div class="lrow"><span>${x.n}${
+            x.r ? " <em>— " + x.r + "</em>" : ""
+          }</span><b>${x.v}</b></div>`;
         });
         if (h.passiva)
           l += `<div class="lrow"><span>Passiva — custo base dobrado</span><b>×2 = ${c.base}</b></div>`;
         c.mods.forEach((m) => {
-          l += `<div class="lrow ${m.v < 0 ? "neg" : ""}"><span>${m.l}</span><b>${m.v > 0 ? "+" : ""}${m.v}</b></div>`;
+          l += `<div class="lrow ${m.v < 0 ? "neg" : ""}"><span>${
+            m.l
+          }</span><b>${m.v > 0 ? "+" : ""}${m.v}</b></div>`;
         });
         if (!c.det.length)
           l = `<div class="lrow"><span>Nenhuma função escolhida</span><b>—</b></div>`;
         if (c.piso)
           l += `<div class="lrow"><span>Piso do sistema — o custo nunca desce abaixo de 1</span><b>= 1</b></div>`;
-        l += `<div class="lrow sum"><span>${h.passiva ? "Desconto permanente" : "Custo de Fluxo"}</span><b>${c.total}</b></div>`;
+        l += `<div class="lrow sum"><span>${
+          h.passiva ? "Desconto permanente" : "Custo de Fluxo"
+        }</span><b>${c.total}</b></div>`;
         $("#side").innerHTML =
           l +
           `<div class="bigrow">
     <div class="big pa"><u>Custo de P.A</u><b>${h.passiva ? 0 : c.pa}</b></div>
     <div class="big pr"><u>Custo prolongado</u><b>${prolTxt(h, c)}</b></div>
-    <div class="big"><u>Runas gastas</u><b style="color:var(--runa)">${runasGastas(h)}</b></div>
-    <div class="big"><u>${ctxHabs().arte ? "Reserva do artefato" : "Fluxo disponível"}</u>
-      <b style="color:var(--fluxo)">${ctxHabs().arte ? fluxoArte(ctxHabs().arte) - (ctxHabs().arte.fluxoGasto || 0) : d.fluxoDisp}</b></div></div>`;
+    <div class="big"><u>Runas gastas</u><b style="color:var(--runa)">${runasGastas(
+      h
+    )}</b></div>
+    <div class="big"><u>${
+      ctxHabs().arte ? "Reserva do artefato" : "Fluxo disponível"
+    }</u>
+      <b style="color:var(--fluxo)">${
+        ctxHabs().arte
+          ? fluxoArte(ctxHabs().arte) - (ctxHabs().arte.fluxoGasto || 0)
+          : d.fluxoDisp
+      }</b></div></div>`;
       }
 
       /* ============================================================
@@ -10472,7 +11188,7 @@
 
         if (t.id === "cNome") {
           CH.nome = t.value;
-          return (slotsNome(), persist());
+          return slotsNome(), persist();
         }
         if (t.id === "pvAtual") {
           CH.pvAtual = t.value === "" ? null : +t.value || 0;
@@ -10743,7 +11459,7 @@
             "[data-artetoggle],[data-artedel],[data-artenova],[data-openmod],[data-addmod],[data-rmmod]," +
             "[data-abrirsec],[data-addmod2],[data-rmmodm],[data-usodelta],[data-uso2delta]," +
             "[data-opencustom],[data-rmcustom],#bCustomSalvar," +
-            "#bAdd,#bDelHab,#bNew,#bSave,#bLoad,#bFolha,#bDescanso,#bRodada,#bEditarSec,#bApagarSec,#bVoltarSec,#bArteAdd",
+            "#bAdd,#bDelHab,#bNew,#bSave,#bLoad,#bFolha,#bDescanso,#bRodada,#bEditarSec,#bApagarSec,#bVoltarSec,#bArteAdd"
         );
         if (!t) return;
         const ds = t.dataset;
@@ -10781,20 +11497,20 @@
             .some(
               (fi) =>
                 (fi.estigma.habs || []).some((h) =>
-                  h.fns.some((sf) => sf.id === f.id),
+                  h.fns.some((sf) => sf.id === f.id)
                 ) ||
                 (fi.artefatos || []).some((a) =>
                   (a.runas || []).some((h) =>
-                    h.fns.some((sf) => sf.id === f.id),
-                  ),
-                ),
+                    h.fns.some((sf) => sf.id === f.id)
+                  )
+                )
             );
           if (
             usada &&
             !confirm(
               '"' +
                 f.n +
-                '" está em uso em alguma habilidade. Remover mesmo assim?',
+                '" está em uso em alguma habilidade. Remover mesmo assim?'
             )
           )
             return;
@@ -10840,7 +11556,7 @@
           CH.usosHab = CH.usosHab || {};
           CH.usosHab[ds.key] = Math.max(
             0,
-            (CH.usosHab[ds.key] || 0) + +ds.uso2delta,
+            (CH.usosHab[ds.key] || 0) + +ds.uso2delta
           );
           return render();
         }
@@ -10940,7 +11656,7 @@
             return render();
           }
           CH.subs[ds.rmsub] = (CH.subs[ds.rmsub] || []).filter(
-            (x) => x !== ds.item,
+            (x) => x !== ds.item
           );
           return render();
         }
@@ -10998,7 +11714,7 @@
         if (t.id === "bDescanso") {
           if (
             !confirm(
-              "Descanso completo: zera Fluxo gasto, P.A, usos por descanso e desativa as habilidades. Confirmar?",
+              "Descanso completo: zera Fluxo gasto, P.A, usos por descanso e desativa as habilidades. Confirmar?"
             )
           )
             return;
@@ -11046,12 +11762,12 @@
           if (i >= 0) {
             if (
               E.habs.some((h) =>
-                h.fns.some((sf) => FN[sf.id] && FN[sf.id].arq === k),
+                h.fns.some((sf) => FN[sf.id] && FN[sf.id].arq === k)
               ) &&
               !confirm(
                 "Há habilidades usando funções de " +
                   CAT[k].n +
-                  ". Remover o arquétipo mesmo assim?",
+                  ". Remover o arquétipo mesmo assim?"
               )
             )
               return;
@@ -11101,7 +11817,7 @@
           a.href = URL.createObjectURL(
             new Blob([JSON.stringify(ROOT, null, 1)], {
               type: "application/json",
-            }),
+            })
           );
           a.download = "insomnia_" + nome + ".json";
           a.click();
@@ -11146,7 +11862,7 @@
             boot();
           } catch (_) {
             alert(
-              "Arquivo inválido. Use um .json salvo por esta ficha ou pela oficina de Estigma.",
+              "Arquivo inválido. Use um .json salvo por esta ficha ou pela oficina de Estigma."
             );
           }
         };
@@ -11182,7 +11898,7 @@
               avisos.push(FN[MIGRA_FN[sf.id]].n);
               sf.id = MIGRA_FN[sf.id];
             }
-          }),
+          })
         );
         if (f.origem && !ORIGENS[f.origem]) {
           avisos.push('origem "' + f.origem + '" não existe mais');
@@ -11198,9 +11914,9 @@
               alert(
                 "Ficha atualizada para a v1.8 do sistema:\n\n• " +
                   [...new Set(avisos)].join("\n• ") +
-                  "\n\nPerfuração de Defesas foi dividida em Perfuração de Escudo e Perfuração de Armadura — confira se a escolhida é a que você queria.",
+                  "\n\nPerfuração de Defesas foi dividida em Perfuração de Escudo e Perfuração de Armadura — confira se a escolhida é a que você queria."
               ),
-            400,
+            400
           );
         return f;
       }
@@ -11240,8 +11956,12 @@
             if (!x) return "";
             const at = atqArma(x),
               dn = danoArma(x, w.v);
-            return `<tr><td>${x.n}${w.v ? " <em>(vinculada)</em>" : ""}</td><td>${x.cat}</td><td>${alcanceArma(x)}</td>
-      <td class="c">${at.prof ? "+" + at.mod : "—"}</td><td class="c">${dn.txt}</td></tr>`;
+            return `<tr><td>${x.n}${
+              w.v ? " <em>(vinculada)</em>" : ""
+            }</td><td>${x.cat}</td><td>${alcanceArma(x)}</td>
+      <td class="c">${at.prof ? "+" + at.mod : "—"}</td><td class="c">${
+              dn.txt
+            }</td></tr>`;
           })
           .join("");
         const habs = E.habs
@@ -11249,8 +11969,12 @@
             const c = custo(h),
               fs = h.fns.map((sf) => FN[sf.id]).filter(Boolean),
               res = resolucao(h);
-            return `<article><h3>${esc(h.nome) || (h.tipo === "estigma" ? "Estigma" : "Runa")}
-      <em>${h.tipo === "estigma" ? "marca principal" : "runa"}${h.comb ? " · combinada" : ""}${h.passiva ? " · passiva" : ""}</em></h3>
+            return `<article><h3>${
+              esc(h.nome) || (h.tipo === "estigma" ? "Estigma" : "Runa")
+            }
+      <em>${h.tipo === "estigma" ? "marca principal" : "runa"}${
+              h.comb ? " · combinada" : ""
+            }${h.passiva ? " · passiva" : ""}</em></h3>
       <table><tr><th>Arquétipo</th><td>${
         fs
           .map((f) => CAT[f.arq].n)
@@ -11259,17 +11983,49 @@
       }</td>
         <th>Função</th><td>${fs.map((f) => f.n).join(" + ") || "—"}</td></tr>
       <tr><th>Alvos</th><td>${h.mira === "area" ? "Área" : MIRA[h.mira].l}</td>
-        <th>Alcance</th><td>${ignoraAlcance(h) ? "próprio da função" : ALC[h.alc].l}</td></tr>
-      <tr><th>Área</th><td>${h.mira === "area" ? AREA[h.area].l + (AREA[h.area].tam ? " " + TAM[h.tam].l.split(" —")[0] : "") : "—"}</td>
-        <th>Duração</th><td>${h.passiva ? "sempre ativa" : DUR[h.dur].l}</td></tr>
-      <tr><th>Atributo</th><td>${fazTeste(res) ? (escolhaAlvo(h) ? "o alvo escolhe entre " + attrsTeste(h).join(" ou ") : h.attr || "—") : "—"}</td>
+        <th>Alcance</th><td>${
+          ignoraAlcance(h) ? "próprio da função" : ALC[h.alc].l
+        }</td></tr>
+      <tr><th>Área</th><td>${
+        h.mira === "area"
+          ? AREA[h.area].l +
+            (AREA[h.area].tam ? " " + TAM[h.tam].l.split(" —")[0] : "")
+          : "—"
+      }</td>
+        <th>Duração</th><td>${
+          h.passiva ? "sempre ativa" : DUR[h.dur].l
+        }</td></tr>
+      <tr><th>Atributo</th><td>${
+        fazTeste(res)
+          ? escolhaAlvo(h)
+            ? "o alvo escolhe entre " + attrsTeste(h).join(" ou ")
+            : h.attr || "—"
+          : "—"
+      }</td>
         <th>Tipo de dano</th><td>${temDano(h) ? tipoDaRuna(h) : "—"}</td></tr>
-      ${paramTxt(h) ? `<tr><th>Parâmetros</th><td colspan="3">${esc(paramTxt(h))}</td></tr>` : ""}
-      <tr><th>Custo P.F</th><td class="c">${c.total}</td><th>Custo P.A</th><td class="c">${h.passiva ? 0 : c.pa}</td></tr>
-      <tr><th>Prolongado</th><td>${esc((h.fns.map((sf) => FN[sf.id]).filter((f) => f && f.pl)[0] || {}).pl || (c.prol ? c.prol + " por rodada" : "—"))}</td>
+      ${
+        paramTxt(h)
+          ? `<tr><th>Parâmetros</th><td colspan="3">${esc(
+              paramTxt(h)
+            )}</td></tr>`
+          : ""
+      }
+      <tr><th>Custo P.F</th><td class="c">${
+        c.total
+      }</td><th>Custo P.A</th><td class="c">${h.passiva ? 0 : c.pa}</td></tr>
+      <tr><th>Prolongado</th><td>${esc(
+        (h.fns.map((sf) => FN[sf.id]).filter((f) => f && f.pl)[0] || {}).pl ||
+          (c.prol ? c.prol + " por rodada" : "—")
+      )}</td>
         <th>Runas gastas</th><td class="c">${runasGastas(h)}</td></tr></table>
-      <p class="fl">Aprimorável: ${yn(fs.some((f) => f.ap))} · Teste de Res.: ${yn(fazTeste(res))} · Causa Dano: ${yn(fs.some((f) => f.dano))} ·
-        C. Condição: ${yn(fs.some((f) => f.cond))} · Prop. Reação: ${yn(fs.some((f) => f.rc === "s" || f.rc === "x"))} ·
+      <p class="fl">Aprimorável: ${yn(
+        fs.some((f) => f.ap)
+      )} · Teste de Res.: ${yn(fazTeste(res))} · Causa Dano: ${yn(
+              fs.some((f) => f.dano)
+            )} ·
+        C. Condição: ${yn(fs.some((f) => f.cond))} · Prop. Reação: ${yn(
+              fs.some((f) => f.rc === "s" || f.rc === "x")
+            )} ·
         Uso Passivo: ${yn(h.passiva)} · Runa Comb.: ${yn(h.comb)}</p>
       ${h.desc ? '<p class="dd">' + esc(h.desc) + "</p>" : ""}</article>`;
           })
@@ -11292,12 +12048,13 @@
         const w = window.open("", "_blank");
         if (!w) {
           alert(
-            "O navegador bloqueou a nova janela. Libere pop-ups para gerar a folha.",
+            "O navegador bloqueou a nova janela. Libere pop-ups para gerar a folha."
           );
           return;
         }
-        w.document
-          .write(`<!doctype html><meta charset="utf-8"><title>${esc(CH.nome || "Médium")} — [In]somnia</title>
+        w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(
+          CH.nome || "Médium"
+        )} — [In]somnia</title>
   <style>
   body{font:12px/1.45 system-ui,sans-serif;color:#111;max-width:820px;margin:22px auto;padding:0 16px}
   h1{font-size:20px;margin:0} .meta{color:#555;font-size:11.5px;margin:2px 0 16px}
@@ -11319,16 +12076,26 @@
   @media print{body{margin:0}}
   </style>
   <h1>${esc(CH.nome || "Médium sem nome")}</h1>
-  <p class="meta">${CH.jogador ? esc(CH.jogador) + " · " : ""}Nível ${CH.nivel} ${d.p.cl} ·
-    ${CH.origem || "sem origem"} · Afinidade ${CH.afinidade || "—"} · Psique ${d.psique}</p>
+  <p class="meta">${CH.jogador ? esc(CH.jogador) + " · " : ""}Nível ${
+          CH.nivel
+        } ${d.p.cl} ·
+    ${CH.origem || "sem origem"} · Afinidade ${CH.afinidade || "—"} · Psique ${
+          d.psique
+        }</p>
 
   <h2>Atributos e derivados</h2>
   <div class="grid">
-    ${ATR.map((k) => `<div class="box"><u>${ATRN[k]}</u><b>${CH.attrs[k]}</b></div>`).join("")}
+    ${ATR.map(
+      (k) => `<div class="box"><u>${ATRN[k]}</u><b>${CH.attrs[k]}</b></div>`
+    ).join("")}
     <div class="box"><u>Psique</u><b>${d.psique}</b></div>
     <div class="box"><u>P.A</u><b>${d.paTotal}</b></div>
-    <div class="box"><u>Pontos de Vida</u><b>${d.pvAtual} / ${d.pvTotal}</b></div>
-    <div class="box"><u>Fluxo</u><b>${d.fluxoDisp - CH.fluxoGasto} / ${d.fluxoDisp}</b></div>
+    <div class="box"><u>Pontos de Vida</u><b>${d.pvAtual} / ${
+          d.pvTotal
+        }</b></div>
+    <div class="box"><u>Fluxo</u><b>${d.fluxoDisp - CH.fluxoGasto} / ${
+          d.fluxoDisp
+        }</b></div>
     <div class="box"><u>[In]Sanidade</u><b>${CH.insanidade}</b></div>
     <div class="box"><u>Iniciativa</u><b>+${d.inic}</b></div>
     <div class="box"><u>Esquiva</u><b>+${d.esquiva}</b></div>
@@ -11337,7 +12104,9 @@
     <div class="box"><u>Desarmado</u><b>+${d.atqDes} · ${d.danoDes}</b></div>
     <div class="box"><u>Deslocamento</u><b>${d.desloc} m</b></div>
     <div class="box"><u>Levant. / Carga</u><b>${d.levant} / ${d.carga}</b></div>
-    <div class="box"><u>Detecção / ND passivo</u><b>${d.detPassiva} m · +${d.ndPassiva}</b></div>
+    <div class="box"><u>Detecção / ND passivo</u><b>${d.detPassiva} m · +${
+          d.ndPassiva
+        }</b></div>
   </div>
 
   <h2>Armas</h2>
@@ -11347,10 +12116,16 @@
   <h2>Especializações e Ecos</h2>
   <table><tr><th style="width:22%">Trilha</th><th>Nv</th><th style="width:auto">Habilidades</th></tr>
   ${listaEsp}${listaEco}
-  ${d.temVinc ? `<tr><td>Eco de Vínculo</td><td class="c">${d.nvVinculo}</td><td>herdado de Manipulação · +${d.nvVinculo} de dano · limite ${d.nvVinculo} arma(s)</td></tr>` : ""}
+  ${
+    d.temVinc
+      ? `<tr><td>Eco de Vínculo</td><td class="c">${d.nvVinculo}</td><td>herdado de Manipulação · +${d.nvVinculo} de dano · limite ${d.nvVinculo} arma(s)</td></tr>`
+      : ""
+  }
   </table>
 
-  <h2>Estigma e Runas — ${E.arqs.map((a) => CAT[a].n).join(", ") || "sem arquétipos"} ·
+  <h2>Estigma e Runas — ${
+    E.arqs.map((a) => CAT[a].n).join(", ") || "sem arquétipos"
+  } ·
     ${d.runasUso}/${d.runasDisp} runas · ${d.passUso}/${d.passLim} passivas</h2>
   ${habs}
 
@@ -11358,9 +12133,23 @@
   ${sigiloFolha()}
   ${secFolha()}
   ${arteFolha()}
-  ${CH.historia ? '<h2>História e objetivos</h2><div class="tx">' + esc(CH.historia) + "</div>" : ""}
-  ${CH.inventario ? '<h2>Inventário</h2><div class="tx">' + esc(CH.inventario) + "</div>" : ""}
-  ${CH.notas ? '<h2>Anotações</h2><div class="tx">' + esc(CH.notas) + "</div>" : ""}
+  ${
+    CH.historia
+      ? '<h2>História e objetivos</h2><div class="tx">' +
+        esc(CH.historia) +
+        "</div>"
+      : ""
+  }
+  ${
+    CH.inventario
+      ? '<h2>Inventário</h2><div class="tx">' + esc(CH.inventario) + "</div>"
+      : ""
+  }
+  ${
+    CH.notas
+      ? '<h2>Anotações</h2><div class="tx">' + esc(CH.notas) + "</div>"
+      : ""
+  }
   `);
         w.document.close();
         w.focus();
@@ -11384,23 +12173,45 @@
                 .map((h) => {
                   const c = custo(h),
                     fs = h.fns.map((sf) => FN[sf.id]).filter(Boolean);
-                  return `<tr><td>${esc(h.nome) || "Runa"}</td><td>${fs.map((x) => x.n).join(" + ") || "—"}</td>
-          <td class="c">${c.total}</td><td class="c">${h.passiva ? 0 : c.pa}</td>
-          <td>${h.passiva ? "passiva" : h.dur === "prol" ? "prolongada" : "—"}</td></tr>`;
+                  return `<tr><td>${esc(h.nome) || "Runa"}</td><td>${
+                    fs.map((x) => x.n).join(" + ") || "—"
+                  }</td>
+          <td class="c">${c.total}</td><td class="c">${
+                    h.passiva ? 0 : c.pa
+                  }</td>
+          <td>${
+            h.passiva ? "passiva" : h.dur === "prol" ? "prolongada" : "—"
+          }</td></tr>`;
                 })
                 .join("");
-              return `<article><h3>${esc(a.nome) || "Artefato"} <em>${R2.n}${a.assimilado ? " · assimilado" : ""}</em></h3>
+              return `<article><h3>${esc(a.nome) || "Artefato"} <em>${R2.n}${
+                a.assimilado ? " · assimilado" : ""
+              }</em></h3>
       <table>
-        <tr><th>Forma</th><td>${FORMAS[a.forma] || "—"}${a.arma ? " — " + esc(a.arma) : ""}</td>
+        <tr><th>Forma</th><td>${FORMAS[a.forma] || "—"}${
+                a.arma ? " — " + esc(a.arma) : ""
+              }</td>
             <th>Emoção</th><td>${esc(a.emocao) || "—"}</td></tr>
         <tr><th>Psique do Onírico</th><td class="c">${a.psiOn || 0}</td>
             <th>Atq. Psíquico</th><td class="c">+${a.atqOn || 0}</td></tr>
-        <tr><th>Reserva de Fluxo</th><td class="c">${fluxoArte(a) - (a.fluxoGasto || 0)} / ${a.fluxoTotal || 0}</td>
+        <tr><th>Reserva de Fluxo</th><td class="c">${
+          fluxoArte(a) - (a.fluxoGasto || 0)
+        } / ${a.fluxoTotal || 0}</td>
             <th>Runas</th><td class="c">${runasArte(a)} / ${R2.runas}</td></tr>
-        <tr><th>Limites</th><td colspan="3">até ${cfg.pa} P.A por runa · bônus e penalidades no máximo +${cfg.bon}</td></tr>
-        ${R2.nd ? `<tr><th>Risco</th><td colspan="3">teste de Psique contra ND ${R2.nd} + [In]Sanidade na primeira utilização de cada combate</td></tr>` : ""}
+        <tr><th>Limites</th><td colspan="3">até ${
+          cfg.pa
+        } P.A por runa · bônus e penalidades no máximo +${cfg.bon}</td></tr>
+        ${
+          R2.nd
+            ? `<tr><th>Risco</th><td colspan="3">teste de Psique contra ND ${R2.nd} + [In]Sanidade na primeira utilização de cada combate</td></tr>`
+            : ""
+        }
       </table>
-      ${runas ? `<table><tr><th style="width:auto">Runa</th><th>Função</th><th>P.F</th><th>P.A</th><th>Uso</th></tr>${runas}</table>` : ""}
+      ${
+        runas
+          ? `<table><tr><th style="width:auto">Runa</th><th>Função</th><th>P.F</th><th>P.A</th><th>Uso</th></tr>${runas}</table>`
+          : ""
+      }
       ${a.notas ? '<p class="dd">' + esc(a.notas) + "</p>" : ""}</article>`;
             })
             .join("")
@@ -11420,53 +12231,81 @@
               if (!x) return "";
               const at = atqArma(x, w2.v),
                 dn = danoArma(x, w2.v);
-              return `<tr><td>${x.n}</td><td>${x.cat}</td><td class="c">${at.prof ? "+" + at.mod : "—"}</td><td class="c">${dn.txt}</td></tr>`;
+              return `<tr><td>${x.n}</td><td>${x.cat}</td><td class="c">${
+                at.prof ? "+" + at.mod : "—"
+              }</td><td class="c">${dn.txt}</td></tr>`;
             })
             .join("");
           esp =
             Object.keys(ESP)
               .map(
                 (k) =>
-                  `<tr><td>${ESP[k].n}</td><td class="c">${f.esp[k].nv}</td><td>${(f.esp[k].tal || []).filter(Boolean).join(", ") || "—"}</td></tr>`,
+                  `<tr><td>${ESP[k].n}</td><td class="c">${
+                    f.esp[k].nv
+                  }</td><td>${
+                    (f.esp[k].tal || []).filter(Boolean).join(", ") || "—"
+                  }</td></tr>`
               )
               .join("") +
             Object.keys(ECO)
               .map(
                 (k) =>
-                  `<tr><td>Eco de ${ECO[k].n}</td><td class="c">${f.ecos[k].nv}</td><td>${(f.ecos[k].hab || []).filter(Boolean).join(", ") || "—"}</td></tr>`,
+                  `<tr><td>Eco de ${ECO[k].n}</td><td class="c">${
+                    f.ecos[k].nv
+                  }</td><td>${
+                    (f.ecos[k].hab || []).filter(Boolean).join(", ") || "—"
+                  }</td></tr>`
               )
               .join("");
           habs = f.estigma.habs
             .map((h) => {
               const c = custo(h),
                 fs = h.fns.map((sf) => FN[sf.id]).filter(Boolean);
-              return `<tr><td>${esc(h.nome) || (h.tipo === "estigma" ? "Estigma" : "Runa")}</td>
-        <td>${fs.map((x) => x.n).join(" + ") || "—"}</td><td class="c">${c.total}</td>
-        <td class="c">${h.passiva ? 0 : c.pa}</td><td class="c">${runasGastas(h)}</td></tr>`;
+              return `<tr><td>${
+                esc(h.nome) || (h.tipo === "estigma" ? "Estigma" : "Runa")
+              }</td>
+        <td>${fs.map((x) => x.n).join(" + ") || "—"}</td><td class="c">${
+                c.total
+              }</td>
+        <td class="c">${h.passiva ? 0 : c.pa}</td><td class="c">${runasGastas(
+                h
+              )}</td></tr>`;
             })
             .join("");
         } finally {
           CH = o;
         }
         const tit = f.secTipo === "invocacao" ? "Invocação" : "Sobreposição";
-        return `<h2>Sigilo — ficha da ${tit}${f.nome ? ' · "' + esc(f.nome) + '"' : ""}</h2>
-  <p class="meta">Nível ${f.nivel} · Afinidade ${f.afinidade || "—"}${f.origem ? " · " + esc(f.origem) : " · sem Origem"}${
-    f.secTipo === "invocacao"
-      ? " · " + { p: "Pequena", m: "Média", g: "Grande" }[f.secTam]
-      : ""
-  }</p>
+        return `<h2>Sigilo — ficha da ${tit}${
+          f.nome ? ' · "' + esc(f.nome) + '"' : ""
+        }</h2>
+  <p class="meta">Nível ${f.nivel} · Afinidade ${f.afinidade || "—"}${
+          f.origem ? " · " + esc(f.origem) : " · sem Origem"
+        }${
+          f.secTipo === "invocacao"
+            ? " · " + { p: "Pequena", m: "Média", g: "Grande" }[f.secTam]
+            : ""
+        }</p>
   <div class="grid">
-    ${ATR.map((k) => `<div class="box"><u>${ATRN[k]}</u><b>${f.attrs[k]}</b></div>`).join("")}
+    ${ATR.map(
+      (k) => `<div class="box"><u>${ATRN[k]}</u><b>${f.attrs[k]}</b></div>`
+    ).join("")}
     <div class="box"><u>Psique</u><b>${d.psique}</b></div>
     <div class="box"><u>P.A</u><b>${d.paTotal}</b></div>
     <div class="box"><u>Pontos de Vida</u><b>${d.pvTotal}</b></div>
     <div class="box"><u>Limite de Fluxo</u><b>${d.limFluxo}</b></div>
     <div class="box"><u>Runas</u><b>${d.runasUso} / ${d.runasDisp}</b></div>
     <div class="box"><u>Iniciativa</u><b>+${d.inic}</b></div>
-    <div class="box"><u>Esquiva / Defesa</u><b>+${d.esquiva} / +${d.defesa}</b></div>
+    <div class="box"><u>Esquiva / Defesa</u><b>+${d.esquiva} / +${
+          d.defesa
+        }</b></div>
     <div class="box"><u>Atq. Psíquico</u><b>+${d.atqPsi}</b></div>
   </div>
-  ${armas ? `<table><tr><th style="width:auto">Arma</th><th>Cat.</th><th>Ataque</th><th>Dano</th></tr>${armas}</table>` : ""}
+  ${
+    armas
+      ? `<table><tr><th style="width:auto">Arma</th><th>Cat.</th><th>Ataque</th><th>Dano</th></tr>${armas}</table>`
+      : ""
+  }
   <table><tr><th style="width:22%">Trilha</th><th>Nv</th><th style="width:auto">Habilidades</th></tr>${esp}</table>
   <table><tr><th style="width:auto">Habilidade</th><th>Função</th><th>P.F</th><th>P.A</th><th>Runas</th></tr>${habs}</table>
   ${f.historia ? '<div class="tx">' + esc(f.historia) + "</div>" : ""}`;
@@ -11475,7 +12314,7 @@
         const d = D(),
           ls = subsDaOrigem().filter((sb) => !sb.ref && subSel(sb.id).length);
         const us = Object.keys(USOS[CH.origem] || {}).filter(
-          (nv) => CH.nivel >= +nv,
+          (nv) => CH.nivel >= +nv
         );
         if (!ls.length && !us.length) return "";
         let h = "<h2>Origem — " + esc(CH.origem) + "</h2><table>";
